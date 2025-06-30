@@ -3,6 +3,8 @@ dotenv.config();
 
 import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
+import AuthAccountRouter from './routers/auth.router';
+import logger from './utils/logger';
 
 
 const PORT = process.env.PORT || "8080";
@@ -22,14 +24,19 @@ class App {
     }
 
     private routes(): void {
+        const authRouter = new AuthAccountRouter();
+        this.app?.use("/auth", authRouter.getRouter());
         this.app?.get('/', (req: Request, res: Response) => {
             res.status(200).send("<h1>Welcome to Mini Project</h1>")
         })
     }
 
     private errorHandler(): void {
-        this.app?.use((err: any, req: Request, res: Response, next: NextFunction) => {
-            res.status(err.rc || 500).send(err)
+        this.app?.use((error: any, req: Request, res: Response, next: NextFunction) => {
+            logger.error(
+                `${req.method} ${req.path}: ${error.message} ${JSON.stringify(error)}`
+            );
+            res.status(error.rc || 500).send(error)
         })
     }
 

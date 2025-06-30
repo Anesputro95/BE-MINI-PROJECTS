@@ -1,0 +1,140 @@
+2025-06-30 08:13:18 [ERROR]: POST /auth/regis: 
+Invalid `prisma.account.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/controllers/account.controller.ts:25:53
+
+  22     throw new AppError("Email already registered:", 400);
+  23 }
+  24 
+→ 25 const newAccount = await prisma.account.create({
+       data: {
+         user_name: "towef12",
+         email: "towef74691@kimdyn.com",
+         password: "$2b$10$Xvv6EFYllMvuUz.GurlVk.guZCjpdxW9eYx2smVAImyFqSWU9.ju6",
+         role: "CUSTOMER",
+         isVerified: false,
+     +   username: String
+       }
+     })
+
+Argument `username` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-06-30 08:13:49 [ERROR]: POST /auth/regis: 
+Invalid `prisma.account.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/controllers/account.controller.ts:25:53
+
+  22     throw new AppError("Email already registered:", 400);
+  23 }
+  24 
+→ 25 const newAccount = await prisma.account.create({
+       data: {
+         user_name: "towef",
+         email: "towef74691@kimdyn.com",
+         password: "$2b$10$1sXziYcm0bFpJ3TjKtXH/eS/PT73c3dr98hKy9CVWy1PFu6sr8fce",
+         role: "CUSTOMER",
+         isVerified: false,
+     +   username: String
+       }
+     })
+
+Argument `username` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-06-30 10:44:51 [ERROR]: POST /auth/regis: 
+Invalid `prisma.account.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/controllers/account.controller.ts:27:53
+
+  24     throw new AppError("Email already registered:", 400);
+  25 }
+  26 
+→ 27 const newAccount = await prisma.account.create({
+       data: {
+         user_name: "towef",
+         email: "towef74691@kimdyn.com",
+         password: "$2b$10$o4Xk0GzkwBAlPr5oHI9sdOGOD2us5WoVfZhbIa8yja9JjkVOm/wmC",
+         role: "CUSTOMER",
+         isVerified: false,
+     +   username: String
+       }
+     })
+
+Argument `username` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-06-30 10:46:05 [ERROR]: POST /auth/regis: 
+Invalid `prisma.account.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/controllers/account.controller.ts:27:53
+
+  24     throw new AppError("Email already registered:", 400);
+  25 }
+  26 
+→ 27 const newAccount = await prisma.account.create({
+       data: {
+         user_name: "anes",
+         email: "anes@mail.com",
+         password: "$2b$10$XkFOqkUPxUGHhNUbKh1.VO36SRvYTUhZ7WFl4BMt5vh1zUU80A63m",
+         role: "CUSTOMER",
+         isVerified: false,
+     +   username: String
+       }
+     })
+
+Argument `username` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-06-30 10:54:32 [ERROR]: POST /auth/regis: 
+Invalid `prisma.account.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/controllers/account.controller.ts:26:53
+
+  23     throw new AppError("Email already registered:", 400);
+  24 }
+  25 
+→ 26 const newAccount = await prisma.account.create({
+       data: {
+         email: "anes@mail.com",
+         password: "$2b$10$/bOkrBOEGtUaXMVd4uI3yuMazJ.CcmhDysJGcyIL965xPygG1eg..",
+         role: "CUSTOMER",
+     +   username: String
+       }
+     })
+
+Argument `username` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-06-30 10:55:30 [ERROR]: POST /auth/regis: 
+Invalid `prisma.account.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/controllers/account.controller.ts:26:53
+
+  23     throw new AppError("Email already registered:", 400);
+  24 }
+  25 
+→ 26 const newAccount = await prisma.account.create({
+       data: {
+         email: "anes@mail.com",
+         password: "$2b$10$qPEgIH5Tl2D/CFPdeMl7.ONK0dJGW5YzqkrouafgHr3h.f19hZDwC",
+         role: "event organizer",
+     +   username: String
+       }
+     })
+
+Argument `username` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-06-30 11:00:48 [ERROR]: POST /auth/regis: 
+Invalid `prisma.account.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/controllers/account.controller.ts:26:53
+
+  23     throw new AppError("Email already registered:", 400);
+  24 }
+  25 
+→ 26 const newAccount = await prisma.account.create({
+       data: {
+         username: "anes12",
+         email: "anes.putro@mail.com",
+         password: "$2b$10$8jjRHCWLVnwXN2YThPaRP.At0rBLb.4AxOcnmKXUQp4qncjPgm1R2",
+         role: "event organizer"
+               ~~~~~~~~~~~~~~~~~
+       }
+     })
+
+Invalid value for argument `role`. Expected UserRole. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-06-30 11:02:45 [ERROR]: POST /auth/regis: Email already registered: {"statusCode":400,"success":false,"message":"Email already registered:"}
+2025-06-30 11:29:24 [ERROR]: POST /auth/regis: Email already registered: {"statusCode":400,"success":false,"message":"Email already registered:"}
+2025-06-30 15:09:28 [ERROR]: POST /auth/login: 
+Invalid `prisma.account.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/controllers/auth.controller.ts:140:51
+
+  137     next: NextFunction,
+  138 ): Promise<void> {
+  139     try {
+→ 140         const findUser = await prisma.account.findUnique(
+Timed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 10, connection limit: 23) {"code":"P2024","meta":{"modelName":"Account","connection_limit":23,"timeout":10},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-06-30 15:09:59 [ERROR]: POST /auth/login: Please verify your email {"statusCode":403,"success":false,"message":"Please verify your email"}
