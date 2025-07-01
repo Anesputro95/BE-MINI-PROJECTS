@@ -18,6 +18,9 @@ class AuthAccountRouter {
     private initialRoutes(): void {
         this.router.post("/regis", regisValidation, this.accountController.register);
         this.router.post("/login", loginValidation, this.accountController.login);
+
+        this.router.get("/verify/:token", this.accountController.verifyAccount);
+        this.router.use(verifyToken)
     }
 
     public getRouter(): Router {

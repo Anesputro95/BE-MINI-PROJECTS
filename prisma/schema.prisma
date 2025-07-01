@@ -25,12 +25,24 @@ model Account {
   email         String   @unique
   password      String
   role          UserRole
-  isVeriefied   Boolean  @default(false)
+  isVerified    Boolean  @default(false)
   referall_code String?  @unique
   referred_by   String?
   ImgProfile    String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
+  emailVerification EmailVerification[]
+
   @@map("account")
+}
+
+model EmailVerification {
+  token     String   @id
+  account   Account  @relation(fields: [accountId], references: [id])
+  accountId Int
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@map("email_verification")
 }

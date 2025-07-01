@@ -5,7 +5,7 @@ import { hashPassword } from "../utils/hash";
 import { transport } from "../config/nodemailer";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
-import { loginService, regisService } from "../services/auth.service";
+import { loginService, regisService, verifyEmailService } from "../services/auth.service";
 
 class AuthAccountController {
     public async register(
@@ -45,6 +45,32 @@ class AuthAccountController {
             next(error)
         }
     }
+
+    public async verifyAccount(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> {
+        try {
+            const { token } = req.params;
+
+            if (!token) {
+                throw new AppError("Token is missing", 404);
+            }
+
+            await verifyEmailService(token); 
+
+            res.status(200).json({
+                success: true,
+                message: "Email verified successfully",
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }
+
+
 
 export default AuthAccountController;

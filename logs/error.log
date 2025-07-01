@@ -138,3 +138,56 @@ Invalid `prisma.account.findUnique()` invocation in
 → 140         const findUser = await prisma.account.findUnique(
 Timed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 10, connection limit: 23) {"code":"P2024","meta":{"modelName":"Account","connection_limit":23,"timeout":10},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
 2025-06-30 15:09:59 [ERROR]: POST /auth/login: Please verify your email {"statusCode":403,"success":false,"message":"Please verify your email"}
+2025-07-01 14:58:20 [ERROR]: POST /auth/regis: 
+Invalid `prisma.account.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/account.repositori.ts:29:27
+
+  26 
+  27 export const createAccountByEmail = async (
+  28     data: CreateAccountInput) => {
+→ 29     return prisma.account.create({
+           data: {
+             username: "cola12",
+             email: "colap89152@kimdyn.com",
+             password: "$2b$10$BrjIQVNoNxWJ7x4RdvoQHO0WtkhZenhdXBH3ac/U0QDnZTX/rSo3W",
+             role: "ORGANIZER",
+             isVeriefied: false,
+             ~~~~~~~~~~~
+             referall_code: "cola12-lw9dzw",
+             referred_by: null,
+         ?   isVerified?: Boolean,
+         ?   ImgProfile?: String | Null,
+         ?   createdAt?: DateTime,
+         ?   updatedAt?: DateTime,
+         ?   emailVerification?: EmailVerificationCreateNestedManyWithoutAccountInput
+           }
+         })
+
+Unknown argument `isVeriefied`. Did you mean `isVerified`? Available options are marked with ?. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-01 14:58:57 [ERROR]: POST /auth/regis: 
+Invalid `prisma.account.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/account.repositori.ts:29:27
+
+  26 
+  27 export const createAccountByEmail = async (
+  28     data: CreateAccountInput) => {
+→ 29     return prisma.account.create({
+           data: {
+             username: "cola12",
+             email: "colap89152@kimdyn.com",
+             password: "$2b$10$ybqeYM61cpW80Zm1s9.EtOuDwtTgQAO8L26WoNQL36Rw1Nglw1NL2",
+             role: "ORGANIZER",
+             isVeriefied: false,
+             ~~~~~~~~~~~
+             referall_code: "cola12-jdyzw5",
+             referred_by: null,
+         ?   isVerified?: Boolean,
+         ?   ImgProfile?: String | Null,
+         ?   createdAt?: DateTime,
+         ?   updatedAt?: DateTime,
+         ?   emailVerification?: EmailVerificationCreateNestedManyWithoutAccountInput
+           }
+         })
+
+Unknown argument `isVeriefied`. Did you mean `isVerified`? Available options are marked with ?. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-01 16:31:29 [ERROR]: GET /auth/verify/17514516b251b04160cdf9c4af262fc7cdd3b7588b175569: Token is missing {"statusCode":404,"success":false,"message":"Token is missing"}

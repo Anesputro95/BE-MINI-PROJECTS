@@ -1,9 +1,10 @@
 import { compare } from "bcrypt";
 import { transport } from "../config/nodemailer";
 import AppError from "../errors/AppError";
-import { createAccountByEmail, findAccountByEmail, findAccountByReferralCode, loginAccountByEmail } from "../repositories/account.repositori";
+import { createAccountByEmail, createVerificationToken, deleteVerificationToken, findAccountByEmail, findAccountByReferralCode, findVerificationToken, loginAccountByEmail, verifyAccountByEmail } from "../repositories/account.repositori";
 import { hashPassword } from "../utils/hash";
 import { sign } from "jsonwebtoken";
+import crypto from "crypto";
 
 export const regisService = async (data: any) => {
     const { username, email, password, role } = data;
@@ -40,10 +41,17 @@ export const regisService = async (data: any) => {
         email,
         password: await hashPassword(password),
         role: role || "ORGANIZER",
-        isVeriefied: false,
+        isVerified: false,
         referall_code: referralCodeNew,
         referred_by: referredBy
     });
+
+    const token = crypto.randomBytes(24).toString("hex");
+    const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24);
+
+    await createVerificationToken(newAccount.id, token, expiresAt);
+
+    const verifyLink = `${process.env.BASE_URL}/auth/verify/${token}`;
 
     await transport.sendMail({
         from: process.env.MAILSENDER,
@@ -85,10 +93,10 @@ export const regisService = async (data: any) => {
               <p>Thank you for registering your account.</p>
               <p>To complete your registration, please verify your email by clicking the button below:</p>
       
-              <a href="" class="btn">Verify My Account</a>
+              <a href="${verifyLink}" class="btn">Verify My Account</a>
       
               <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
-              <p style="word-break: break-all;">https://yourdomain.com/verify/${newAccount.id}</p>
+              <p style="word-break: break-all;">${verifyLink}</p>
       
               <div class="footer">
                 <p>This email was sent by Event App. If you did not sign up, please ignore this message.</p>
@@ -111,7 +119,7 @@ export const loginService = async (data: any) => {
         throw new AppError("Email not registered", 404);
     };
 
-    if (!findUser.isVeriefied) {
+    if (!findUser.isVerified) {
         throw new AppError("Email not verify, please verify first", 401)
     }
 
@@ -131,3 +139,16 @@ export const loginService = async (data: any) => {
         account: findUser
     }
 }
+
+export const verifyEmailService = async (token: string) => {
+    const record = await findVerificationToken(token);
+    if (!record) throw new AppError("Invalid or expired token", 404);
+
+    if (record.expiresAt < new Date()) {
+        await deleteVerificationToken(token);
+        throw new AppError("Token has expired", 400);
+    }
+
+    await verifyAccountByEmail(record.account.email);
+    await deleteVerificationToken(token);
+};
