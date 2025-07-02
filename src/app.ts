@@ -1,4 +1,6 @@
+import searchRouter from './routers/search.router';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 import express, { Application, NextFunction, Request, Response } from 'express';
@@ -26,6 +28,7 @@ class App {
     private routes(): void {
         const authRouter = new AuthAccountRouter();
         this.app?.use("/auth", authRouter.getRouter());
+        this.app?.use('/api', searchRouter);
         this.app?.get('/', (req: Request, res: Response) => {
             res.status(200).send("<h1>Welcome to Mini Project</h1>")
         })
