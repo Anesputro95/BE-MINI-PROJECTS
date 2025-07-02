@@ -36,11 +36,14 @@ export const regisService = async (data: any) => {
         }
     }
 
+    const allowedRoles = ["CUSTOMER", "ORGANIZER"]
+    const safeRoles = allowedRoles.includes(role) ? role : "CUSTOMER"
+
     const newAccount = await createAccountByEmail({
         username,
         email,
         password: await hashPassword(password),
-        role: role || "ORGANIZER",
+        role: safeRoles,
         isVerified: false,
         referall_code: referralCodeNew,
         referred_by: referredBy
@@ -96,7 +99,8 @@ export const regisService = async (data: any) => {
               <a href="${verifyLink}" class="btn">Verify My Account</a>
       
               <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
-              <p style="word-break: break-all;">${verifyLink}</p>
+              <a href="${verifyLink}" class="">click here</a>
+              
       
               <div class="footer">
                 <p>This email was sent by Event App. If you did not sign up, please ignore this message.</p>
