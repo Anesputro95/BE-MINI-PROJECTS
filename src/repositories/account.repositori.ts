@@ -7,9 +7,9 @@ export const findAccountByEmail = async (email: string) => {
     })
 }
 
-export const findAccountByReferralCode = async (referall_code: string) => {
+export const findAccountByReferralCode = async (code: string) => {
     return prisma.account.findUnique({
-        where: { referall_code }
+        where: { referall_code: code }
     })
 }
 
@@ -28,6 +28,7 @@ export const createAccountByEmail = async (
     data: CreateAccountInput) => {
     return prisma.account.create({ data })
 }
+
 export const loginAccountByEmail = async (email: string) => {
     return prisma.account.findUnique({
         where: { email }

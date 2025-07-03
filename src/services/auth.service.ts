@@ -5,62 +5,91 @@ import { createAccountByEmail, createVerificationToken, deleteVerificationToken,
 import { hashPassword } from "../utils/hash";
 import { sign } from "jsonwebtoken";
 import crypto from "crypto";
+import { createReferral } from "../repositories/referral.repositori";
+import { createUserPoints } from "../repositories/userPoints.repositori";
+import { createCoupon } from "../repositories/coupon.repositori";
 
 export const regisService = async (data: any) => {
-    const { username, email, password, role } = data;
+  const { username, email, password, role } = data;
 
-    const exitingAccount = await findAccountByEmail(email);
-    if (exitingAccount) {
-        throw new AppError("User already exist", 400);
+  const exitingAccount = await findAccountByEmail(email);
+  if (exitingAccount) {
+    throw new AppError("User already exist", 400);
+  }
+
+  let referredBy = null;
+  const referralCode = data.referralCode;
+  let referrer = null
+
+  if (referralCode) {
+    referrer = await findAccountByReferralCode(referralCode);
+    if (!referrer) {
+      throw new AppError("Invalid referral code", 400);
     }
+    referredBy = referralCode;
+  }
 
-    let referredBy = null;
-    const referralCode = data.referralCode;
-
-    if (referralCode) {
-        const referrer = await findAccountByReferralCode(referralCode);
-        if (!referrer) {
-            throw new AppError("Invalid referral code", 400);
-        }
-        referredBy = referralCode;
+  let referralCodeNew = "";
+  let isUnique = false;
+  while (!isUnique) {
+    const code = `${username}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+    const existingCode = await findAccountByReferralCode(code);
+    if (!existingCode) {
+      referralCodeNew = code;
+      isUnique = true;
     }
+  }
 
-    let referralCodeNew = "";
-    let isUnique = false;
-    while (!isUnique) {
-        const code = `${username}-${Math.random().toString(36).substring(2, 8)}`;
-        const existingCode = await findAccountByReferralCode(code);
-        if (!existingCode) {
-            referralCodeNew = code;
-            isUnique = true;
-        }
-    }
+  const allowedRoles = ["CUSTOMER", "ORGANIZER"]
+  const safeRoles = allowedRoles.includes(role) ? role : "CUSTOMER"
 
-    const allowedRoles = ["CUSTOMER", "ORGANIZER"]
-    const safeRoles = allowedRoles.includes(role) ? role : "CUSTOMER"
+  const newAccount = await createAccountByEmail({
+    username,
+    email,
+    password: await hashPassword(password),
+    role: safeRoles,
+    isVerified: false,
+    referall_code: referralCodeNew,
+    referred_by: referredBy
+  });
 
-    const newAccount = await createAccountByEmail({
-        username,
-        email,
-        password: await hashPassword(password),
-        role: safeRoles,
-        isVerified: false,
-        referall_code: referralCodeNew,
-        referred_by: referredBy
-    });
+  if (referralCode && referrer) {
+    // point expires selama 3 bulan
+    const now = new Date();
+    const pointExpire = new Date(now);
+    pointExpire.setMonth(now.getMonth() + 3);
 
-    const token = crypto.randomBytes(24).toString("hex");
-    const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24);
+    // tambah ke tabel referall
+    await createReferral(referrer.id, newAccount.id)
+    // tamabah 10.000 point ke referrer
+    await createUserPoints({
+      userId: referrer.id,
+      amount: 10000,
+      expiredAt: pointExpire,
+    })
+    // tambah coupon ke newaccount 
+    const couponCode = `Coupon-${newAccount.id}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`
 
-    await createVerificationToken(newAccount.id, token, expiresAt);
+    await createCoupon({
+      userId: newAccount.id,
+      code: couponCode,
+      discount: 10,
+      expiresAt: pointExpire,
+    })
+  }
 
-    const verifyLink = `${process.env.BASE_URL}/auth/verify/${token}`;
+  const token = crypto.randomBytes(24).toString("hex");
+  const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24 jam
 
-    await transport.sendMail({
-        from: process.env.MAILSENDER,
-        to: newAccount.email,
-        subject: "Verify Your Account - Event App",
-        html: `
+  await createVerificationToken(newAccount.id, token, expiresAt);
+
+  const verifyLink = `${process.env.BASE_URL}/auth/verify/${token}`;
+
+  await transport.sendMail({
+    from: process.env.MAILSENDER,
+    to: newAccount.email,
+    subject: "Verify Your Account - Event App",
+    html: `
         <!DOCTYPE html>
         <html>
           <head>
@@ -109,50 +138,54 @@ export const regisService = async (data: any) => {
           </body>
         </html>
         `,
-    });
+  });
 
-    return newAccount;
-}
+  return newAccount;
+};
 
 export const loginService = async (data: any) => {
-    const { email } = data;
+  const { email } = data;
 
-    const findUser = await loginAccountByEmail(email)
+  const findUser = await loginAccountByEmail(email)
 
-    if (!findUser) {
-        throw new AppError("Email not registered", 404);
-    };
+  if (!findUser) {
+    throw new AppError("Email not registered", 404);
+  };
 
-    if (!findUser.isVerified) {
-        throw new AppError("Email not verify, please verify first", 401)
-    }
+  if (!findUser.isVerified) {
+    throw new AppError("Email not verify, please verify first", 401)
+  }
 
-    const comparePass = await compare(data.password, findUser.password);
-    if (!comparePass) {
-        throw new AppError("Password is wrong", 401);
-    }
+  const comparePass = await compare(data.password, findUser.password);
+  if (!comparePass) {
+    throw new AppError("Password is wrong", 401);
+  }
 
-    const token = sign(
-        { id: findUser.id, role: findUser.role },
-        process.env.TOKEN_KEY || "secret",
-        { expiresIn: "1d" }
-    );
+  const token = sign(
+    { id: findUser.id, role: findUser.role },
+    process.env.TOKEN_KEY || "secret",
+    { expiresIn: "1d" }
+  );
 
-    return {
-        token,
-        account: findUser
-    }
-}
+  return {
+    token,
+    account: findUser
+  }
+};
 
 export const verifyEmailService = async (token: string) => {
-    const record = await findVerificationToken(token);
-    if (!record) throw new AppError("Invalid or expired token", 404);
+  const record = await findVerificationToken(token);
+  if (!record) throw new AppError("Invalid or expired token", 404);
 
-    if (record.expiresAt < new Date()) {
-        await deleteVerificationToken(token);
-        throw new AppError("Token has expired", 400);
-    }
-
-    await verifyAccountByEmail(record.account.email);
+  if (record.expiresAt < new Date()) {
     await deleteVerificationToken(token);
+    throw new AppError("Token has expired", 400);
+  }
+
+  await verifyAccountByEmail(record.account.email);
+  await deleteVerificationToken(token);
 };
+
+
+
+

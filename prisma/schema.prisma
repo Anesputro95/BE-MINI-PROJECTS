@@ -19,6 +19,12 @@ enum UserRole {
   ORGANIZER
 }
 
+enum TransactionStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
 model Account {
   id            Int      @id @default(autoincrement())
   username      String   @unique
@@ -33,6 +39,12 @@ model Account {
   updatedAt     DateTime @updatedAt
 
   emailVerification EmailVerification[]
+  referrallMade     Referall[]          @relation("Referrer")
+  referralReceived  Referall[]          @relation("Referred")
+  points            UserPoint[]
+  coupons           Coupon[]
+  transactions      Transaction[]
+  eventOragnized    Event[]             @relation("ORGANIZER")
 
   @@map("account")
 }
@@ -45,4 +57,77 @@ model EmailVerification {
   createdAt DateTime @default(now())
 
   @@map("email_verification")
+}
+
+model Referall {
+  id         Int      @id @default(autoincrement())
+  referrerId Int
+  referredId Int
+  createdAt  DateTime @default(now())
+
+  referrer Account @relation("Referrer", fields: [referrerId], references: [id])
+  referred Account @relation("Referred", fields: [referredId], references: [id])
+
+  @@map("referrall")
+}
+
+model UserPoint {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  amount    Int
+  expiredAt DateTime
+  createdAt DateTime @default(now())
+
+  user Account @relation(fields: [userId], references: [id])
+
+  @@map("user-point")
+}
+
+model Coupon {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  code      String   @unique
+  discount  Int
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user Account @relation(fields: [userId], references: [id])
+  transaction Transaction[]
+
+  @@map("coupon")
+}
+
+model Event {
+  id            Int      @id @default(autoincrement())
+  organizerId   Int
+  title         String
+  thumbnail     String
+  description   String
+  seatQuota     Int
+  availableSeat Int
+  createdAt     DateTime @default(now())
+
+  organizer Account @relation("ORGANIZER", fields: [organizerId], references: [id])
+  transaction Transaction[]
+
+  @@map("event")
+}
+
+model Transaction {
+  id              Int               @id @default(autoincrement())
+  userId          Int
+  eventId         Int
+  ticketQuantity  Int
+  totalPrice      Int
+  paymentProofUrl String?
+  status          TransactionStatus @default(PENDING)
+  userPoints      Int?
+  usedCouponsId   Int?
+  createdAt       DateTime          @default(now())
+
+  user   Account @relation(fields: [userId], references: [id])
+  event  Event   @relation(fields: [eventId], references: [id])
+  coupon Coupon? @relation(fields: [usedCouponsId], references: [id])
+
+  @@map("transaction")
 }

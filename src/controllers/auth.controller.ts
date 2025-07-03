@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import e, { NextFunction, Request, Response } from "express";
 import AppError from "../errors/AppError";
 import { prisma } from "../config/prisma";
 import { hashPassword } from "../utils/hash";
@@ -68,7 +68,6 @@ class AuthAccountController {
             next(error);
         }
     }
-
 }
 
 
