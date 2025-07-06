@@ -66,3 +66,47 @@ export const verifyAccountByEmail = async (email: string) => {
         }
     });
 };
+
+export const findAccountById = async (id: number) => {
+    return prisma.account.findUnique({
+        where: { id }
+    })
+}
+
+export const updateUser = async (data: Partial<Account>, id: number) => {
+    return prisma.account.update({
+        data,
+        where: { id }
+    })
+}
+
+export const createPasswordResetToken = async (email: string, token: string, expiresAt: Date) => {
+    return prisma.passwordReset.create({
+        data: {
+            email,
+            token,
+            expiresAt
+        }
+    })
+}
+
+export const findResetToken = async (token: string) => {
+    return prisma.passwordReset.findUnique(
+        {
+            where: { token }
+        }
+    )
+}
+
+export const deleteResetToken = async (token: string) => {
+    return prisma.passwordReset.delete({
+        where: { token },
+    });
+};
+
+export const deleteAllResetTokensByEmail = async (email: string) => {
+    return prisma.passwordReset.deleteMany({
+        where: { email },
+    });
+};
+

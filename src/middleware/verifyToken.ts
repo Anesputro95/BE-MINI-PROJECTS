@@ -16,7 +16,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
         console.log(checkToken);
 
         // jika token tidak valid, akan di lempar error
-        res.locals.user = checkToken;
+        res.locals.descript = checkToken;
         next();
 
     } catch (error: any) {

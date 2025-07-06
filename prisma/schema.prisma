@@ -49,6 +49,16 @@ model Account {
   @@map("account")
 }
 
+model PasswordReset {
+  id        Int      @id @default(autoincrement())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@map("password-reset")
+}
+
 model EmailVerification {
   token     String   @id
   account   Account  @relation(fields: [accountId], references: [id])
@@ -91,7 +101,7 @@ model Coupon {
   expiresAt DateTime
   createdAt DateTime @default(now())
 
-  user Account @relation(fields: [userId], references: [id])
+  user        Account       @relation(fields: [userId], references: [id])
   transaction Transaction[]
 
   @@map("coupon")
@@ -107,7 +117,7 @@ model Event {
   availableSeat Int
   createdAt     DateTime @default(now())
 
-  organizer Account @relation("ORGANIZER", fields: [organizerId], references: [id])
+  organizer   Account       @relation("ORGANIZER", fields: [organizerId], references: [id])
   transaction Transaction[]
 
   @@map("event")

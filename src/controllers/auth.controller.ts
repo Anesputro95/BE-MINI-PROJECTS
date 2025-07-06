@@ -5,7 +5,7 @@ import { hashPassword } from "../utils/hash";
 import { transport } from "../config/nodemailer";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
-import { loginService, regisService, verifyEmailService } from "../services/auth.service";
+import { editProfileService, loginService, regisService, resetPasswordRequestService, resetPasswordService, uploadProfileService, verifyEmailService } from "../services/auth.service";
 
 class AuthAccountController {
     public async register(
@@ -32,6 +32,7 @@ class AuthAccountController {
     ): Promise<void> {
         try {
             const loginAccount = await loginService(req.body)
+
             res.status(200).send({
                 message: "Login Success",
                 email: loginAccount.account.email,
@@ -58,7 +59,7 @@ class AuthAccountController {
                 throw new AppError("Token is missing", 404);
             }
 
-            await verifyEmailService(token); 
+            await verifyEmailService(token);
 
             res.status(200).json({
                 success: true,
@@ -68,8 +69,82 @@ class AuthAccountController {
             next(error);
         }
     }
+
+    public async uploadProfile(
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const uploadedUrl = await uploadProfileService(req.file, res.locals.descript.id)
+            console.log(uploadedUrl);
+
+            res.status(201).send({
+                success: true,
+                message: "Upload profile success",
+                data: {
+                    imageUrl: uploadedUrl
+                }
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public async editProfile(
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const updated = await editProfileService(req.body, res.locals.descript.id)
+
+            res.status(200).send({
+                success: true,
+                message: "account berhasil di update",
+                data: updated,
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public async requestResetPassword(
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const { email } = req.body;
+            const token = await resetPasswordRequestService(email);
+
+            res.status(200).send({
+                success: true,
+                message: "If your email is registered, a reset link has been sent.",
+                token: token || null,
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public async confirmResetPassword(
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const { token, newPassword } = req.body;
+            await resetPasswordService(token, newPassword);
+
+            res.status(200).send({
+                success: true,
+                message: "Password changed successfully",
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
 }
-
-
 
 export default AuthAccountController;

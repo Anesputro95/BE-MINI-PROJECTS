@@ -1,13 +1,17 @@
 import { compare } from "bcrypt";
 import { transport } from "../config/nodemailer";
 import AppError from "../errors/AppError";
-import { createAccountByEmail, createVerificationToken, deleteVerificationToken, findAccountByEmail, findAccountByReferralCode, findVerificationToken, loginAccountByEmail, verifyAccountByEmail } from "../repositories/account.repositori";
+import { createAccountByEmail, createPasswordResetToken, createVerificationToken, deleteAllResetTokensByEmail, deleteResetToken, deleteVerificationToken, findAccountByEmail, findAccountById, findAccountByReferralCode, findResetToken, findVerificationToken, loginAccountByEmail, updateUser, verifyAccountByEmail } from "../repositories/account.repositori";
 import { hashPassword } from "../utils/hash";
 import { sign } from "jsonwebtoken";
 import crypto from "crypto";
+import bcrypt from "bcrypt";
 import { createReferral } from "../repositories/referral.repositori";
 import { createUserPoints } from "../repositories/userPoints.repositori";
 import { createCoupon } from "../repositories/coupon.repositori";
+import { cloudinaryUpload } from "../config/cloudinary";
+import { prisma } from "../config/prisma";
+import { Multer } from "multer";
 
 export const regisService = async (data: any) => {
   const { username, email, password, role } = data;
@@ -186,6 +190,141 @@ export const verifyEmailService = async (token: string) => {
   await deleteVerificationToken(token);
 };
 
+export const uploadProfileService = async (
+  file: Express.Multer.File | undefined,
+  id: number,
+) => {
+  if (!file) {
+    throw new AppError("No file exist", 400);
+  }
+  console.log("FILE YANG DIKIRIM:", file);
 
+  const upload = await cloudinaryUpload(file);
 
+  await updateUser({ ImgProfile: upload.secure_url }, id)
+  return upload.secure_url;
+};
 
+export const editProfileService = async (data: any, userId: number) => {
+  const account = await findAccountById(userId);
+
+  if (!account) {
+    throw new AppError("User not found", 404);
+  }
+
+  if (!data.oldpassword || !data.newPassword) {
+    throw new AppError("Old and new passwords must be filled in.", 400)
+  }
+
+  const isMatch = await bcrypt.compare(data.oldpassword, account.password);
+  if (!isMatch) {
+    throw new AppError("Password is not correct", 404)
+  };
+
+  const hashedNewPassword = await bcrypt.hash(data.newPassword, 10);
+
+  const updatedUser = await updateUser(
+    {
+      username: data.username || account.username,
+      password: hashedNewPassword
+    },
+    userId
+  )
+
+  return updatedUser;
+}
+
+export const resetPasswordRequestService = async (email: string) => {
+  const account = await findAccountByEmail(email);
+
+  if (!account) {
+    return;
+  };
+
+  const token = crypto.randomBytes(24).toString("hex");
+  const expiresAt = new Date(Date.now() + 1000 * 60 * 30); // 30 menit
+
+  const tokenData = await findResetToken(token); 
+
+  await deleteAllResetTokensByEmail(email);
+  await createPasswordResetToken(email, token, expiresAt);
+
+  const resetLink = `${process.env.BASE_URL}/reset-password/${token}`;
+
+  await transport.sendMail({
+    to: email,
+    subject: "Reset Password",
+    html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <style>
+              .container {
+                max-width: 600px;
+                margin: auto;
+                font-family: Arial, sans-serif;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                padding: 24px;
+                background-color: #f9f9f9;
+              }
+              .btn {
+                display: inline-block;
+                margin-top: 20px;
+                padding: 12px 24px;
+                background-color: #dc3545;
+                color: white;
+                text-decoration: none;
+                border-radius: 4px;
+              }
+              .footer {
+                font-size: 12px;
+                color: #888;
+                margin-top: 30px;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <p>You have requested to reset your password.</p>
+              <p>Click the button below to create a new password:</p>
+
+              <a href="${resetLink}" class="btn">Reset My Password</a>
+
+              <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
+              <a href="${resetLink}">${resetLink}</a>
+
+              <div class="footer">
+                <p>This email was sent by Event App. If you did not request a password reset, please ignore this message or contact support.</p>
+              </div>
+              <p>This link is valid for 30 minutes only.</p>
+
+            </div>
+          </body>
+        </html>
+        `
+  })
+
+  return token;
+}
+
+export const resetPasswordService = async (token: string, newPassword: string) => {
+  console.log("Token received:", token);
+
+  const tokenData = await findResetToken(token);
+  console.log("Token from DB:", tokenData);
+
+  if (!tokenData || tokenData.expiresAt < new Date()) {
+    throw new AppError("Token invalid", 400);
+  };
+
+  const account = await findAccountByEmail(tokenData.email);
+  if (!account) {
+    throw new AppError("User not exist", 404)
+  }
+
+  const hashPassword = await bcrypt.hash(newPassword, 10);
+  await updateUser({ password: hashPassword }, account.id);
+
+  await deleteResetToken(token);
+}
