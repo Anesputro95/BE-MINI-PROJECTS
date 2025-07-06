@@ -32,6 +32,7 @@ class App {
         this.app?.get('/', (req: Request, res: Response) => {
             res.status(200).send("<h1>Welcome to Mini Project</h1>")
         })
+        
     }
 
     private errorHandler(): void {

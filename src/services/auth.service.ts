@@ -292,7 +292,8 @@ export const resetPasswordRequestService = async (email: string) => {
               <a href="${resetLink}" class="btn">Reset My Password</a>
 
               <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
-              <a href="${resetLink}">${resetLink}</a>
+              <br>
+              <a href="${resetLink}">Click Here</a>
 
               <div class="footer">
                 <p>This email was sent by Event App. If you did not request a password reset, please ignore this message or contact support.</p>

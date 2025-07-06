@@ -346,3 +346,6 @@ Argument `where` of type PasswordResetWhereUniqueInput needs at least one of `id
 2025-07-06 18:51:10 [ERROR]: GET /auth/verify/982e0a72e6f2cbd9ffbabc4b65518073cf096310d61e4dd6: Invalid or expired token {"statusCode":404,"success":false,"message":"Invalid or expired token"}
 2025-07-06 18:55:42 [ERROR]: GET /auth/verify/be864a98846d625b5173c70b98eadf2dd84599fa46d63c43: Invalid or expired token {"statusCode":404,"success":false,"message":"Invalid or expired token"}
 2025-07-06 19:13:58 [ERROR]: GET /auth/verify/e4103785da6de3be9f6bb8b81435f24d3028e8ac5b8edf3a: Invalid or expired token {"statusCode":404,"success":false,"message":"Invalid or expired token"}
+2025-07-06 19:52:40 [ERROR]: POST /auth/login: Email not verify, please verify first {"statusCode":401,"success":false,"message":"Email not verify, please verify first"}
+2025-07-06 19:53:26 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
+2025-07-06 19:53:36 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
