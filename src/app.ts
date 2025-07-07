@@ -9,7 +9,6 @@ import logger from './utils/logger';
 import EventDashboradRouter from './routers/dashboardEvent.router';
 import TransactionRouter from './routers/transaction.router';
 
-
 const PORT = process.env.PORT || "8080";
 
 class App {
@@ -21,6 +20,7 @@ class App {
         this.routes();
         this.errorHandler();
     }
+
     private configure(): void {
         this.app?.use(cors());
         this.app?.use(express.json());
@@ -30,14 +30,15 @@ class App {
         const authRouter = new AuthAccountRouter();
         const eventDashboradRouter = new EventDashboradRouter();
         const transactionRouter = new TransactionRouter();
+
         this.app?.use("/auth", authRouter.getRouter());
         this.app?.use('/api', searchRouter);
         this.app?.use('/dashboard', eventDashboradRouter.getRouter());
         this.app?.use('/transactions', transactionRouter.getRouter());
+
         this.app?.get('/', (req: Request, res: Response) => {
             res.status(200).send("<h1>Welcome to Mini Project</h1>")
-        })
-        
+        });
     }
 
     private errorHandler(): void {
@@ -46,13 +47,13 @@ class App {
                 `${req.method} ${req.path}: ${error.message} ${JSON.stringify(error)}`
             );
             res.status(error.rc || 500).send(error)
-        })
+        });
     }
 
     public start(): void {
         this.app?.listen(PORT, () => {
             console.log(`Server is Running on http://localhost:${PORT}`);
-        })
+        });
     }
 }
 

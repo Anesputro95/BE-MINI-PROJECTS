@@ -1,6 +1,6 @@
-
 import { Router } from 'express';
 import TransactionController from '../controllers/transaction.controller';
+import { verifyToken } from '../middleware/verifyToken';
 
 class TransactionRouter {
     private router: Router;
@@ -13,15 +13,31 @@ class TransactionRouter {
     }
 
     private initialRoute(): void {
+        // 👥 Untuk admin/organizer melihat daftar attendee
         this.router.get(
             "/attendees/:eventId",
+            verifyToken,
             this.transactionController.getAttendList
+        );
+
+        // 🧾 Untuk user membuat transaksi pembelian tiket
+        this.router.post(
+            "/create-transaction",
+            verifyToken,
+            this.transactionController.createTransaction
+        );
+
+        // 📜 Untuk user melihat daftar transaksi mereka
+        this.router.get(
+            "/transactions",
+            verifyToken,
+            this.transactionController.getUserTransactions
         );
     }
 
     public getRouter(): Router {
         return this.router;
-      }
+    }
 }
 
 export default TransactionRouter;

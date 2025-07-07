@@ -666,6 +666,7 @@ Invalid `prisma.event.create()` invocation in
 
 Invalid value for argument `category`. Expected EventCategory. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
 2025-07-07 21:04:49 [INFO]: Token:
+<<<<<<< HEAD
 =======
 2025-07-07 20:01:18 [INFO]: Token:
 2025-07-07 20:12:05 [INFO]: Token:
@@ -1154,3 +1155,12 @@ Invalid `prisma.event.delete()` invocation in
 Foreign key constraint violated on the constraint: `ticket_eventId_fkey` {"code":"P2003","meta":{"modelName":"Event","constraint":"ticket_eventId_fkey"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
 2025-07-07 22:12:26 [INFO]: Token:
 2025-07-07 22:12:35 [INFO]: Token:
+=======
+
+2025-07-07 22:53:36 [ERROR]: POST /event/create-transaction: Authorization header missing or invalid {"statusCode":401,"success":false,"message":"Authorization header missing or invalid"}
+2025-07-07 22:54:00 [ERROR]: POST /event/create-transaction: Authorization header missing or invalid {"statusCode":401,"success":false,"message":"Authorization header missing or invalid"}
+2025-07-07 22:54:01 [ERROR]: POST /event/create-transaction: Authorization header missing or invalid {"statusCode":401,"success":false,"message":"Authorization header missing or invalid"}
+2025-07-07 22:57:00 [INFO]: Token:
+2025-07-07 22:58:49 [INFO]: Token:
+
+>>>>>>> bbff219474ba67fe0f1fe2ae88efe0809bb2075c
