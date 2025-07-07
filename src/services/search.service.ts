@@ -5,7 +5,7 @@ export const searchUsersService = async (query: string) => {
     where: {
       username: {
         contains: query,
-        mode: "insensitive", // makes it case-insensitive
+        mode: "insensitive",
       },
     },
     select: {
