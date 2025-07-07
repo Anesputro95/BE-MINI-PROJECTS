@@ -15,8 +15,10 @@ class EventDashboardRouter {
     }
 
     private initialRoute(): void {
-        this.router.get("/events", verifyToken, isOrganizer, this.dashboardEventController.getEvents);
+        this.router.get("/events", verifyToken, this.dashboardEventController.getEvents);
         this.router.post("/create-event", verifyToken, isOrganizer, this.dashboardEventController.createEvents)
+        this.router.patch("/event/:id", verifyToken, isOrganizer, this.dashboardEventController.updateEvent)
+        this.router.delete("/event/:id", verifyToken, isOrganizer, this.dashboardEventController.deleteEvent)
     }
 
     public getRouter(): Router {

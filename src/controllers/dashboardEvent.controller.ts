@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { createEventService, getEventsService } from "../services/dashboardEvent.service";
+import { createEventService, deleteEventService, getEventsService, updateEventService } from "../services/dashboardEvent.service";
 
 class EventDashboardController {
     public async getEvents(
@@ -8,9 +8,9 @@ class EventDashboardController {
         next: NextFunction,
     ): Promise<void> {
         try {
-            const { id: organizerId } = res.locals.descript;
+            const { id: customerId } = res.locals.descript;
 
-            const events = await getEventsService(organizerId);
+            const events = await getEventsService(customerId);
 
             res.status(200).send({
                 success: true,
@@ -47,6 +47,49 @@ class EventDashboardController {
                 message: "Event created successfully",
                 data: event,
             });
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public async updateEvent(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> {
+        try {
+            const id = parseInt(req.params.id);
+            const input = {
+                id,
+                ...req.body,
+            };
+
+            const updatedEvent = await updateEventService(input);
+
+            res.status(200).json({
+                success: true,
+                message: 'Event updated successfully',
+                data: updatedEvent,
+            });
+        } catch (error) {
+            next(error);
+        }
+    };
+
+    public async deleteEvent(
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const id = parseInt(req.params.id);
+
+            const deleted = await deleteEventService(id)
+
+            res.status(200).send({
+                success: true,
+                message: "Event successfully deleted"
+            })
         } catch (error) {
             next(error)
         }

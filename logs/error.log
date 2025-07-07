@@ -295,280 +295,228 @@ Invalid `prisma.account.create()` invocation in
 Unique constraint failed on the fields: (`username`) {"code":"P2002","meta":{"modelName":"Account","target":["username"]},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
 2025-07-07 07:18:46 [ERROR]: POST /dashboard/create-event: Token is missing {"statusCode":404,"success":false,"message":"Token is missing"}
 2025-07-07 07:44:44 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
-2025-07-07 18:09:21 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
-2025-07-07 18:09:40 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 96 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"username\":\"fanaxo4654\",\n    \"email\":\"fanaxo4654@iamtile.com\",\n    \"password\":\"Kevin123\",\n}","type":"entity.parse.failed"}
-2025-07-07 18:09:47 [ERROR]: POST /auth/login: Email not verify, please verify first {"statusCode":401,"success":false,"message":"Email not verify, please verify first"}
-2025-07-07 18:23:40 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 93 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"username\":\"mixap48\",\n    \"email\":\"mixap48248@iamtile.com\",\n    \"password\":\"Kevin123\",\n}","type":"entity.parse.failed"}
-2025-07-07 18:53:50 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
-2025-07-07 19:02:14 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 93 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{\n  \"username\": \"deveb49778\",\n  \"email\": \"deveb49778@iamtile.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
-2025-07-07 19:34:08 [ERROR]: POST /dashboard/create-event: 
+2025-07-07 21:25:48 [ERROR]: POST /dashboard/create-event: 
 Invalid `prisma.event.create()` invocation in
-/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/dashboardEvent.repository.ts:36:25
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:39:25
 
-  33 export const createEvent = async (input: CreateEventDTO) => {
-  34     const { organizerId, title, description, seatQuota, thumbnail, tickets } = input;
-  35 
-→ 36     return prisma.event.create({
+  36 export const createEvent = async (input: CreateEventDTO) => {
+  37     const { organizerId, title, description, thumbnail, category, salesStart, salesEnd, tickets } = input;
+  38 
+→ 39     return prisma.event.create({
            data: {
-             organizerId: 16,
-             title: "Coldplay Charity Concert",
-             description: "An amazing time to be ALIVE",
-             thumbnail: "https://example.com/concert.jpg",
+             organizerId: 1,
+             title: "Bring Me The Horizon",
+             description: "Lost",
+             thumbnail: "https://link-thumbnail.jpg/",
+             category: "Concert",
+                       ~~~~~~~~~
+             salesStart: "2025-07-10T10:00:00.000Z",
+             salesEnd: "2025-07-20T22:00:00.000Z",
+             tickets: {
+               create: [
+                 {
+                   name: "VIP Seat",
+                   price: 2000000,
+                   quota: 100
+                 },
+                 {
+                   name: "Regular",
+                   price: 500000,
+                   quota: 500
+                 }
+               ]
+             }
+           },
+           include: {
+             tickets: true
+           }
+         })
+
+Invalid value for argument `category`. Expected EventCategory. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-07 21:26:10 [ERROR]: POST /dashboard/create-event: Cannot read properties of undefined (reading 'map') {}
+2025-07-07 21:27:36 [ERROR]: POST /dashboard/create-event: 
+Invalid `prisma.event.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:39:25
+
+  36 export const createEvent = async (input: CreateEventDTO) => {
+  37     const { organizerId, title, description, thumbnail, category, salesStart, salesEnd, tickets } = input;
+  38 
+→ 39     return prisma.event.create({
+           data: {
+             organizerId: 1,
+             title: "Tech Conference 2025",
+             description: "A national technology conference event.",
+             thumbnail: "https://example.com/image.jpg",
+             category: "MUSIC",
+                       ~~~~~~~
+             salesStart: "2025-07-10T09:00:00.000Z",
+             salesEnd: "2025-07-20T17:00:00.000Z",
              tickets: {
                create: [
                  {
                    name: "Regular",
-                   price: 5000000,
-                   quota: 300
+                   price: 100000,
+                   quota: 100
                  },
                  {
                    name: "VIP",
-                   price: 150000000,
+                   price: 250000,
+                   quota: 50
+                 }
+               ]
+             }
+           },
+           include: {
+             tickets: true
+           }
+         })
+
+Invalid value for argument `category`. Expected EventCategory. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-07 21:42:33 [ERROR]: POST /dashboard/create-event: 
+Invalid `prisma.event.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:43:25
+
+  40 export const createEvent = async (input: CreateEventInput) => {
+  41     const { organizerId, title, description, thumbnail, category, salesStart, salesEnd, tickets } = input;
+  42 
+→ 43     return prisma.event.create({
+           data: {
+             organizerId: 1,
+             title: "Seminar Nasional",
+             description: "Acara untuk pengusaha muda.",
+             thumbnail: "https://example.com/image.jpg",
+             category: "Education",
+                       ~~~~~~~~~~~
+             salesStart: undefined,
+             salesEnd: undefined,
+             tickets: {
+               create: [
+                 {
+                   name: "Umum",
+                   price: 100000,
+                   quota: 100
+                 }
+               ]
+             }
+           },
+           include: {
+             tickets: true
+           }
+         })
+
+Invalid value for argument `category`. Expected EventCategory. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-07 21:42:39 [ERROR]: POST /dashboard/create-event: 
+Invalid `prisma.event.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:43:25
+
+  40 export const createEvent = async (input: CreateEventInput) => {
+  41     const { organizerId, title, description, thumbnail, category, salesStart, salesEnd, tickets } = input;
+  42 
+→ 43     return prisma.event.create({
+           data: {
+             organizerId: 1,
+             title: "Seminar Nasional",
+             description: "Acara untuk pengusaha muda.",
+             thumbnail: "https://example.com/image.jpg",
+             category: "Education",
+                       ~~~~~~~~~~~
+             salesStart: undefined,
+             salesEnd: undefined,
+             tickets: {
+               create: [
+                 {
+                   name: "Umum",
+                   price: 100000,
+                   quota: 100
+                 }
+               ]
+             }
+           },
+           include: {
+             tickets: true
+           }
+         })
+
+Invalid value for argument `category`. Expected EventCategory. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-07 21:53:39 [ERROR]: POST /dashboard/create-event: 
+Invalid `prisma.event.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:43:25
+
+  40 export const createEvent = async (input: CreateEventInput) => {
+  41     const { organizerId, title, description, thumbnail, category, salesStart, salesEnd, tickets } = input;
+  42 
+→ 43     return prisma.event.create({
+           data: {
+             organizerId: 1,
+             title: "Seminar Nasional SMA Bogor",
+             description: undefined,
+             category: undefined,
+             salesStart: undefined,
+             salesEnd: undefined,
+             tickets: {
+               create: [
+                 {
+                   name: "VIP",
+                   price: 300000,
                    quota: 50
                  }
                ]
              },
-         +   availableSeat: Int
+         +   thumbnail: String
            },
            include: {
              tickets: true
            }
          })
 
-Argument `availableSeat` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
-2025-07-07 19:34:47 [ERROR]: POST /dashboard/create-event: 
+Argument `thumbnail` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-07 21:54:14 [ERROR]: POST /dashboard/create-event: 
 Invalid `prisma.event.create()` invocation in
-/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/dashboardEvent.repository.ts:36:25
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:43:25
 
-  33 export const createEvent = async (input: CreateEventDTO) => {
-  34     const { organizerId, title, description, seatQuota, thumbnail, tickets } = input;
-  35 
-→ 36     return prisma.event.create({
+  40 export const createEvent = async (input: CreateEventInput) => {
+  41     const { organizerId, title, description, thumbnail, category, salesStart, salesEnd, tickets } = input;
+  42 
+→ 43     return prisma.event.create({
            data: {
-             organizerId: 16,
-             title: "Coldplay Charity Concert",
-             description: "An amazing time to be ALIVE",
-             thumbnail: "https://example.com/concert.jpg",
+             organizerId: 1,
+             title: "Seminar Nasional SMA Bogor",
+             thumbnail: "https://example.com/image2.jpg",
+             category: undefined,
+             salesStart: undefined,
+             salesEnd: undefined,
              tickets: {
                create: [
                  {
-                   name: "Regular",
-                   price: 5000000,
-                   quota: 300
-                 },
-                 {
                    name: "VIP",
-                   price: 150000000,
+                   price: 300000,
                    quota: 50
                  }
                ]
              },
-         +   availableSeat: Int
+         +   description: String
            },
            include: {
              tickets: true
            }
          })
 
-Argument `availableSeat` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
-2025-07-07 20:26:29 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/dashboardEvent.repository.ts:39:25
+Argument `description` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-07 22:10:17 [ERROR]: DELETE /dashboard/event/3: 
+Invalid `prisma.event.delete()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:87:37
 
-  36 export const createEvent = async (input: CreateEventDTO) => {
-  37     const { organizerId, title, description, thumbnail, category, salesStart, salesEnd, tickets } = input;
-  38 
-→ 39     return prisma.event.create(
-Error occurred during query execution:
-ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \"EventCategory\": \"DEFAULT\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false }) {"clientVersion":"6.10.1","name":"PrismaClientUnknownRequestError"}
-2025-07-07 20:29:20 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/dashboardEvent.repository.ts:39:25
+  84 };
+  85 
+  86 export const deleteEvent = async (id: number) => {
+→ 87     return await prisma.event.delete(
+Foreign key constraint violated on the constraint: `ticket_eventId_fkey` {"code":"P2003","meta":{"modelName":"Event","constraint":"ticket_eventId_fkey"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-07 22:10:28 [ERROR]: DELETE /dashboard/event/3: 
+Invalid `prisma.event.delete()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:87:37
 
-  36 export const createEvent = async (input: CreateEventDTO) => {
-  37     const { organizerId, title, description, thumbnail, category, salesStart, salesEnd, tickets } = input;
-  38 
-→ 39     return prisma.event.create({
-           data: {
-             organizerId: 16,
-             title: "Chemical Romance",
-             description: "Bring Back The Black Parade",
-             thumbnail: "https://link-thumbnail.jpg",
-             category: "Concert",
-                       ~~~~~~~~~
-             salesStart: "2025-07-10T10:00:00.000Z",
-             salesEnd: "2025-07-20T22:00:00.000Z",
-             tickets: {
-               create: [
-                 {
-                   name: "VIP Seat",
-                   price: 2000000,
-                   quota: 100
-                 },
-                 {
-                   name: "Regular",
-                   price: 500000,
-                   quota: 500
-                 }
-               ]
-             }
-           },
-           include: {
-             tickets: true
-           }
-         })
-
-Invalid value for argument `category`. Expected EventCategory. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
-2025-07-07 21:02:05 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 93 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{\n  \"username\": \"deveb49778\",\n  \"email\": \"deveb49778@iamtile.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
-2025-07-07 21:02:24 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/dashboardEvent.repository.ts:39:25
-
-  36 export const createEvent = async (input: CreateEventDTO) => {
-  37     const { organizerId, title, description, thumbnail, category, salesStart, salesEnd, tickets } = input;
-  38 
-→ 39     return prisma.event.create({
-           data: {
-             organizerId: 1,
-             title: "Chemical Romance",
-             description: "Bring Back The Black Parade",
-             thumbnail: "https://link-thumbnail.jpg",
-             category: "Concert",
-                       ~~~~~~~~~
-             salesStart: "2025-07-10T10:00:00.000Z",
-             salesEnd: "2025-07-20T22:00:00.000Z",
-             tickets: {
-               create: [
-                 {
-                   name: "VIP Seat",
-                   price: 2000000,
-                   quota: 100
-                 },
-                 {
-                   name: "Regular",
-                   price: 500000,
-                   quota: 500
-                 }
-               ]
-             }
-           },
-           include: {
-             tickets: true
-           }
-         })
-
-Invalid value for argument `category`. Expected EventCategory. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
-2025-07-07 21:02:26 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/dashboardEvent.repository.ts:39:25
-
-  36 export const createEvent = async (input: CreateEventDTO) => {
-  37     const { organizerId, title, description, thumbnail, category, salesStart, salesEnd, tickets } = input;
-  38 
-→ 39     return prisma.event.create({
-           data: {
-             organizerId: 1,
-             title: "Chemical Romance",
-             description: "Bring Back The Black Parade",
-             thumbnail: "https://link-thumbnail.jpg",
-             category: "Concert",
-                       ~~~~~~~~~
-             salesStart: "2025-07-10T10:00:00.000Z",
-             salesEnd: "2025-07-20T22:00:00.000Z",
-             tickets: {
-               create: [
-                 {
-                   name: "VIP Seat",
-                   price: 2000000,
-                   quota: 100
-                 },
-                 {
-                   name: "Regular",
-                   price: 500000,
-                   quota: 500
-                 }
-               ]
-             }
-           },
-           include: {
-             tickets: true
-           }
-         })
-
-Invalid value for argument `category`. Expected EventCategory. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
-2025-07-07 21:02:27 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/dashboardEvent.repository.ts:39:25
-
-  36 export const createEvent = async (input: CreateEventDTO) => {
-  37     const { organizerId, title, description, thumbnail, category, salesStart, salesEnd, tickets } = input;
-  38 
-→ 39     return prisma.event.create({
-           data: {
-             organizerId: 1,
-             title: "Chemical Romance",
-             description: "Bring Back The Black Parade",
-             thumbnail: "https://link-thumbnail.jpg",
-             category: "Concert",
-                       ~~~~~~~~~
-             salesStart: "2025-07-10T10:00:00.000Z",
-             salesEnd: "2025-07-20T22:00:00.000Z",
-             tickets: {
-               create: [
-                 {
-                   name: "VIP Seat",
-                   price: 2000000,
-                   quota: 100
-                 },
-                 {
-                   name: "Regular",
-                   price: 500000,
-                   quota: 500
-                 }
-               ]
-             }
-           },
-           include: {
-             tickets: true
-           }
-         })
-
-Invalid value for argument `category`. Expected EventCategory. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
-2025-07-07 21:02:42 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/dashboardEvent.repository.ts:39:25
-
-  36 export const createEvent = async (input: CreateEventDTO) => {
-  37     const { organizerId, title, description, thumbnail, category, salesStart, salesEnd, tickets } = input;
-  38 
-→ 39     return prisma.event.create({
-           data: {
-             organizerId: 1,
-             title: "Chemical Romance",
-             description: "Bring Back The Black Parade",
-             thumbnail: "https://link-thumbnail.jpg",
-             category: "Concert",
-                       ~~~~~~~~~
-             salesStart: "2025-07-10T10:00:00.000Z",
-             salesEnd: "2025-07-20T22:00:00.000Z",
-             tickets: {
-               create: [
-                 {
-                   name: "VIP Seat",
-                   price: 2000000,
-                   quota: 100
-                 },
-                 {
-                   name: "Regular",
-                   price: 500000,
-                   quota: 500
-                 }
-               ]
-             }
-           },
-           include: {
-             tickets: true
-           }
-         })
-
-Invalid value for argument `category`. Expected EventCategory. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+  84 };
+  85 
+  86 export const deleteEvent = async (id: number) => {
+→ 87     return await prisma.event.delete(
+Foreign key constraint violated on the constraint: `ticket_eventId_fkey` {"code":"P2003","meta":{"modelName":"Event","constraint":"ticket_eventId_fkey"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}

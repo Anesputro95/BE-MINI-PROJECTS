@@ -18,7 +18,7 @@ export const eventDashboard = async (organizerId: number) => {
     });
 }
 
-interface CreateEventDTO {
+interface CreateEventInput {
     organizerId: number;
     title: string;
     description: string;
@@ -30,10 +30,14 @@ interface CreateEventDTO {
         name: string;
         price: number;
         quota: number;
-    } [];
+    }[];
 }
 
-export const createEvent = async (input: CreateEventDTO) => {
+export interface UpdateEventDTO extends Partial<CreateEventInput> {
+    id: number;
+}
+
+export const createEvent = async (input: CreateEventInput) => {
     const { organizerId, title, description, thumbnail, category, salesStart, salesEnd, tickets } = input;
 
     return prisma.event.create({
@@ -56,5 +60,35 @@ export const createEvent = async (input: CreateEventDTO) => {
         include: {
             tickets: true,
         }
+    });
+};
+
+export const updateEvent = async (input: UpdateEventDTO) => {
+    const { id, tickets, ...eventData } = input;
+
+    return prisma.event.update({
+        where: { id },
+        data: {
+            ...eventData,
+            tickets: {
+                deleteMany: {},
+                create: tickets?.map(t => ({
+                    name: t.name,
+                    price: t.price,
+                    quota: t.quota,
+                }))
+            }
+        },
+        include: { tickets: true }
+    });
+};
+
+export const deleteEvent = async (id: number) => {
+    await prisma.ticket.deleteMany({
+        where: { eventId: id }
+    });
+
+    return await prisma.event.delete({
+        where: { id }
     });
 };

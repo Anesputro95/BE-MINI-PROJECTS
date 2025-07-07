@@ -2,7 +2,8 @@ import App from "../app";
 import { prisma } from "../config/prisma";
 import AppError from "../errors/AppError";
 import { EventCategory } from "../generated/prisma";
-import { createEvent, eventDashboard } from "../repositories/dashboardEvent.repository";
+import { createEvent, deleteEvent, eventDashboard, updateEvent } from "../repositories/dashboardEvent.repository";
+
 
 interface CreateEventInput {
     organizerId: number;
@@ -16,13 +17,25 @@ interface CreateEventInput {
         name: string;
         price: number;
         quota: number;
-    } [];
+    }[];
+}
+
+export interface UpdateEventDTO extends Partial<CreateEventInput> {
+    id: number;
 }
 
 export const getEventsService = async (organizerId: number) => {
-    return await eventDashboard(organizerId)
+    return await eventDashboard(organizerId);
 };
 
 export const createEventService = async (input: CreateEventInput) => {
     return await createEvent(input);
 };
+
+export const updateEventService = async (input: UpdateEventDTO) => {
+    return await updateEvent(input);
+};
+
+export const deleteEventService = async (id: number) => {
+    return await deleteEvent(id)
+}
