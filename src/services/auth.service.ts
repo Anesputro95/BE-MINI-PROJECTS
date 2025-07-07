@@ -167,7 +167,7 @@ export const loginService = async (data: any) => {
 
   const token = sign(
     { id: findUser.id, role: findUser.role },
-    process.env.TOKEN_KEY || "secret",
+    process.env.TOKEN_KEY || "fallback_secret",
     { expiresIn: "1d" }
   );
 

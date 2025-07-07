@@ -1,12 +1,15 @@
 import { NextFunction, Request, Response } from "express";
 
-export const isOrganizer = async (req: Request, res: Response, next: NextFunction) => {
-    const user = res.locals.descript
+export const isOrganizer = (req: Request, res: Response, next: NextFunction): void => {
+    const user = res.locals.descript; 
 
     if (!user || user.role !== "ORGANIZER") {
-        return res.status(404).send({
-            succes: false,
+        res.status(403).send({
+            success: false,
             message: "Access denied: Organizer only."
-        })
+        });
+        return;
     }
-}
+
+    next();
+};

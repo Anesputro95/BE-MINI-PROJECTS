@@ -1,12 +1,12 @@
-import searchRouter from './routers/search.router';
 import dotenv from 'dotenv';
-
 dotenv.config();
 
+import searchRouter from './routers/search.router';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import AuthAccountRouter from './routers/auth.router';
 import logger from './utils/logger';
+import EventDashboradRouter from './routers/dashboardEvent.router';
 
 
 const PORT = process.env.PORT || "8080";
@@ -27,8 +27,10 @@ class App {
 
     private routes(): void {
         const authRouter = new AuthAccountRouter();
+        const eventDashboradRouter = new EventDashboradRouter();
         this.app?.use("/auth", authRouter.getRouter());
         this.app?.use('/api', searchRouter);
+        this.app?.use('/dashboard', eventDashboradRouter.getRouter())
         this.app?.get('/', (req: Request, res: Response) => {
             res.status(200).send("<h1>Welcome to Mini Project</h1>")
         })

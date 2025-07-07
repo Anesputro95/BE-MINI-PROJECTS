@@ -11,7 +11,7 @@ class AuthAccountRouter {
 
     constructor() {
         this.router = Router();
-        this.accountController = new AuthAccountController();;
+        this.accountController = new AuthAccountController();
         this.initialRoutes();
     }
 

@@ -349,3 +349,30 @@ Argument `where` of type PasswordResetWhereUniqueInput needs at least one of `id
 2025-07-06 19:52:40 [ERROR]: POST /auth/login: Email not verify, please verify first {"statusCode":401,"success":false,"message":"Email not verify, please verify first"}
 2025-07-06 19:53:26 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
 2025-07-06 19:53:36 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
+2025-07-07 07:09:20 [ERROR]: POST /auth/login: Email not registered {"statusCode":404,"success":false,"message":"Email not registered"}
+2025-07-07 07:09:37 [ERROR]: POST /auth/regis: 
+Invalid `prisma.account.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/account.repositori.ts:29:27
+
+  26 
+  27 export const createAccountByEmail = async (
+  28     data: CreateAccountInput) => {
+→ 29     return prisma.account.create(
+Unique constraint failed on the fields: (`username`) {"code":"P2002","meta":{"modelName":"Account","target":["username"]},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-07 07:18:46 [INFO]: Token:
+2025-07-07 07:18:46 [ERROR]: POST /dashboard/create-event: Token is missing {"statusCode":404,"success":false,"message":"Token is missing"}
+2025-07-07 07:19:15 [INFO]: Token:
+2025-07-07 07:19:42 [INFO]: Token:
+2025-07-07 07:21:06 [INFO]: Token:
+2025-07-07 07:27:37 [INFO]: Token:
+2025-07-07 07:31:20 [INFO]: Token:
+2025-07-07 07:31:55 [INFO]: Token:
+2025-07-07 07:32:06 [INFO]: Token:
+2025-07-07 07:32:25 [INFO]: Token:
+2025-07-07 07:33:40 [INFO]: Token:
+2025-07-07 07:35:36 [INFO]: Token:
+2025-07-07 07:35:39 [INFO]: Token:
+2025-07-07 07:43:32 [INFO]: Token:
+2025-07-07 07:44:44 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
+2025-07-07 07:45:04 [INFO]: Token:
+2025-07-07 07:45:19 [INFO]: Token:
