@@ -29,14 +29,17 @@ class EventDashboardController {
     ): Promise<void> {
         try {
             const { id: organizerId } = res.locals.descript;
-            const { title, description, seatQuota, thumbnail } = req.body;
+            const { title, description, thumbnail, category, salesStart, salesEnd, tickets } = req.body;
 
             const event = await createEventService({
                 organizerId,
                 title,
                 description,
-                seatQuota,
-                thumbnail
+                thumbnail,
+                category,
+                salesStart,
+                salesEnd,
+                tickets,
             });
 
             res.status(201).send({

@@ -114,14 +114,43 @@ model Event {
   title         String
   thumbnail     String
   description   String
-  seatQuota     Int
-  availableSeat Int
+  category      EventCategory @default(DEFAULT)
+  salesStart    DateTime?
+  salesEnd      DateTime?
   createdAt     DateTime @default(now())
+  tickets       Ticket[]
 
   organizer   Account       @relation("ORGANIZER", fields: [organizerId], references: [id])
   transaction Transaction[]
 
   @@map("event")
+}
+
+model Ticket {
+  id            Int      @id @default(autoincrement())
+  eventId       Int
+  name          String
+  price         Int      @default(0)
+  quota         Int
+  sold          Int      @default(0)
+  createdAt     DateTime @default(now())
+
+  event         Event    @relation(fields: [eventId], references: [id])
+
+  @@map("ticket")
+}
+
+enum EventCategory {
+  DEFAULT
+  CONCERT
+  SEMINAR
+  WORKSHOP
+  SPORTS
+  THEATRE
+  FESTIVAL
+  WELLNESS
+  KIDS
+  EDUCATION
 }
 
 model Transaction {

@@ -88,6 +88,7 @@ export const regisService = async (data: any) => {
   await createVerificationToken(newAccount.id, token, expiresAt);
 
   const verifyLink = `${process.env.BASE_URL}/auth/verify/${token}`;
+  console.log("📧 Verification link sent:", verifyLink); // ⬅️ Tambahkan ini
 
   await transport.sendMail({
     from: process.env.MAILSENDER,
