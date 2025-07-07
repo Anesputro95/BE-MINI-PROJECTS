@@ -53,6 +53,7 @@ class AuthAccountController {
         next: NextFunction
     ): Promise<void> {
         try {
+            console.log("✅ verifyAccount CALLED", req.params);
             const { token } = req.params;
 
             if (!token) {

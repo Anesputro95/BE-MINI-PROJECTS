@@ -4,7 +4,7 @@ import { isOrganizer } from "../middleware/isOrganizer";
 import EventDashboardController from "../controllers/dashboardEvent.controller";
 
 
-class EventDashboradRouter {
+class EventDashboardRouter {
     private router: Router;
     private dashboardEventController: EventDashboardController;
 
@@ -24,5 +24,5 @@ class EventDashboradRouter {
     }
 }
 
-export default EventDashboradRouter;
+export default EventDashboardRouter;
 
