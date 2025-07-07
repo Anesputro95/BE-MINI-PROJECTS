@@ -7,6 +7,7 @@ import cors from 'cors';
 import AuthAccountRouter from './routers/auth.router';
 import logger from './utils/logger';
 import EventDashboradRouter from './routers/dashboardEvent.router';
+import transactionRouter from './routers/transaction.router';
 
 
 const PORT = process.env.PORT || "8080";
@@ -30,6 +31,7 @@ class App {
         const eventDashboradRouter = new EventDashboradRouter();
         this.app?.use("/auth", authRouter.getRouter());
         this.app?.use('/api', searchRouter);
+        this.app?.use('/event', transactionRouter);
         this.app?.use('/dashboard', eventDashboradRouter.getRouter())
         this.app?.get('/', (req: Request, res: Response) => {
             res.status(200).send("<h1>Welcome to Mini Project</h1>")
