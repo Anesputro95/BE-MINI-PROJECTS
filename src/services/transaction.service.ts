@@ -7,33 +7,30 @@ import { createTransaction, getUserTransactions, TransactionsStatus, getTransact
 interface CreateTransactionInput {
     userId: number;
     eventId: number;
+    ticketId: number;
     ticketQuantity: number;
     usedCouponsId?: number;
     userPoints?: number;
 }
 
 export const createTransactionService = async (input: CreateTransactionInput) => {
-    const { userId, eventId, ticketQuantity, usedCouponsId, userPoints } = input;
+    const { userId, eventId, ticketId, ticketQuantity, usedCouponsId, userPoints } = input;
 
-    const event = await prisma.event.findFirst({
-        where: { id: eventId },
-        include: { tickets: true },
+    const ticket = await prisma.ticket.findFirst({
+        where: { 
+            id: ticketId,
+            eventId: eventId, 
+        },
     });
 
-    if (!event) {
-        throw new AppError("Event not found", 404);
+    if (!ticket) {
+        throw new AppError("Ticket not found for this event", 404);
     }
-
-    if (event.tickets.length === 0) {
-        throw new AppError("No tickets available for this event", 400);
-    }
-
-    const ticket = event.tickets[0];
 
     if (ticket.quota - ticket.sold < ticketQuantity) {
         throw new AppError("Not enough ticket quota", 400);
     }
-
+ 
     let totalPrice = ticket.price * ticketQuantity;
 
     if (userPoints && userPoints > 0) {
@@ -46,6 +43,7 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
     const transaction = await createTransaction({
         userId,
         eventId,
+        ticketId,
         ticketQuantity,
         totalPrice,
         usedCouponsId,
