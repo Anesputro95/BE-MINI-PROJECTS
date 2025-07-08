@@ -52,6 +52,26 @@ class EventDashboardController {
         }
     }
 
+    public async getEventByList(
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const id = parseInt(req.params.id);
+
+            const getEvent = await getEventsService(id);
+
+            res.status(200).send({
+                success: true,
+                message: "the event was successfully obtained",
+                data: getEvent
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+
     public async updateEvent(
         req: Request,
         res: Response,
@@ -84,7 +104,7 @@ class EventDashboardController {
         try {
             const id = parseInt(req.params.id);
 
-            const deleted = await deleteEventService(id)
+            await deleteEventService(id)
 
             res.status(200).send({
                 success: true,

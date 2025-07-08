@@ -2,7 +2,7 @@ import App from "../app";
 import { prisma } from "../config/prisma";
 import AppError from "../errors/AppError";
 import { EventCategory } from "../generated/prisma";
-import { createEvent, deleteEvent, eventDashboard, updateEvent } from "../repositories/dashboardEvent.repository";
+import { createEvent, deleteEvent, eventDashboard, getEventByList, updateEvent } from "../repositories/dashboardEvent.repository";
 
 
 interface CreateEventInput {
@@ -31,6 +31,10 @@ export const getEventsService = async (organizerId: number) => {
 export const createEventService = async (input: CreateEventInput) => {
     return await createEvent(input);
 };
+
+export const getEventByListService = async (id: number) => {
+    return await getEventByList(id);
+}
 
 export const updateEventService = async (input: UpdateEventDTO) => {
     return await updateEvent(input);
