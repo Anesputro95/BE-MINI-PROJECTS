@@ -4,11 +4,13 @@ import { findEventById } from "../repositories/event.repository";
 import { createTransaction, getUserTransactions, TransactionsStatus, getTransactionEventById, findTransactionById, updateTransationById } from "../repositories/transaction.repositori";
 
 
+
 interface CreateTransactionInput {
     userId: number;
     eventId: number;
     ticketId: number;
     ticketQuantity: number;
+    paymentProofUrl?: string;
     usedCouponsId?: number;
     userPoints?: number;
 }
@@ -17,9 +19,11 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
     const { userId, eventId, ticketId, ticketQuantity, usedCouponsId, userPoints } = input;
 
     const ticket = await prisma.ticket.findFirst({
-        where: {
+
+        where: { 
             id: ticketId,
-            eventId: eventId,
+            eventId: eventId, 
+
         },
     });
 
@@ -30,7 +34,7 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
     if (ticket.quota - ticket.sold < ticketQuantity) {
         throw new AppError("Not enough ticket quota", 400);
     }
-
+ 
     let totalPrice = ticket.price * ticketQuantity;
 
     if (userPoints && userPoints > 0) {
@@ -46,6 +50,8 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
         ticketId,
         ticketQuantity,
         totalPrice,
+        status: "WAITING_PAYMENT",
+        restored: false,
         usedCouponsId,
         userPoints,
     });
@@ -75,48 +81,65 @@ export const transactionService = async (eventId: number) => {
     }));
 };
 
-export const getEventTransactionsService = async (eventId: number, organizerId: number) => {
-    const event = await findEventById(eventId)
 
-    if (!event || event.organizerId !== organizerId) {
-        throw new AppError("Unauthorized access to event transactions", 403);
-    }
-
-    const transactions = await getTransactionEventById(eventId);
-    return transactions
-}
-
-export const updateTransactionStatusService = async (
+export const uploadPaymentProofService = async (
     transactionId: number,
-    organizerId: number,
-    status: "ACCEPTED" | "REJECTED" | "PENDING"
+    paymentProofUrl: string,
+    userId: number
 ) => {
-    const transaction = await findTransactionById(transactionId);
+    const trx = await prisma.transaction.findUnique({
+        where: {id: transactionId},
+    });
 
-    if (!transaction) {
-        throw new AppError("Transaction not found", 404)
+    if (!trx) {
+        throw new AppError("Transaction not found", 404);
     }
 
-    if (transaction.event.organizerId !== organizerId) {
-        throw new AppError("You are not the organizer of this event", 403)
+    if (trx.userId !== userId) {
+        throw new AppError("Unauthorized", 403);
     }
 
-    if (transaction.status !== "PENDING") {
-        throw new AppError("Transaction already processed", 400)
+    if (trx.status !== "WAITING_PAYMENT") {
+        throw new AppError("Cannot upload payment proof for this status", 400);
     }
 
-    if (status === "REJECTED") {
-        await prisma.ticket.update({
-            where: { id: transaction.ticketId },
-            data: {
-                sold: {
-                    decrement: transaction.ticketQuantity
-                }
-            }
-        })
-    };
+    return prisma.transaction.update({
+        where: {id: transactionId},
+        data: {
+            paymentProofUrl,
+            paymentProofUploadedAt: new Date(),
+            status: "WAITING_CONFIRMATION",
+        },
+    });
+};
 
-    const updated = await updateTransationById(organizerId, status);
-    return updated
-}
+export const confirmTransactionService = async (
+    transactionId: number,
+    action: "ACCEPT" | "REJECT",
+    organizerId: number
+) => {
+    const trx = await prisma.transaction.findUnique({
+        where: {id: transactionId},
+        include: {event: true},
+    });
+
+    if (!trx) {
+        throw new AppError("Transaction not found", 404);
+    }
+
+    if (trx.event.organizerId !== organizerId) {
+        throw new AppError("Unauthorized", 403);
+    }
+
+    if (trx.status !== "WAITING_CONFIRMATION") {
+        throw new AppError("Transaction is not pending confirmation", 400);
+    }
+
+    return prisma.transaction.update({
+        where: {id: transactionId},
+        data: {
+            status: action === "ACCEPT" ? "DONE" : "REJECTED",
+        },
+    });
+};
 

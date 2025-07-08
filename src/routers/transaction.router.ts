@@ -35,20 +35,19 @@ class TransactionRouter {
             this.transactionController.getUserTransactions
         );
 
-        //  Untuk Organizer dapat melihat event yg di buat
-        this.router.get(
-            "/event-transaction/:eventId",
-            verifyToken,
-            this.transactionController.getEventTransactions
-        )
 
-        // untuk organizer mendapat transactiion berdasarkan id
         this.router.patch(
-            "/transaction/:id",
+            "/transactions/:transactionId/upload-payment-proof",
             verifyToken,
-            isOrganizer,
-            this.transactionController.updateTransactionStatus
-        )
+            this.transactionController.uploadPaymentProof
+        );
+
+        this.router.patch(
+            "/transactions/:transactionId/confirm",
+            verifyToken,
+            this.transactionController.confirmTransaction
+        );
+
     }
 
     public getRouter(): Router {

@@ -3,7 +3,10 @@ import {
     transactionService,
     createTransactionService,
     getUserTransactionsService,
-    updateTransactionStatusService,
+
+    uploadPaymentProofService,
+    confirmTransactionService
+
 } from "../services/transaction.service";
 import { getEventTransactionsService } from "../services/transaction.service"
 
@@ -74,51 +77,50 @@ class TransactionController {
         }
     }
 
-    public async getEventTransactions(
+
+    public async uploadPaymentProof (
+
         req: Request,
         res: Response,
         next: NextFunction,
     ): Promise<void> {
         try {
-            const eventId = Number(req.params.eventId)
-            const organizerId = res.locals.descript.id;
 
-            const transaction = await getEventTransactionsService(eventId, organizerId);
+            const { id: userId } = res.locals.descript;
+            const transactionId = Number(req.params.transactionId);
+            const { paymentProofUrl } = req.body;
+
+            const trx = await uploadPaymentProofService(transactionId, paymentProofUrl, userId);
 
             res.status(200).send({
-                success: true,
-                message: "All transactions for this event",
-                data: transaction,
-            })
+            success: true,
+            message: "Payment proof uploaded",
+            data: trx,
+            });
         } catch (error) {
-            next(error)
+            next(error);
         }
-    }
+        }
 
-    public async updateTransactionStatus(
+        public async confirmTransaction(
         req: Request,
         res: Response,
-        next: NextFunction
-    ): Promise<void> {
+        next: NextFunction,
+        ): Promise<void> {
         try {
-            const transactionId = Number(req.params.id)
-            const status = req.body;
-            const { organizerId } = res.locals.descript;
+            const { id: organizerId } = res.locals.descript;
+            const transactionId = Number(req.params.transactionId);
+            const { action } = req.body; // "ACCEPT" or "REJECT"
 
-            const updateTransaction = await updateTransactionStatusService(
-                transactionId,
-                status,
-                organizerId
-            )
+            const trx = await confirmTransactionService(transactionId, action, organizerId);
 
             res.status(200).send({
-                succcess: true,
-                message: "Transaction status updated successfully",
-                data: updateTransaction
-            })
-
+            success: true,
+            message: `Transaction ${action === "ACCEPT" ? "accepted" : "rejected"}`,
+            data: trx,
+            });
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
 
