@@ -50,6 +50,23 @@ export const getUserTransactions = async (userId: number) => {
     });
 };
 
-export const getTransactionById = async (eventId: number) => {
-
+export const getTransactionEventById = async (eventId: number) => {
+    return prisma.transaction.findMany({
+        where: { eventId },
+        select: {
+            id: true,
+            status: true,
+            totalPrice: true,
+            ticketQuantity: true,
+            paymentProofUrl: true,
+            createdAt: true,
+            user: {
+                select: {
+                    username: true,
+                    email: true,
+                }
+            }
+        }
+    })
 }
+

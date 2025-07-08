@@ -63,11 +63,11 @@ export const createEvent = async (input: CreateEventInput) => {
     });
 };
 
-export const getEventByList = async (id: number) => {
-    await prisma.event.findFirst({
-        where: { id }
-    })
-}
+export const findEventById = async (eventId: number) => {
+    return prisma.event.findUnique({
+        where: { id: eventId },
+    });
+};
 
 export const updateEvent = async (input: UpdateEventDTO) => {
     const { id, tickets, ...eventData } = input;

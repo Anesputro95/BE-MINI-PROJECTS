@@ -33,6 +33,13 @@ class TransactionRouter {
             verifyToken,
             this.transactionController.getUserTransactions
         );
+
+        //  Untuk Organizer dapat melihat event yg di buat
+        this.router.get(
+            "/event-transaction/:eventId",
+            verifyToken,
+            this.transactionController.getEventTransactions
+        )
     }
 
     public getRouter(): Router {

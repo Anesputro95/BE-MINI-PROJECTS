@@ -1,6 +1,8 @@
 import { prisma } from "../config/prisma";
 import AppError from "../errors/AppError";
-import { createTransaction, getUserTransactions, TransactionsStatus } from "../repositories/transaction.repositori";
+import { findEventById } from "../repositories/dashboardEvent.repository";
+import { createTransaction, getUserTransactions, TransactionsStatus, getTransactionEventById } from "../repositories/transaction.repositori";
+
 
 interface CreateTransactionInput {
     userId: number;
@@ -10,7 +12,6 @@ interface CreateTransactionInput {
     userPoints?: number;
 }
 
-// 👇 Service untuk bikin transaksi
 export const createTransactionService = async (input: CreateTransactionInput) => {
     const { userId, eventId, ticketQuantity, usedCouponsId, userPoints } = input;
 
@@ -61,12 +62,10 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
     return transaction;
 };
 
-// 👇 Service untuk history transaksi user
 export const getUserTransactionsService = async (userId: number) => {
     return getUserTransactions(userId);
 };
 
-// 👇 Service untuk ambil data attendee berdasarkan event
 export const transactionService = async (eventId: number) => {
     const attendes = await TransactionsStatus(eventId);
 
@@ -77,3 +76,14 @@ export const transactionService = async (eventId: number) => {
         totalPrice: trx.totalPrice,
     }));
 };
+
+export const getEventTransactionsService = async (eventId: number, organizerId: number) => {
+    const event = await findEventById(eventId)
+
+    if (!event || event.organizerId !== organizerId) {
+        throw new AppError("Unauthorized access to event transactions", 403);
+    }
+
+    const transactions = await getTransactionEventById(eventId);
+    return transactions
+}

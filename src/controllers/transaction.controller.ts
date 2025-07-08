@@ -2,11 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import {
     transactionService,
     createTransactionService,
-    getUserTransactionsService
+    getUserTransactionsService,
 } from "../services/transaction.service";
+import { getEventTransactionsService } from "../services/transaction.service"
 
 class TransactionController {
-    // Untuk mendapatkan daftar attendee (organizer)
     public async getAttendList(
         req: Request,
         res: Response,
@@ -25,7 +25,6 @@ class TransactionController {
         }
     }
 
-    // Untuk membuat transaksi pembelian tiket (user)
     public async createTransaction(
         req: Request,
         res: Response,
@@ -53,7 +52,6 @@ class TransactionController {
         }
     }
 
-    // Untuk melihat daftar transaksi milik user
     public async getUserTransactions(
         req: Request,
         res: Response,
@@ -73,6 +71,28 @@ class TransactionController {
             next(error);
         }
     }
+
+    public async getEventTransactions(
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const eventId = Number(req.params.eventId)
+            const organizerId = res.locals.descript.id;
+
+            const transaction = await getEventTransactionsService(eventId, organizerId);
+
+            res.status(200).send({
+                success: true,
+                message: "All transactions for this event",
+                data: transaction,
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }
 
 export default TransactionController;
