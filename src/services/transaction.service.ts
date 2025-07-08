@@ -73,7 +73,12 @@ export const getUserTransactionsService = async (userId: number) => {
 export const transactionService = async (eventId: number) => {
     const attendes = await TransactionsStatus(eventId);
 
-    return attendes.map((trx) => ({
+    return attendes.map(
+        (trx: {
+            ticketQuantity: number;
+            totalPrice: number;
+            user: {username: string; email: string};
+        }) => ({
         name: trx.user.username,
         email: trx.user.email,
         quantity: trx.ticketQuantity,
