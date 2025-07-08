@@ -1,6 +1,6 @@
 import { prisma } from "../config/prisma";
 import AppError from "../errors/AppError";
-import { findEventById } from "../repositories/dashboardEvent.repository";
+import { findEventById } from "../repositories/event.repository";
 import { createTransaction, getUserTransactions, TransactionsStatus, getTransactionEventById, findTransactionById, updateTransationById } from "../repositories/transaction.repositori";
 
 

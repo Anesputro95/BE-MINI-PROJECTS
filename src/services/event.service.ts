@@ -2,7 +2,7 @@ import App from "../app";
 import { prisma } from "../config/prisma";
 import AppError from "../errors/AppError";
 import { EventCategory } from "../generated/prisma";
-import { createEvent, deleteEvent, eventDashboard, findEventById, updateEvent } from "../repositories/dashboardEvent.repository";
+import { createEvent, deleteEvent, eventDashboard, findEventById, updateEvent } from "../repositories/event.repository";
 
 
 interface CreateEventInput {
