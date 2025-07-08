@@ -47,6 +47,7 @@ class TransactionRouter {
             isOrganizer,
             this.transactionController.confirmTransaction
         );
+
     }
 
     public getRouter(): Router {

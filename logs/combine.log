@@ -376,7 +376,6 @@ Unique constraint failed on the fields: (`username`) {"code":"P2002","meta":{"mo
 2025-07-07 07:44:44 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
 2025-07-07 07:45:04 [INFO]: Token:
 2025-07-07 07:45:19 [INFO]: Token:
-<<<<<<< Updated upstream
 2025-07-07 18:09:21 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
 2025-07-07 18:09:40 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 96 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"username\":\"fanaxo4654\",\n    \"email\":\"fanaxo4654@iamtile.com\",\n    \"password\":\"Kevin123\",\n}","type":"entity.parse.failed"}
 2025-07-07 18:09:47 [ERROR]: POST /auth/login: Email not verify, please verify first {"statusCode":401,"success":false,"message":"Email not verify, please verify first"}
@@ -666,250 +665,7 @@ Invalid `prisma.event.create()` invocation in
 
 Invalid value for argument `category`. Expected EventCategory. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
 2025-07-07 21:04:49 [INFO]: Token:
-<<<<<<< HEAD
-=======
-2025-07-07 20:01:18 [INFO]: Token:
-2025-07-07 20:12:05 [INFO]: Token:
-2025-07-07 20:13:07 [INFO]: Token:
-2025-07-07 20:13:15 [INFO]: Token:
-2025-07-07 20:13:43 [INFO]: Token:
-2025-07-07 20:14:08 [INFO]: Token:
-2025-07-07 20:21:54 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
-2025-07-07 20:27:07 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
-2025-07-07 20:27:26 [INFO]: Token:
-2025-07-07 20:27:27 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:31:25
 
-  28 export const createEvent = async (input: CreateEventDTO) => {
-  29     const { organizerId, title, description, seatQuota, thumbnail } = input;
-  30 
-→ 31     return prisma.event.create(
-The column `seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 20:28:04 [INFO]: Token:
-2025-07-07 20:28:06 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:31:25
-
-  28 export const createEvent = async (input: CreateEventDTO) => {
-  29     const { organizerId, title, description, seatQuota, thumbnail } = input;
-  30 
-→ 31     return prisma.event.create(
-The column `seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 20:28:30 [INFO]: Token:
-2025-07-07 20:28:32 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:31:25
-
-  28 export const createEvent = async (input: CreateEventDTO) => {
-  29     const { organizerId, title, description, seatQuota, thumbnail } = input;
-  30 
-→ 31     return prisma.event.create(
-The column `seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 20:28:38 [INFO]: Token:
-2025-07-07 20:28:39 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:31:25
-
-  28 export const createEvent = async (input: CreateEventDTO) => {
-  29     const { organizerId, title, description, seatQuota, thumbnail } = input;
-  30 
-→ 31     return prisma.event.create(
-The column `seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 20:29:16 [INFO]: Token:
-2025-07-07 20:29:24 [INFO]: Token:
-2025-07-07 20:29:25 [ERROR]: GET /dashboard/events: 
-Invalid `prisma.event.findMany()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:4:25
-
-  1 import { prisma } from '../config/prisma'
-  2 
-  3 export const eventDashboard = async (organizerId: number) => {
-→ 4     return prisma.event.findMany(
-The column `event.seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"event.seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 20:29:45 [INFO]: Token:
-2025-07-07 20:29:48 [ERROR]: GET /dashboard/events: 
-Invalid `prisma.event.findMany()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:4:25
-
-  1 import { prisma } from '../config/prisma'
-  2 
-  3 export const eventDashboard = async (organizerId: number) => {
-→ 4     return prisma.event.findMany(
-The column `event.seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"event.seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 20:35:53 [INFO]: Token:
-2025-07-07 20:35:57 [ERROR]: GET /dashboard/events: 
-Invalid `prisma.event.findMany()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:4:25
-
-  1 import { prisma } from '../config/prisma'
-  2 
-  3 export const eventDashboard = async (organizerId: number) => {
-→ 4     return prisma.event.findMany(
-The column `event.seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"event.seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 20:39:25 [ERROR]: POST /auth/regis: Invalid referral code {"statusCode":400,"success":false,"message":"Invalid referral code"}
-2025-07-07 20:40:47 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
-2025-07-07 20:42:06 [INFO]: Token:
-2025-07-07 20:42:11 [INFO]: Token:
-2025-07-07 20:42:48 [INFO]: Token:
-2025-07-07 20:42:50 [INFO]: Token:
-2025-07-07 20:43:10 [INFO]: Token:
-2025-07-07 20:45:56 [INFO]: Token:
-2025-07-07 20:47:51 [INFO]: Token:
-2025-07-07 20:57:59 [INFO]: Token:
-2025-07-07 20:58:06 [INFO]: Token:
-2025-07-07 20:58:07 [ERROR]: GET /dashboard/events: 
-Invalid `prisma.event.findMany()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:4:25
-
-  1 import { prisma } from '../config/prisma'
-  2 
-  3 export const eventDashboard = async (organizerId: number) => {
-→ 4     return prisma.event.findMany(
-The column `event.seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"event.seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 20:58:24 [INFO]: Token:
-2025-07-07 20:58:25 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:31:25
-
-  28 export const createEvent = async (input: CreateEventDTO) => {
-  29     const { organizerId, title, description, seatQuota, thumbnail } = input;
-  30 
-→ 31     return prisma.event.create(
-The column `seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 20:58:32 [INFO]: Token:
-2025-07-07 20:58:33 [ERROR]: GET /dashboard/events: 
-Invalid `prisma.event.findMany()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:4:25
-
-  1 import { prisma } from '../config/prisma'
-  2 
-  3 export const eventDashboard = async (organizerId: number) => {
-→ 4     return prisma.event.findMany(
-The column `event.seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"event.seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 20:58:43 [INFO]: Token:
-2025-07-07 20:58:44 [ERROR]: GET /dashboard/events: 
-Invalid `prisma.event.findMany()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:4:25
-
-  1 import { prisma } from '../config/prisma'
-  2 
-  3 export const eventDashboard = async (organizerId: number) => {
-→ 4     return prisma.event.findMany(
-The table `public.event` does not exist in the current database. {"code":"P2021","meta":{"modelName":"Event","table":"public.event"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 21:00:45 [ERROR]: POST /auth/login: Email not registered {"statusCode":404,"success":false,"message":"Email not registered"}
-2025-07-07 21:02:42 [ERROR]: GET /auth/verify/ec2114f95329c9d7b8b1b8fe2c2a8c4b1877b945a16b2f67: 
-Invalid `prisma.emailVerification.delete()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/account.repositori.ts:56:43
-
-  53 }
-  54 
-  55 export const deleteVerificationToken = async (token: string) => {
-→ 56     return prisma.emailVerification.delete(
-An operation failed because it depends on one or more records that were required but not found. No record was found for a delete. {"code":"P2025","meta":{"modelName":"EmailVerification","cause":"No record was found for a delete."},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 21:02:57 [ERROR]: GET /auth/verify/ec2114f95329c9d7b8b1b8fe2c2a8c4b1877b945a16b2f67: Invalid or expired token {"statusCode":404,"success":false,"message":"Invalid or expired token"}
-2025-07-07 21:03:41 [INFO]: Token:
-2025-07-07 21:03:42 [ERROR]: GET /dashboard/events: 
-Invalid `prisma.event.findMany()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:4:25
-
-  1 import { prisma } from '../config/prisma'
-  2 
-  3 export const eventDashboard = async (organizerId: number) => {
-→ 4     return prisma.event.findMany(
-The column `event.seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"event.seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 21:03:49 [INFO]: Token:
-2025-07-07 21:03:50 [ERROR]: GET /dashboard/events: 
-Invalid `prisma.event.findMany()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:4:25
-
-  1 import { prisma } from '../config/prisma'
-  2 
-  3 export const eventDashboard = async (organizerId: number) => {
-→ 4     return prisma.event.findMany(
-The column `event.seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"event.seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 21:04:28 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
-2025-07-07 21:04:47 [INFO]: Token:
-2025-07-07 21:04:48 [ERROR]: GET /dashboard/events: 
-Invalid `prisma.event.findMany()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:4:25
-
-  1 import { prisma } from '../config/prisma'
-  2 
-  3 export const eventDashboard = async (organizerId: number) => {
-→ 4     return prisma.event.findMany(
-The column `event.seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"event.seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 21:04:58 [INFO]: Token:
-2025-07-07 21:04:59 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:31:25
-
-  28 export const createEvent = async (input: CreateEventDTO) => {
-  29     const { organizerId, title, description, seatQuota, thumbnail } = input;
-  30 
-→ 31     return prisma.event.create(
-The column `seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 21:05:46 [INFO]: Token:
-2025-07-07 21:05:47 [ERROR]: GET /dashboard/events: 
-Invalid `prisma.event.findMany()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:4:25
-
-  1 import { prisma } from '../config/prisma'
-  2 
-  3 export const eventDashboard = async (organizerId: number) => {
-→ 4     return prisma.event.findMany(
-The column `event.seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"event.seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 21:12:14 [INFO]: Token:
-2025-07-07 21:12:15 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:31:25
-
-  28 export const createEvent = async (input: CreateEventDTO) => {
-  29     const { organizerId, title, description, seatQuota, thumbnail } = input;
-  30 
-→ 31     return prisma.event.create(
-The column `seatQuota` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Event","column":"seatQuota"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
-2025-07-07 21:14:33 [INFO]: Token:
-2025-07-07 21:14:33 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:31:25
-
-  28 export const createEvent = async (input: CreateEventDTO) => {
-  29     const { organizerId, title, description, seatQuota, thumbnail } = input;
-  30 
-→ 31     return prisma.event.create({
-           data: {
-             organizerId: 1,
-             title: "Bring Me The Horizon",
-             description: "Lost",
-             availableSeat: undefined,
-             thumbnail: "https://link-thumbnail.jpg/",
-         +   seatQuota: Int
-           }
-         })
-
-Argument `seatQuota` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
-2025-07-07 21:14:47 [INFO]: Token:
-2025-07-07 21:14:47 [ERROR]: POST /dashboard/create-event: 
-Invalid `prisma.event.create()` invocation in
-/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/dashboardEvent.repository.ts:31:25
-
-  28 export const createEvent = async (input: CreateEventDTO) => {
-  29     const { organizerId, title, description, seatQuota, thumbnail } = input;
-  30 
-→ 31     return prisma.event.create({
-           data: {
-             organizerId: 1,
-             title: "Bring Me The Horizon",
-             description: "Lost",
-             availableSeat: undefined,
-             thumbnail: "https://link-thumbnail.jpg/",
-         +   seatQuota: Int
-           }
-         })
-
-Argument `seatQuota` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
->>>>>>> Stashed changes
 2025-07-07 21:25:28 [INFO]: Token:
 2025-07-07 21:25:48 [INFO]: Token:
 2025-07-07 21:25:48 [ERROR]: POST /dashboard/create-event: 
@@ -1157,13 +913,10 @@ Foreign key constraint violated on the constraint: `ticket_eventId_fkey` {"code"
 2025-07-07 22:12:35 [INFO]: Token:
 =======
 
-2025-07-07 22:53:36 [ERROR]: POST /event/create-transaction: Authorization header missing or invalid {"statusCode":401,"success":false,"message":"Authorization header missing or invalid"}
 2025-07-07 22:54:00 [ERROR]: POST /event/create-transaction: Authorization header missing or invalid {"statusCode":401,"success":false,"message":"Authorization header missing or invalid"}
 2025-07-07 22:54:01 [ERROR]: POST /event/create-transaction: Authorization header missing or invalid {"statusCode":401,"success":false,"message":"Authorization header missing or invalid"}
 2025-07-07 22:57:00 [INFO]: Token:
-2025-07-07 22:58:49 [INFO]: Token:
 
->>>>>>> bbff219474ba67fe0f1fe2ae88efe0809bb2075c
 2025-07-08 10:57:31 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
 2025-07-08 10:58:39 [INFO]: Token:
 2025-07-08 11:01:59 [INFO]: Token:
@@ -1199,6 +952,7 @@ Invalid `prisma.transaction.create()` invocation in
 → 34     return prisma.transaction.create(
 The column `ticketId` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"ticketId"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
 2025-07-08 11:51:54 [INFO]: Token:
+
 2025-07-08 15:21:05 [INFO]: Token:
 2025-07-08 15:26:15 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 92 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{\n  \"username\": \"wevocaf137\",\n  \"email\": \"wevocaf137@fuasha.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
 2025-07-08 15:26:47 [INFO]: Token:
@@ -1461,9 +1215,11 @@ Invalid `prisma.transaction.findUnique()` invocation in
 Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
 2025-07-08 16:51:22 [INFO]: Token:
 2025-07-08 17:01:27 [INFO]: Token:
+
 2025-07-08 17:09:18 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 93 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{ \n  \"username\": \"wevocaf137\",\n  \"email\": \"wevocaf137@fuasha.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
 2025-07-08 17:09:46 [INFO]: Token:
 2025-07-08 17:10:56 [INFO]: Token:
 2025-07-08 17:10:58 [ERROR]: PATCH /api/transactions/1/upload-payment-proof: Cannot upload payment proof for this status {"statusCode":400,"success":false,"message":"Cannot upload payment proof for this status"}
 2025-07-08 17:11:02 [INFO]: Token:
 2025-07-08 17:11:15 [INFO]: Token:
+

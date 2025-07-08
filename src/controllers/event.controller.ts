@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { createEventService, deleteEventService, getEventsService, updateEventService } from "../services/dashboardEvent.service";
+import { createEventService, deleteEventService, getEventsService, updateEventService } from "../services/event.service";
 
 class EventDashboardController {
     public async getEvents(
