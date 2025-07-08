@@ -1216,3 +1216,30 @@ Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":
 2025-07-08 16:51:22 [INFO]: Token:
 2025-07-08 17:01:27 [INFO]: Token:
 
+2025-07-08 21:22:11 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 92 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{ \n  \"username\": \"fetiw5911\",\n  \"email\": \"fetiw59118@fuasha.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
+2025-07-08 21:22:43 [INFO]: Token:
+2025-07-08 21:24:25 [INFO]: Token:
+2025-07-08 21:24:26 [ERROR]: POST /transactions/create-transaction: Ticket not found for this event {"statusCode":404,"success":false,"message":"Ticket not found for this event"}
+2025-07-08 21:25:11 [INFO]: Token:
+2025-07-08 21:25:55 [INFO]: Token:
+2025-07-08 21:25:57 [ERROR]: PATCH /api/transactions/2/upload-payment-proof: Transaction not found {"statusCode":404,"success":false,"message":"Transaction not found"}
+2025-07-08 21:26:07 [INFO]: Token:
+2025-07-08 21:31:29 [INFO]: Token:
+2025-07-08 21:31:29 [ERROR]: PATCH /api/transactions/:transactionId/confirm: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/services/transaction.service.ts:126:42
+
+  123     action: "ACCEPT" | "REJECT",
+  124     organizerId: number
+  125 ) => {
+→ 126     const trx = await prisma.transaction.findUnique({
+            where: {
+          +   id: Int
+            },
+            include: {
+              event: true
+            }
+          })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-08 21:31:51 [INFO]: Token:

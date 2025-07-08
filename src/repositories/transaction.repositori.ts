@@ -100,7 +100,7 @@ export const findTransactionById = async (id: number) => {
 
 export const updateTransationById = async (
     id: number,
-    status: "ACCEPTED" | "REJECTED" | "PENDING") => {
+    status: "WAITING_PAYMENT" | "WAITING_CONFIRMATION" | "DONE" | "REJECTED" | "EXPIRED"| "CANCELED") => {
     return prisma.transaction.update({
         where: { id },
         data: { status },
