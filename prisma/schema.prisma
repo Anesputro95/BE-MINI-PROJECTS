@@ -136,7 +136,6 @@ model Transaction {
   usedCouponsId   Int?
   createdAt       DateTime          @default(now())
 
-  ticketId        Int
   event           Event             @relation(fields: [eventId], references: [id])
   coupon          Coupon?           @relation(fields: [usedCouponsId], references: [id])
   user            Account           @relation(fields: [userId], references: [id])

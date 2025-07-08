@@ -1,7 +1,7 @@
 import { prisma } from "../config/prisma";
 import AppError from "../errors/AppError";
 import { findEventById } from "../repositories/event.repository";
-import { createTransaction, getUserTransactions, TransactionsStatus, getTransactionEventById, findTransactionById, updateTransationById } from "../repositories/transaction.repositori";
+import { createTransaction, getUserTransactions, TransactionsStatus, getTransactionEventById, findTransactionById, updateTransactionById, getTransactionStatsByDay, getTransactionStatsByMonth, getTransactionStatsByYear } from "../repositories/transaction.repositori";
 
 
 
@@ -20,9 +20,9 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
 
     const ticket = await prisma.ticket.findFirst({
 
-        where: { 
+        where: {
             id: ticketId,
-            eventId: eventId, 
+            eventId: eventId,
 
         },
     });
@@ -34,7 +34,7 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
     if (ticket.quota - ticket.sold < ticketQuantity) {
         throw new AppError("Not enough ticket quota", 400);
     }
- 
+
     let totalPrice = ticket.price * ticketQuantity;
 
     if (userPoints && userPoints > 0) {
@@ -88,7 +88,7 @@ export const uploadPaymentProofService = async (
     userId: number
 ) => {
     const trx = await prisma.transaction.findUnique({
-        where: {id: transactionId},
+        where: { id: transactionId },
     });
 
     if (!trx) {
@@ -104,7 +104,7 @@ export const uploadPaymentProofService = async (
     }
 
     return prisma.transaction.update({
-        where: {id: transactionId},
+        where: { id: transactionId },
         data: {
             paymentProofUrl,
             paymentProofUploadedAt: new Date(),
@@ -119,8 +119,8 @@ export const confirmTransactionService = async (
     organizerId: number
 ) => {
     const trx = await prisma.transaction.findUnique({
-        where: {id: transactionId},
-        include: {event: true},
+        where: { id: transactionId },
+        include: { event: true },
     });
 
     if (!trx) {
@@ -136,10 +136,28 @@ export const confirmTransactionService = async (
     }
 
     return prisma.transaction.update({
-        where: {id: transactionId},
+        where: { id: transactionId },
         data: {
             status: action === "ACCEPT" ? "DONE" : "REJECTED",
         },
     });
 };
+
+export const getEventStatisticService = async (eventId: number) => {
+    const byDay = await prisma.transaction.groupBy({
+        by: ['createdAt'],
+        where: {
+            eventId,
+            status: 'DONE',
+        },
+        _count: { id: true },
+        _sum: { totalPrice: true },
+    });
+
+
+    return {
+        byDay
+    }
+    
+}
 

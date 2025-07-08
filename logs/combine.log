@@ -1216,3 +1216,247 @@ Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":
 2025-07-08 16:51:22 [INFO]: Token:
 2025-07-08 17:01:27 [INFO]: Token:
 
+2025-07-08 20:16:09 [INFO]: Token:
+2025-07-08 20:16:23 [INFO]: Token:
+2025-07-08 20:16:30 [INFO]: Token:
+2025-07-08 20:17:50 [INFO]: Token:
+2025-07-08 20:17:58 [INFO]: Token:
+2025-07-08 20:20:41 [INFO]: Token:
+2025-07-08 20:21:04 [INFO]: Token:
+2025-07-08 20:21:06 [ERROR]: PATCH /dashboard/event/3: 
+Invalid `prisma.event.update()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/event.repository.ts:75:25
+
+  72 export const updateEvent = async (input: UpdateEventDTO) => {
+  73     const { id, tickets, ...eventData } = input;
+  74 
+→ 75     return prisma.event.update(
+An operation failed because it depends on one or more records that were required but not found. No 'Event' record (needed to inline the relation on 'Event' record(s)) was found for a nested create on one-to-many relation 'EventToTicket'. {"code":"P2025","meta":{"modelName":"Event","cause":"No 'Event' record (needed to inline the relation on 'Event' record(s)) was found for a nested create on one-to-many relation 'EventToTicket'."},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 20:21:11 [INFO]: Token:
+2025-07-08 20:21:19 [INFO]: Token:
+2025-07-08 21:09:30 [ERROR]: POST /auth/login: Email not registered {"statusCode":404,"success":false,"message":"Email not registered"}
+2025-07-08 21:20:17 [INFO]: Token:
+2025-07-08 21:20:17 [ERROR]: GET /transactions/event/4/statistics: 
+Invalid `prisma.transaction.findMany()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:42:31
+
+  39 };
+  40 
+  41 export const getUserTransactions = async (userId: number) => {
+→ 42     return prisma.transaction.findMany({
+           where: {
+         +   userId: {
+         +     equals: Int | IntFieldRefInput,
+         +     in: Int[] | ListIntFieldRefInput,
+         +     notIn: Int[] | ListIntFieldRefInput,
+         +     lt: Int | IntFieldRefInput,
+         +     lte: Int | IntFieldRefInput,
+         +     gt: Int | IntFieldRefInput,
+         +     gte: Int | IntFieldRefInput,
+         +     not: Int | NestedIntFilter
+         +   }
+           },
+           orderBy: {
+             createdAt: "desc"
+           },
+           include: {
+             event: {
+               select: {
+                 title: true,
+                 thumbnail: true
+               }
+             }
+           }
+         })
+
+Argument `userId` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-08 21:20:42 [INFO]: Token:
+2025-07-08 21:20:54 [INFO]: Token:
+2025-07-08 21:20:56 [ERROR]: PATCH /dashboard/event/4: 
+Invalid `prisma.event.update()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/event.repository.ts:75:25
+
+  72 export const updateEvent = async (input: UpdateEventDTO) => {
+  73     const { id, tickets, ...eventData } = input;
+  74 
+→ 75     return prisma.event.update(
+An operation failed because it depends on one or more records that were required but not found. No 'Event' record (needed to inline the relation on 'Event' record(s)) was found for a nested create on one-to-many relation 'EventToTicket'. {"code":"P2025","meta":{"modelName":"Event","cause":"No 'Event' record (needed to inline the relation on 'Event' record(s)) was found for a nested create on one-to-many relation 'EventToTicket'."},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 21:21:11 [INFO]: Token:
+2025-07-08 21:21:20 [INFO]: Token:
+2025-07-08 21:21:27 [INFO]: Token:
+2025-07-08 21:21:35 [INFO]: Token:
+2025-07-08 21:21:35 [ERROR]: GET /transactions/event/1/statistics: 
+Invalid `prisma.transaction.findMany()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:42:31
+
+  39 };
+  40 
+  41 export const getUserTransactions = async (userId: number) => {
+→ 42     return prisma.transaction.findMany({
+           where: {
+         +   userId: {
+         +     equals: Int | IntFieldRefInput,
+         +     in: Int[] | ListIntFieldRefInput,
+         +     notIn: Int[] | ListIntFieldRefInput,
+         +     lt: Int | IntFieldRefInput,
+         +     lte: Int | IntFieldRefInput,
+         +     gt: Int | IntFieldRefInput,
+         +     gte: Int | IntFieldRefInput,
+         +     not: Int | NestedIntFilter
+         +   }
+           },
+           orderBy: {
+             createdAt: "desc"
+           },
+           include: {
+             event: {
+               select: {
+                 title: true,
+                 thumbnail: true
+               }
+             }
+           }
+         })
+
+Argument `userId` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-08 21:21:36 [INFO]: Token:
+2025-07-08 21:21:36 [ERROR]: GET /transactions/event/1/statistics: 
+Invalid `prisma.transaction.findMany()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:42:31
+
+  39 };
+  40 
+  41 export const getUserTransactions = async (userId: number) => {
+→ 42     return prisma.transaction.findMany({
+           where: {
+         +   userId: {
+         +     equals: Int | IntFieldRefInput,
+         +     in: Int[] | ListIntFieldRefInput,
+         +     notIn: Int[] | ListIntFieldRefInput,
+         +     lt: Int | IntFieldRefInput,
+         +     lte: Int | IntFieldRefInput,
+         +     gt: Int | IntFieldRefInput,
+         +     gte: Int | IntFieldRefInput,
+         +     not: Int | NestedIntFilter
+         +   }
+           },
+           orderBy: {
+             createdAt: "desc"
+           },
+           include: {
+             event: {
+               select: {
+                 title: true,
+                 thumbnail: true
+               }
+             }
+           }
+         })
+
+Argument `userId` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-08 21:21:59 [INFO]: Token:
+2025-07-08 21:21:59 [ERROR]: GET /transactions/event/1/statistics: 
+Invalid `prisma.transaction.findMany()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:42:31
+
+  39 };
+  40 
+  41 export const getUserTransactions = async (userId: number) => {
+→ 42     return prisma.transaction.findMany({
+           where: {
+         +   userId: {
+         +     equals: Int | IntFieldRefInput,
+         +     in: Int[] | ListIntFieldRefInput,
+         +     notIn: Int[] | ListIntFieldRefInput,
+         +     lt: Int | IntFieldRefInput,
+         +     lte: Int | IntFieldRefInput,
+         +     gt: Int | IntFieldRefInput,
+         +     gte: Int | IntFieldRefInput,
+         +     not: Int | NestedIntFilter
+         +   }
+           },
+           orderBy: {
+             createdAt: "desc"
+           },
+           include: {
+             event: {
+               select: {
+                 title: true,
+                 thumbnail: true
+               }
+             }
+           }
+         })
+
+Argument `userId` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-08 21:24:39 [INFO]: Token:
+2025-07-08 21:24:41 [ERROR]: GET /transactions/event/1/statistics: 
+Invalid `prisma.transaction.findMany()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:42:31
+
+  39 };
+  40 
+  41 export const getUserTransactions = async (userId: number) => {
+→ 42     return prisma.transaction.findMany({
+           where: {
+         +   userId: {
+         +     equals: Int | IntFieldRefInput,
+         +     in: Int[] | ListIntFieldRefInput,
+         +     notIn: Int[] | ListIntFieldRefInput,
+         +     lt: Int | IntFieldRefInput,
+         +     lte: Int | IntFieldRefInput,
+         +     gt: Int | IntFieldRefInput,
+         +     gte: Int | IntFieldRefInput,
+         +     not: Int | NestedIntFilter
+         +   }
+           },
+           orderBy: {
+             createdAt: "desc"
+           },
+           include: {
+             event: {
+               select: {
+                 title: true,
+                 thumbnail: true
+               }
+             }
+           }
+         })
+
+Argument `userId` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-08 21:24:56 [INFO]: Token:
+2025-07-08 21:24:58 [ERROR]: GET /transactions/event/1/statistics: 
+Invalid `prisma.transaction.findMany()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:42:31
+
+  39 };
+  40 
+  41 export const getUserTransactions = async (userId: number) => {
+→ 42     return prisma.transaction.findMany({
+           where: {
+         +   userId: {
+         +     equals: Int | IntFieldRefInput,
+         +     in: Int[] | ListIntFieldRefInput,
+         +     notIn: Int[] | ListIntFieldRefInput,
+         +     lt: Int | IntFieldRefInput,
+         +     lte: Int | IntFieldRefInput,
+         +     gt: Int | IntFieldRefInput,
+         +     gte: Int | IntFieldRefInput,
+         +     not: Int | NestedIntFilter
+         +   }
+           },
+           orderBy: {
+             createdAt: "desc"
+           },
+           include: {
+             event: {
+               select: {
+                 title: true,
+                 thumbnail: true
+               }
+             }
+           }
+         })
+
+Argument `userId` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-08 21:26:51 [INFO]: Token:

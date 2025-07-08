@@ -8,7 +8,8 @@ import {
     confirmTransactionService
 
 } from "../services/transaction.service";
-import { getEventTransactionsService } from "../services/transaction.service"
+import AppError from "../errors/AppError";
+
 
 class TransactionController {
     public async getAttendList(
@@ -78,7 +79,7 @@ class TransactionController {
     }
 
 
-    public async uploadPaymentProof (
+    public async uploadPaymentProof(
 
         req: Request,
         res: Response,
@@ -93,20 +94,20 @@ class TransactionController {
             const trx = await uploadPaymentProofService(transactionId, paymentProofUrl, userId);
 
             res.status(200).send({
-            success: true,
-            message: "Payment proof uploaded",
-            data: trx,
+                success: true,
+                message: "Payment proof uploaded",
+                data: trx,
             });
         } catch (error) {
             next(error);
         }
-        }
+    }
 
-        public async confirmTransaction(
+    public async confirmTransaction(
         req: Request,
         res: Response,
         next: NextFunction,
-        ): Promise<void> {
+    ): Promise<void> {
         try {
             const { id: organizerId } = res.locals.descript;
             const transactionId = Number(req.params.transactionId);
@@ -115,12 +116,36 @@ class TransactionController {
             const trx = await confirmTransactionService(transactionId, action, organizerId);
 
             res.status(200).send({
-            success: true,
-            message: `Transaction ${action === "ACCEPT" ? "accepted" : "rejected"}`,
-            data: trx,
+                success: true,
+                message: `Transaction ${action === "ACCEPT" ? "accepted" : "rejected"}`,
+                data: trx,
             });
         } catch (error) {
             next(error);
+        }
+    }
+
+    public async getEventStatistic(
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const { id: userId } = res.locals.descript;
+
+            if (!userId) {
+                throw new AppError("Unauthorized: No user ID found", 401);
+            }
+
+            const transactions = await getUserTransactionsService(userId);
+
+            res.status(200).send({
+                success: true,
+                message: "Event statistics retrieved",
+                data: transactions,
+            })
+        } catch (error) {
+            next(error)
         }
     }
 

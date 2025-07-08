@@ -48,6 +48,13 @@ class TransactionRouter {
             this.transactionController.confirmTransaction
         );
 
+        this.router.get(
+            "/event/:eventId/statistics",
+            verifyToken,
+            isOrganizer,
+            this.transactionController.getEventStatistic
+        )
+
     }
 
     public getRouter(): Router {
