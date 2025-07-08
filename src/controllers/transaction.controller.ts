@@ -3,6 +3,7 @@ import {
     transactionService,
     createTransactionService,
     getUserTransactionsService,
+    updateTransactionStatusService,
 } from "../services/transaction.service";
 import { getEventTransactionsService } from "../services/transaction.service"
 
@@ -89,6 +90,33 @@ class TransactionController {
                 message: "All transactions for this event",
                 data: transaction,
             })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public async updateTransactionStatus(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> {
+        try {
+            const transactionId = Number(req.params.id)
+            const status = req.body;
+            const { organizerId } = res.locals.descript;
+
+            const updateTransaction = await updateTransactionStatusService(
+                transactionId,
+                status,
+                organizerId
+            )
+
+            res.status(200).send({
+                succcess: true,
+                message: "Transaction status updated successfully",
+                data: updateTransaction
+            })
+
         } catch (error) {
             next(error)
         }

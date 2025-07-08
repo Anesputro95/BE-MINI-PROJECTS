@@ -71,3 +71,36 @@ export const getTransactionEventById = async (eventId: number) => {
     })
 }
 
+export const findTransactionById = async (id: number) => {
+    return prisma.transaction.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        ticketId: true,
+        ticketQuantity: true,
+        status: true,
+        event: {
+          select: {
+            id: true,
+            organizerId: true,
+          },
+        },
+        user: {
+          select: {
+            id: true,
+            email: true,
+          },
+        },
+      },
+    });
+  };
+  
+
+export const updateTransationById = async (
+    id: number,
+    status: "ACCEPTED" | "REJECTED" | "PENDING") => {
+    return prisma.transaction.update({
+        where: { id },
+        data: { status },
+    })
+}

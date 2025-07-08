@@ -1199,3 +1199,5 @@ Invalid `prisma.transaction.create()` invocation in
 → 34     return prisma.transaction.create(
 The column `ticketId` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"ticketId"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
 2025-07-08 11:51:54 [INFO]: Token:
+2025-07-08 16:39:07 [INFO]: Token:
+2025-07-08 16:44:51 [INFO]: Token:

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import TransactionController from '../controllers/transaction.controller';
 import { verifyToken } from '../middleware/verifyToken';
+import { isOrganizer } from '../middleware/isOrganizer';
 
 class TransactionRouter {
     private router: Router;
@@ -39,6 +40,14 @@ class TransactionRouter {
             "/event-transaction/:eventId",
             verifyToken,
             this.transactionController.getEventTransactions
+        )
+
+        // untuk organizer mendapat transactiion berdasarkan id
+        this.router.patch(
+            "/transaction/:id",
+            verifyToken,
+            isOrganizer,
+            this.transactionController.updateTransactionStatus
         )
     }
 

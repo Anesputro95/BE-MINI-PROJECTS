@@ -10,8 +10,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
@@ -109,16 +109,16 @@ model Coupon {
 }
 
 model Event {
-  id            Int      @id @default(autoincrement())
-  organizerId   Int
-  title         String
-  thumbnail     String
-  description   String
-  category      EventCategory @default(DEFAULT)
-  salesStart    DateTime?
-  salesEnd      DateTime?
-  createdAt     DateTime @default(now())
-  tickets       Ticket[]
+  id          Int           @id @default(autoincrement())
+  organizerId Int
+  title       String
+  thumbnail   String
+  description String
+  category    EventCategory @default(DEFAULT)
+  salesStart  DateTime?
+  salesEnd    DateTime?
+  createdAt   DateTime      @default(now())
+  tickets     Ticket[]
 
   organizer   Account       @relation("ORGANIZER", fields: [organizerId], references: [id])
   transaction Transaction[]
@@ -127,15 +127,16 @@ model Event {
 }
 
 model Ticket {
-  id            Int      @id @default(autoincrement())
-  eventId       Int
-  name          String
-  price         Int      @default(0)
-  quota         Int
-  sold          Int      @default(0)
-  createdAt     DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  eventId   Int
+  name      String
+  price     Int      @default(0)
+  quota     Int
+  sold      Int      @default(0)
+  createdAt DateTime @default(now())
 
-  event         Event    @relation(fields: [eventId], references: [id])
+  event        Event         @relation(fields: [eventId], references: [id])
+  transactions Transaction[] @relation("TicketToTransaction")
 
   @@map("ticket")
 }
@@ -169,6 +170,7 @@ model Transaction {
   user   Account @relation(fields: [userId], references: [id])
   event  Event   @relation(fields: [eventId], references: [id])
   coupon Coupon? @relation(fields: [usedCouponsId], references: [id])
+  ticket Ticket  @relation("TicketToTransaction", fields: [ticketId], references: [id])
 
   @@map("transaction")
 }
