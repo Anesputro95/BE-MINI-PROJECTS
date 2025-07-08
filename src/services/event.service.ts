@@ -2,7 +2,7 @@ import App from "../app";
 import { prisma } from "../config/prisma";
 import AppError from "../errors/AppError";
 import { EventCategory } from "../generated/prisma";
-import { createEvent, deleteEvent, eventDashboard, findEventById, updateEvent } from "../repositories/event.repository";
+import { createEvent, deleteEvent, eventDashboard, findEventById, getEventByOragnizerId, updateEvent } from "../repositories/event.repository";
 
 
 interface CreateEventInput {
@@ -43,3 +43,23 @@ export const updateEventService = async (input: UpdateEventDTO) => {
 export const deleteEventService = async (id: number) => {
     return await deleteEvent(id)
 }
+
+export const getMyEventsService = async (organizerId: number) => {
+    const events = await getEventByOragnizerId(organizerId);
+
+    return events.map((event) => {
+        const totalQuota = event.tickets.reduce((sum, t) => sum + t.quota, 0);
+        const totalSold = event.tickets.reduce((sum, t) => sum + t.sold, 0);
+        const availableSeat = totalQuota - totalSold;
+
+        return {
+            id: event.id,
+            title: event.title,
+            thumbnail: event.thumbnail,
+            createdAt: event.createdAt,
+            totalQuota,
+            availableSeat,
+        };
+    });
+}
+

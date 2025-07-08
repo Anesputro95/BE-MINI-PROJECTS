@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { createEventService, deleteEventService, getEventsService, updateEventService } from "../services/event.service";
+import { createEventService, deleteEventService, getEventsService, getMyEventsService, updateEventService } from "../services/event.service";
 
-class EventDashboardController {
+class EventController {
     public async getEvents(
         req: Request,
         res: Response,
@@ -114,6 +114,26 @@ class EventDashboardController {
             next(error)
         }
     }
+
+    public async getMyEvent(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> {
+        try {
+            const { id: organizerId } = res.locals.descript;
+
+            const events = await getMyEventsService(organizerId);
+
+            res.status(200).send({
+                success: true,
+                message: "Your events retrieved successfully",
+                data: events,
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
-export default EventDashboardController;
+export default EventController;

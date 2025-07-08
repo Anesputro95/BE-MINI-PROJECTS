@@ -98,3 +98,24 @@ export const deleteEvent = async (id: number) => {
         where: { id }
     });
 };
+
+export const getEventByOragnizerId = async (organizerId: number) => {
+    return prisma.event.findMany({
+        where: { organizerId },
+        select: {
+            id: true,
+            title: true,
+            thumbnail: true,
+            createdAt: true,
+            tickets: {
+                select: {
+                    quota: true,
+                    sold: true
+                }
+            }
+        },
+        orderBy: {
+            createdAt: "desc",
+        }
+    })
+}

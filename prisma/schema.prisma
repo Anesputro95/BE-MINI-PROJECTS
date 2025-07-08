@@ -89,16 +89,15 @@ model Coupon {
 }
 
 model Event {
-  id          Int    @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
   organizerId Int
   title       String
   thumbnail   String
   description String
-
-  createdAt  DateTime      @default(now())
-  category   EventCategory @default(DEFAULT)
-  salesEnd   DateTime?
-  salesStart DateTime?
+  createdAt   DateTime      @default(now())
+  category    EventCategory @default(DEFAULT)
+  salesEnd    DateTime?
+  salesStart  DateTime?
 
   organizer   Account       @relation("ORGANIZER", fields: [organizerId], references: [id])
   tickets     Ticket[]
