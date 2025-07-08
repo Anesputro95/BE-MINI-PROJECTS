@@ -1164,3 +1164,38 @@ Foreign key constraint violated on the constraint: `ticket_eventId_fkey` {"code"
 2025-07-07 22:58:49 [INFO]: Token:
 
 >>>>>>> bbff219474ba67fe0f1fe2ae88efe0809bb2075c
+2025-07-08 10:57:31 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
+2025-07-08 10:58:39 [INFO]: Token:
+2025-07-08 11:01:59 [INFO]: Token:
+2025-07-08 11:02:01 [ERROR]: POST /transactions/create-transaction: Event not found {"statusCode":404,"success":false,"message":"Event not found"}
+2025-07-08 11:02:25 [INFO]: Token:
+2025-07-08 11:02:27 [ERROR]: POST /transactions/create-transaction: Event not found {"statusCode":404,"success":false,"message":"Event not found"}
+2025-07-08 11:03:16 [INFO]: Token:
+2025-07-08 11:03:22 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:33:31
+
+  30 }
+  31 
+  32 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 33     return prisma.transaction.create(
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \"TransactionStatus\": \"PENDING\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false }) {"clientVersion":"6.10.1","name":"PrismaClientUnknownRequestError"}
+2025-07-08 11:09:32 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 91 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{\n  \"username\": \"bacijad16\",\n  \"email\": \"bacijad167@fuasha.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
+2025-07-08 11:09:52 [INFO]: Token:
+2025-07-08 11:10:53 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 92 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{\n  \"username\": \"wevocaf137\",\n  \"email\": \"wevocaf137@fuasha.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
+2025-07-08 11:10:58 [ERROR]: POST /auth/login: Email not verify, please verify first {"statusCode":401,"success":false,"message":"Email not verify, please verify first"}
+2025-07-08 11:12:16 [INFO]: Token:
+2025-07-08 11:12:59 [INFO]: Token:
+2025-07-08 11:43:19 [INFO]: Token:
+2025-07-08 11:45:33 [INFO]: Token:
+2025-07-08 11:45:37 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:34:31
+
+  31 }
+  32 
+  33 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 34     return prisma.transaction.create(
+The column `ticketId` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"ticketId"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 11:51:54 [INFO]: Token:

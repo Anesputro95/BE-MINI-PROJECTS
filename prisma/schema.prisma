@@ -157,6 +157,7 @@ model Transaction {
   id              Int               @id @default(autoincrement())
   userId          Int
   eventId         Int
+  ticketId        Int
   ticketQuantity  Int
   totalPrice      Int
   paymentProofUrl String?

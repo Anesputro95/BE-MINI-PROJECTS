@@ -22,6 +22,7 @@ export const TransactionsStatus = async (eventId: number) => {
 interface CreateTransactionDTO {
     userId: number;
     eventId: number;
+    ticketId: number;
     ticketQuantity: number;
     totalPrice: number;
     paymentProofUrl?: string;
