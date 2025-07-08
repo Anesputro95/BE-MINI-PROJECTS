@@ -77,13 +77,13 @@ export const transactionService = async (eventId: number) => {
         (trx: {
             ticketQuantity: number;
             totalPrice: number;
-            user: {username: string; email: string};
+            user: { username: string; email: string };
         }) => ({
-        name: trx.user.username,
-        email: trx.user.email,
-        quantity: trx.ticketQuantity,
-        totalPrice: trx.totalPrice,
-    }));
+            name: trx.user.username,
+            email: trx.user.email,
+            quantity: trx.ticketQuantity,
+            totalPrice: trx.totalPrice,
+        }));
 };
 
 
@@ -138,6 +138,22 @@ export const confirmTransactionService = async (
 
     if (trx.status !== "WAITING_CONFIRMATION") {
         throw new AppError("Transaction is not pending confirmation", 400);
+    }
+
+    if (action === "REJECT") {
+        await prisma.ticket.update({
+            where: { id: trx.ticketId },
+            data: {
+                sold: { increment: trx.ticketQuantity }
+            }
+        })
+    }
+
+    if (trx.usedCouponsId) {
+        await prisma.coupon.update({
+            where: { id: trx.usedCouponsId },
+            data: { isUsed: false }
+        })
     }
 
     return prisma.transaction.update({

@@ -81,6 +81,7 @@ model Coupon {
   discount    Int
   expiresAt   DateTime
   createdAt   DateTime      @default(now())
+  isUsed      Boolean       @default(false)
   user        Account       @relation(fields: [userId], references: [id])
   transaction Transaction[]
 
@@ -88,16 +89,16 @@ model Coupon {
 }
 
 model Event {
-  id          Int           @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   organizerId Int
   title       String
   thumbnail   String
   description String
 
-  createdAt   DateTime      @default(now())
-  category    EventCategory @default(DEFAULT)
-  salesEnd    DateTime?
-  salesStart  DateTime?
+  createdAt  DateTime      @default(now())
+  category   EventCategory @default(DEFAULT)
+  salesEnd   DateTime?
+  salesStart DateTime?
 
   organizer   Account       @relation("ORGANIZER", fields: [organizerId], references: [id])
   tickets     Ticket[]
@@ -115,30 +116,29 @@ model Ticket {
   sold      Int      @default(0)
   createdAt DateTime @default(now())
 
-  event     Event    @relation(fields: [eventId], references: [id])
-
+  event Event @relation(fields: [eventId], references: [id])
 
   @@map("ticket")
 }
 
 model Transaction {
-  id              Int               @id @default(autoincrement())
-  userId          Int
-  eventId         Int
-  ticketId        Int
-  ticketQuantity  Int
-  totalPrice      Int
-  paymentProofUrl String?
+  id                     Int               @id @default(autoincrement())
+  userId                 Int
+  eventId                Int
+  ticketId               Int
+  ticketQuantity         Int
+  totalPrice             Int
+  paymentProofUrl        String?
   paymentProofUploadedAt DateTime?
-  status          TransactionStatus @default(WAITING_PAYMENT)
-  restored        Boolean           @default(false)
-  userPoints      Int?
-  usedCouponsId   Int?
-  createdAt       DateTime          @default(now())
+  status                 TransactionStatus @default(WAITING_PAYMENT)
+  restored               Boolean           @default(false)
+  userPoints             Int?
+  usedCouponsId          Int?
+  createdAt              DateTime          @default(now())
 
-  event           Event             @relation(fields: [eventId], references: [id])
-  coupon          Coupon?           @relation(fields: [usedCouponsId], references: [id])
-  user            Account           @relation(fields: [userId], references: [id])
+  event  Event   @relation(fields: [eventId], references: [id])
+  coupon Coupon? @relation(fields: [usedCouponsId], references: [id])
+  user   Account @relation(fields: [userId], references: [id])
 
   @@map("transaction")
 }

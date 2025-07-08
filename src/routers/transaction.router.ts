@@ -2,6 +2,7 @@ import { Router } from 'express';
 import TransactionController from '../controllers/transaction.controller';
 import { verifyToken } from '../middleware/verifyToken';
 import { isOrganizer } from '../middleware/isOrganizer';
+import { isCustomer } from '../middleware/isCustomer';
 
 class TransactionRouter {
     private router: Router;
@@ -25,6 +26,7 @@ class TransactionRouter {
         this.router.post(
             "/create-transaction",
             verifyToken,
+            isCustomer,
             this.transactionController.createTransaction
         );
 
