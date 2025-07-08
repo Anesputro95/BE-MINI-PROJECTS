@@ -36,7 +36,6 @@ class App {
         this.app?.use('/api', searchRouter);
         this.app?.use('/event', eventRouter.getRouter());
         this.app?.use('/transactions', transactionRouter.getRouter());
-        this.app?.use("/api", transactionRouter.getRouter());
 
         this.app?.get('/', (req: Request, res: Response) => {
             res.status(200).send("<h1>Welcome to Mini Project</h1>")

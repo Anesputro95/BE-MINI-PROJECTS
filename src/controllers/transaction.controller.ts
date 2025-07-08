@@ -132,16 +132,19 @@ class TransactionController {
         next: NextFunction,
     ): Promise<void> {
         try {
-            const eventId = Number(req.params.eventId);
-            const type = req.query.type as "day" | "month" | "year" | undefined;
+            const { id: userId } = res.locals.descript;
 
-            const data = await getEventStatisticService(eventId, type);
+            if (!userId) {
+                throw new AppError("Unauthorized: No user ID found", 401);
+            }
+
+            const transactions = await getUserTransactionsService(userId);
 
             res.status(200).send({
                 success: true,
                 message: "Event statistics retrieved",
-                data,
-            });
+                data: transactions,
+            })
         } catch (error) {
             next(error);
         }

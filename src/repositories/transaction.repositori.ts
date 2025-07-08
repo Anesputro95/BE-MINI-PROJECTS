@@ -107,41 +107,26 @@ export const updateTransactionById = async (
     })
 };
 
-export const getTransactionStatsByDay = async (eventId: number) => {
-    return prisma.$queryRaw`
-    SELECT
-      DATE("createdAt") as date,
-      COUNT(*) as totalTransactions,
-      SUM("totalPrice") as totalRevenue
-    FROM "transaction"
-    WHERE "eventId" = ${eventId} AND status = 'DONE'
-    GROUP BY date
-    ORDER BY date ASC
-  `;
-}
+export const getTransactionStatsByInterval = async (eventId: number, interval: string) => {
+    const allowed = ["day", "month", "year"];
+    if (!allowed.includes(interval)) {
+        throw new Error("Invalid interval")
+    }
 
-export const getTransactionStatsByMonth = async (eventId: number) => {
+    type StatisticResult = {
+        period: Date;
+        totalTransactions: bigint;
+        totalRevenue: bigint;
+    }
+    
     return prisma.$queryRaw`
-      SELECT
-        DATE_TRUNC('month', "createdAt") as month,
-        COUNT(*) as "totalTransactions",
-        SUM("totalPrice") as "totalRevenue"
-      FROM "transaction"
-      WHERE "eventId" = ${eventId} AND status = 'DONE'
-      GROUP BY month
-      ORDER BY month ASC
-    `;
+        SELECT
+            date_trunc(${interval}::text, "createdAt") AS period,
+            COUNT(*) AS "totalTransactions",
+            SUM("totalPrice") AS "totalRevenue"
+        FROM "transaction"
+        WHERE "eventId" = ${eventId} AND status = 'DONE'
+        GROUP BY period
+        ORDER BY period ASC
+        `;
 };
-
-export const getTransactionStatsByYear = async (eventId: number) => {
-    return prisma.$queryRaw`
-    SELECT
-      DATE_TRUNC('year', "createdAt") as month,
-      COUNT(*) as "totalTransactions",
-      SUM("totalPrice") as "totalRevenue"
-    FROM "transaction"
-    WHERE "eventId" = ${eventId} AND status = 'DONE'
-    GROUP BY month
-    ORDER BY month ASC
-  `;
-}
