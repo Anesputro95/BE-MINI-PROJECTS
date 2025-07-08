@@ -1199,3 +1199,264 @@ Invalid `prisma.transaction.create()` invocation in
 → 34     return prisma.transaction.create(
 The column `ticketId` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"ticketId"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
 2025-07-08 11:51:54 [INFO]: Token:
+2025-07-08 15:21:05 [INFO]: Token:
+2025-07-08 15:26:15 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 92 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{\n  \"username\": \"wevocaf137\",\n  \"email\": \"wevocaf137@fuasha.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
+2025-07-08 15:26:47 [INFO]: Token:
+2025-07-08 15:26:49 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:35:31
+
+  32 }
+  33 
+  34 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 35     return prisma.transaction.create(
+The column `ticketId` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"ticketId"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 15:27:29 [INFO]: Token:
+2025-07-08 15:27:32 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:35:31
+
+  32 }
+  33 
+  34 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 35     return prisma.transaction.create(
+The column `ticketId` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"ticketId"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 15:34:04 [INFO]: Token:
+2025-07-08 15:34:08 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:35:31
+
+  32 }
+  33 
+  34 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 35     return prisma.transaction.create(
+The column `restored` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"restored"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 15:34:41 [INFO]: Token:
+2025-07-08 15:34:44 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:35:31
+
+  32 }
+  33 
+  34 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 35     return prisma.transaction.create(
+The column `restored` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"restored"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 15:38:34 [INFO]: Token:
+2025-07-08 15:38:39 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:35:31
+
+  32 }
+  33 
+  34 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 35     return prisma.transaction.create(
+The column `restored` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"restored"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 15:40:56 [INFO]: Token:
+2025-07-08 15:41:00 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+The column `restored` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"restored"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 15:41:21 [INFO]: Token:
+2025-07-08 15:41:23 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+The column `restored` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"restored"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 15:46:02 [INFO]: Token:
+2025-07-08 15:46:06 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+The column `transaction.paymentProofUploadedAt` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"transaction.paymentProofUploadedAt"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 15:47:00 [INFO]: Token:
+2025-07-08 15:47:03 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \"TransactionStatus\": \"WAITING_PAYMENT\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false }) {"clientVersion":"6.10.1","name":"PrismaClientUnknownRequestError"}
+2025-07-08 15:48:16 [INFO]: Token:
+2025-07-08 15:48:19 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \"TransactionStatus\": \"WAITING_PAYMENT\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false }) {"clientVersion":"6.10.1","name":"PrismaClientUnknownRequestError"}
+2025-07-08 16:07:22 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 91 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{\n  \"username\": \"bacijad16\",\n  \"email\": \"bacijad167@fuasha.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
+2025-07-08 16:07:42 [INFO]: Token:
+2025-07-08 16:09:30 [INFO]: Token:
+2025-07-08 16:09:33 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+The column `restored` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"restored"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 16:10:44 [INFO]: Token:
+2025-07-08 16:10:47 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+The column `ticketId` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"ticketId"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 16:11:52 [INFO]: Token:
+2025-07-08 16:11:57 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+The column `transaction.paymentProofUploadedAt` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"transaction.paymentProofUploadedAt"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 16:12:28 [INFO]: Token:
+2025-07-08 16:12:32 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \"TransactionStatus\": \"WAITING_PAYMENT\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false }) {"clientVersion":"6.10.1","name":"PrismaClientUnknownRequestError"}
+2025-07-08 16:19:24 [INFO]: Token:
+2025-07-08 16:22:26 [ERROR]: POST /auth/login: Email not registered {"statusCode":404,"success":false,"message":"Email not registered"}
+2025-07-08 16:23:58 [INFO]: Token:
+2025-07-08 16:25:26 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 91 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{\n  \"username\": \"bacijad16\",\n  \"email\": \"bacijad167@fuasha.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
+2025-07-08 16:25:51 [INFO]: Token:
+2025-07-08 16:25:54 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+The column `restored` does not exist in the current database. {"code":"P2022","meta":{"modelName":"Transaction","column":"restored"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 16:28:53 [INFO]: Token:
+2025-07-08 16:28:57 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \"TransactionStatus\": \"WAITING_PAYMENT\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false }) {"clientVersion":"6.10.1","name":"PrismaClientUnknownRequestError"}
+2025-07-08 16:29:36 [INFO]: Token:
+2025-07-08 16:29:39 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \"TransactionStatus\": \"WAITING_PAYMENT\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false }) {"clientVersion":"6.10.1","name":"PrismaClientUnknownRequestError"}
+2025-07-08 16:30:18 [INFO]: Token:
+2025-07-08 16:30:23 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.ticket.findFirst()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/services/transaction.service.ts:20:40
+
+  17 export const createTransactionService = async (input: CreateTransactionInput) => {
+  18     const { userId, eventId, ticketId, ticketQuantity, usedCouponsId, userPoints } = input;
+  19 
+→ 20     const ticket = await prisma.ticket.findFirst(
+Can't reach database server at `aws-0-us-east-2.pooler.supabase.com:5432`
+
+Please make sure your database server is running at `aws-0-us-east-2.pooler.supabase.com:5432`. {"code":"P1001","meta":{"modelName":"Ticket","database_host":"aws-0-us-east-2.pooler.supabase.com","database_port":5432},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 16:31:29 [INFO]: Token:
+2025-07-08 16:31:33 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \"TransactionStatus\": \"WAITING_PAYMENT\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false }) {"clientVersion":"6.10.1","name":"PrismaClientUnknownRequestError"}
+2025-07-08 16:31:39 [INFO]: Token:
+2025-07-08 16:31:42 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \"TransactionStatus\": \"WAITING_PAYMENT\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false }) {"clientVersion":"6.10.1","name":"PrismaClientUnknownRequestError"}
+2025-07-08 16:32:08 [INFO]: Token:
+2025-07-08 16:32:11 [ERROR]: POST /transactions/create-transaction: 
+Invalid `prisma.transaction.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/repositories/transaction.repositori.ts:36:31
+
+  33 }
+  34 
+  35 export const createTransaction = async (data: CreateTransactionDTO) => {
+→ 36     return prisma.transaction.create(
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \"TransactionStatus\": \"WAITING_PAYMENT\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false }) {"clientVersion":"6.10.1","name":"PrismaClientUnknownRequestError"}
+2025-07-08 16:42:41 [INFO]: Token:
+2025-07-08 16:44:17 [INFO]: Token:
+2025-07-08 16:49:23 [INFO]: Token:
+2025-07-08 16:49:25 [ERROR]: POST /api/transactions/:transactionId/upload-payment-proof: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/services/transaction.service.ts:88:42
+
+  85     paymentProofUrl: string,
+  86     userId: number
+  87 ) => {
+→ 88     const trx = await prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-08 16:50:10 [INFO]: Token:
+2025-07-08 16:50:12 [ERROR]: PATCH /api/transactions/:transactionId/upload-payment-proof: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS-1/src/services/transaction.service.ts:88:42
+
+  85     paymentProofUrl: string,
+  86     userId: number
+  87 ) => {
+→ 88     const trx = await prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-08 16:51:22 [INFO]: Token:

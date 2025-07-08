@@ -33,6 +33,18 @@ class TransactionRouter {
             verifyToken,
             this.transactionController.getUserTransactions
         );
+
+        this.router.patch(
+            "/transactions/:transactionId/upload-payment-proof",
+            verifyToken,
+            this.transactionController.uploadPaymentProof
+        );
+
+        this.router.post(
+            "/transactions/:transactionId/confirm",
+            verifyToken,
+            this.transactionController.confirmTransaction
+        );
     }
 
     public getRouter(): Router {

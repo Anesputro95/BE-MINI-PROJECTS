@@ -4,7 +4,7 @@ export const TransactionsStatus = async (eventId: number) => {
     return prisma.transaction.findMany({
         where: {
             eventId,
-            status: "ACCEPTED"
+            status: "DONE"
         },
         select: {
             ticketQuantity: true,
@@ -25,6 +25,8 @@ interface CreateTransactionDTO {
     ticketId: number;
     ticketQuantity: number;
     totalPrice: number;
+    status: "WAITING_PAYMENT" | "WAITING_CONFIRMATION" | "DONE" | "REJECTED" | "EXPIRED" | "CANCELED";
+    restored: boolean,
     paymentProofUrl?: string;
     usedCouponsId?: number;
     userPoints?: number;
