@@ -6,7 +6,7 @@ import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import AuthAccountRouter from './routers/auth.router';
 import logger from './utils/logger';
-import EventDashboradRouter from './routers/dashboardEvent.router';
+import EventDashboradRouter from './routers/event.router';
 import TransactionRouter from './routers/transaction.router';
 
 const PORT = process.env.PORT || "8080";

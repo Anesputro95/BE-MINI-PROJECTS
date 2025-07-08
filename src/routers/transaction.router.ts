@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import TransactionController from '../controllers/transaction.controller';
 import { verifyToken } from '../middleware/verifyToken';
+import { isOrganizer } from '../middleware/isOrganizer';
 
 class TransactionRouter {
     private router: Router;
@@ -34,6 +35,7 @@ class TransactionRouter {
             this.transactionController.getUserTransactions
         );
 
+
         this.router.patch(
             "/transactions/:transactionId/upload-payment-proof",
             verifyToken,
@@ -45,6 +47,7 @@ class TransactionRouter {
             verifyToken,
             this.transactionController.confirmTransaction
         );
+
     }
 
     public getRouter(): Router {

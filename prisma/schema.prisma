@@ -93,10 +93,12 @@ model Event {
   title       String
   thumbnail   String
   description String
+
   createdAt   DateTime      @default(now())
   category    EventCategory @default(DEFAULT)
   salesEnd    DateTime?
   salesStart  DateTime?
+
   organizer   Account       @relation("ORGANIZER", fields: [organizerId], references: [id])
   tickets     Ticket[]
   transaction Transaction[]
@@ -112,7 +114,9 @@ model Ticket {
   quota     Int
   sold      Int      @default(0)
   createdAt DateTime @default(now())
+
   event     Event    @relation(fields: [eventId], references: [id])
+
 
   @@map("ticket")
 }
@@ -121,6 +125,7 @@ model Transaction {
   id              Int               @id @default(autoincrement())
   userId          Int
   eventId         Int
+  ticketId        Int
   ticketQuantity  Int
   totalPrice      Int
   paymentProofUrl String?
@@ -130,6 +135,7 @@ model Transaction {
   userPoints      Int?
   usedCouponsId   Int?
   createdAt       DateTime          @default(now())
+
   ticketId        Int
   event           Event             @relation(fields: [eventId], references: [id])
   coupon          Coupon?           @relation(fields: [usedCouponsId], references: [id])

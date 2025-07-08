@@ -1,6 +1,8 @@
 import { prisma } from "../config/prisma";
 import AppError from "../errors/AppError";
-import { createTransaction, getUserTransactions, TransactionsStatus } from "../repositories/transaction.repositori";
+import { findEventById } from "../repositories/event.repository";
+import { createTransaction, getUserTransactions, TransactionsStatus, getTransactionEventById, findTransactionById, updateTransationById } from "../repositories/transaction.repositori";
+
 
 
 interface CreateTransactionInput {
@@ -13,14 +15,15 @@ interface CreateTransactionInput {
     userPoints?: number;
 }
 
-// 👇 Service untuk bikin transaksi
 export const createTransactionService = async (input: CreateTransactionInput) => {
     const { userId, eventId, ticketId, ticketQuantity, usedCouponsId, userPoints } = input;
 
     const ticket = await prisma.ticket.findFirst({
+
         where: { 
             id: ticketId,
             eventId: eventId, 
+
         },
     });
 
@@ -63,12 +66,10 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
     return transaction;
 };
 
-// 👇 Service untuk history transaksi user
 export const getUserTransactionsService = async (userId: number) => {
     return getUserTransactions(userId);
 };
 
-// 👇 Service untuk ambil data attendee berdasarkan event
 export const transactionService = async (eventId: number) => {
     const attendes = await TransactionsStatus(eventId);
 
@@ -79,6 +80,7 @@ export const transactionService = async (eventId: number) => {
         totalPrice: trx.totalPrice,
     }));
 };
+
 
 export const uploadPaymentProofService = async (
     transactionId: number,
@@ -140,3 +142,4 @@ export const confirmTransactionService = async (
         },
     });
 };
+

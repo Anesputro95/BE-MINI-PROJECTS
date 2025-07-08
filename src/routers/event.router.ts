@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { verifyToken } from "../middleware/verifyToken";
 import { isOrganizer } from "../middleware/isOrganizer";
-import EventDashboardController from "../controllers/dashboardEvent.controller";
+import EventDashboardController from "../controllers/event.controller";
 
 
 class EventDashboardRouter {
