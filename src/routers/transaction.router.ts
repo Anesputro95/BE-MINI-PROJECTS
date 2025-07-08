@@ -40,7 +40,7 @@ class TransactionRouter {
             this.transactionController.uploadPaymentProof
         );
 
-        this.router.post(
+        this.router.patch(
             "/transactions/:transactionId/confirm",
             verifyToken,
             this.transactionController.confirmTransaction

@@ -1460,3 +1460,4 @@ Invalid `prisma.transaction.findUnique()` invocation in
 
 Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
 2025-07-08 16:51:22 [INFO]: Token:
+2025-07-08 17:01:27 [INFO]: Token:
