@@ -148,21 +148,24 @@ export const confirmTransactionService = async (
     });
 };
 
-export const getEventStatisticService = async (eventId: number) => {
-    const byDay = await prisma.transaction.groupBy({
-        by: ['createdAt'],
-        where: {
-            eventId,
-            status: 'DONE',
-        },
-        _count: { id: true },
-        _sum: { totalPrice: true },
-    });
-
+export const getEventStatisticService = async (
+    eventId: number,
+    type?: "day" | "month" | "year"
+) => {
+    if (type === "day") {
+        return { byDay: await getTransactionStatsByDay(eventId) }
+    }
+    if (type === "month") {
+        return { byMonth: await getTransactionStatsByMonth(eventId) }
+    }
+    if (type === "year") {
+        return { byYear: await getTransactionStatsByYear(eventId) }
+    }
 
     return {
-        byDay
-    }
-    
+        byDay: await getTransactionStatsByDay(eventId),
+        byMonth: await getTransactionStatsByMonth(eventId),
+        byYear: await getTransactionStatsByYear(eventId),
+    };
 }
 

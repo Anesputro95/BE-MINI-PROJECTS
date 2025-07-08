@@ -113,7 +113,7 @@ export const getTransactionStatsByDay = async (eventId: number) => {
       DATE("createdAt") as date,
       COUNT(*) as totalTransactions,
       SUM("totalPrice") as totalRevenue
-    FROM "Transaction"
+    FROM "transaction"
     WHERE "eventId" = ${eventId} AND status = 'DONE'
     GROUP BY date
     ORDER BY date ASC
@@ -122,26 +122,26 @@ export const getTransactionStatsByDay = async (eventId: number) => {
 
 export const getTransactionStatsByMonth = async (eventId: number) => {
     return prisma.$queryRaw`
-    SELECT
-        DATE_TRUNC('month', 'createdAt') as month,
-        COUNT(*) as totalTransactions,
-        SUM("totalPrice") as totalRevenue
-    FROM "Transaction"
-    WHERE "eventId" = ${eventId} AND status = 'DONE'
-    GROUP BY date
-    ORDER BY date ASC
+      SELECT
+        DATE_TRUNC('month', "createdAt") as month,
+        COUNT(*) as "totalTransactions",
+        SUM("totalPrice") as "totalRevenue"
+      FROM "transaction"
+      WHERE "eventId" = ${eventId} AND status = 'DONE'
+      GROUP BY month
+      ORDER BY month ASC
     `;
-}
+};
 
 export const getTransactionStatsByYear = async (eventId: number) => {
     return prisma.$queryRaw`
     SELECT
-        DATE_TRUNC('year', 'createdAt') as month,
-        COUNT(*) as totalTransactions,
-        SUM("totalPrice") as totalRevenue
-    FROM "Transaction"
+      DATE_TRUNC('year', "createdAt") as month,
+      COUNT(*) as "totalTransactions",
+      SUM("totalPrice") as "totalRevenue"
+    FROM "transaction"
     WHERE "eventId" = ${eventId} AND status = 'DONE'
-    GROUP BY date
-    ORDER BY date ASC
-    `
+    GROUP BY month
+    ORDER BY month ASC
+  `;
 }

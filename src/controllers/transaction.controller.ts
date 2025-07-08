@@ -5,7 +5,8 @@ import {
     getUserTransactionsService,
 
     uploadPaymentProofService,
-    confirmTransactionService
+    confirmTransactionService,
+    getEventStatisticService
 
 } from "../services/transaction.service";
 import AppError from "../errors/AppError";
@@ -131,23 +132,21 @@ class TransactionController {
         next: NextFunction,
     ): Promise<void> {
         try {
-            const { id: userId } = res.locals.descript;
+            const eventId = Number(req.params.eventId);
+            const type = req.query.type as "day" | "month" | "year" | undefined;
 
-            if (!userId) {
-                throw new AppError("Unauthorized: No user ID found", 401);
-            }
-
-            const transactions = await getUserTransactionsService(userId);
+            const data = await getEventStatisticService(eventId, type);
 
             res.status(200).send({
                 success: true,
                 message: "Event statistics retrieved",
-                data: transactions,
-            })
+                data,
+            });
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
+
 
 }
 
