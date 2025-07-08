@@ -33,11 +33,12 @@ class TransactionController {
     ): Promise<void> {
         try {
             const { id: userId } = res.locals.descript;
-            const { eventId, ticketQuantity, usedCouponsId, userPoints } = req.body;
+            const { eventId, ticketId, ticketQuantity, usedCouponsId, userPoints } = req.body;
 
             const transaction = await createTransactionService({
                 userId,
                 eventId,
+                ticketId,
                 ticketQuantity,
                 usedCouponsId,
                 userPoints,
