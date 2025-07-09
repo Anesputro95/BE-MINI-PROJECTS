@@ -1461,6 +1461,261 @@ Invalid `prisma.transaction.findMany()` invocation in
 
 Argument `userId` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
 2025-07-08 21:26:51 [INFO]: Token:
+<<<<<<< HEAD
 2025-07-08 23:16:01 [INFO]: Token:
 2025-07-08 23:16:36 [INFO]: Token:
 2025-07-08 23:16:45 [INFO]: Token:
+=======
+=======
+2025-07-08 21:22:11 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 92 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{ \n  \"username\": \"fetiw5911\",\n  \"email\": \"fetiw59118@fuasha.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
+2025-07-08 21:22:43 [INFO]: Token:
+2025-07-08 21:24:25 [INFO]: Token:
+2025-07-08 21:24:26 [ERROR]: POST /transactions/create-transaction: Ticket not found for this event {"statusCode":404,"success":false,"message":"Ticket not found for this event"}
+2025-07-08 21:25:11 [INFO]: Token:
+2025-07-08 21:25:55 [INFO]: Token:
+2025-07-08 21:25:57 [ERROR]: PATCH /api/transactions/2/upload-payment-proof: Transaction not found {"statusCode":404,"success":false,"message":"Transaction not found"}
+2025-07-08 21:26:07 [INFO]: Token:
+2025-07-08 21:31:29 [INFO]: Token:
+2025-07-08 21:31:29 [ERROR]: PATCH /api/transactions/:transactionId/confirm: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/services/transaction.service.ts:126:42
+
+  123     action: "ACCEPT" | "REJECT",
+  124     organizerId: number
+  125 ) => {
+→ 126     const trx = await prisma.transaction.findUnique({
+            where: {
+          +   id: Int
+            },
+            include: {
+              event: true
+            }
+          })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-08 21:31:51 [INFO]: Token:
+>>>>>>> ready_repository
+2025-07-08 21:45:50 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 93 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{ \n  \"username\": \"wevocaf137\",\n  \"email\": \"wevocaf137@fuasha.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
+2025-07-08 21:46:22 [INFO]: Token:
+2025-07-08 21:47:46 [INFO]: Token:
+2025-07-08 21:48:39 [INFO]: Token:
+2025-07-08 21:48:41 [ERROR]: PATCH /api/transactions/1/confirm: Transaction is not pending confirmation {"statusCode":400,"success":false,"message":"Transaction is not pending confirmation"}
+2025-07-08 21:48:45 [INFO]: Token:
+2025-07-08 21:51:33 [INFO]: Token:
+2025-07-08 22:18:59 [INFO]: Token:
+2025-07-08 22:19:03 [ERROR]: GET /transactions/event/2/statistics: 
+Invalid `prisma.$queryRaw()` invocation:
+
+
+Raw query failed. Code: `42P01`. Message: `relation "Transaction" does not exist` {"code":"P2010","meta":{"code":"42P01","message":"relation \"Transaction\" does not exist"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 22:23:33 [INFO]: Token:
+2025-07-08 22:23:37 [ERROR]: GET /transactions/event/2/statistics: 
+Invalid `prisma.$queryRaw()` invocation:
+
+
+Raw query failed. Code: `42725`. Message: `ERROR: function date_trunc(unknown, unknown) is not unique
+HINT: Could not choose a best candidate function. You might need to add explicit type casts.` {"code":"P2010","meta":{"code":"42725","message":"ERROR: function date_trunc(unknown, unknown) is not unique\nHINT: Could not choose a best candidate function. You might need to add explicit type casts."},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 22:33:18 [INFO]: Token:
+2025-07-08 22:33:22 [ERROR]: GET /transactions/event/2/statistics: Do not know how to serialize a BigInt {}
+2025-07-08 22:34:22 [INFO]: Token:
+2025-07-08 22:34:24 [ERROR]: GET /transactions/event/2/statistics: Do not know how to serialize a BigInt {}
+2025-07-08 22:38:31 [INFO]: Token:
+2025-07-08 22:38:37 [ERROR]: GET /transactions/event/2/statistics: Do not know how to serialize a BigInt {}
+2025-07-08 22:43:04 [INFO]: Token:
+2025-07-08 22:43:08 [ERROR]: GET /transactions/event/2/statistics: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Your raw query had an incorrect number of parameters. Expected: `1`, actual: `0`. {"code":"P1016","meta":{"expected":1,"actual":0},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 22:52:11 [INFO]: Token:
+2025-07-08 22:52:15 [ERROR]: GET /transactions/event/2/statistics: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Your raw query had an incorrect number of parameters. Expected: `1`, actual: `0`. {"code":"P1016","meta":{"expected":1,"actual":0},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 22:55:01 [INFO]: Token:
+2025-07-08 22:55:05 [ERROR]: GET /transactions/event/2/statistics: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Your raw query had an incorrect number of parameters. Expected: `1`, actual: `0`. {"code":"P1016","meta":{"expected":1,"actual":0},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 23:00:38 [INFO]: Token:
+2025-07-08 23:00:41 [ERROR]: GET /transactions/event/2/statistics: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Your raw query had an incorrect number of parameters. Expected: `1`, actual: `0`. {"code":"P1016","meta":{"expected":1,"actual":0},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 23:01:33 [INFO]: Token:
+2025-07-08 23:01:38 [ERROR]: GET /transactions/event/1/statistics: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Your raw query had an incorrect number of parameters. Expected: `1`, actual: `0`. {"code":"P1016","meta":{"expected":1,"actual":0},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 23:01:43 [INFO]: Token:
+2025-07-08 23:01:44 [ERROR]: GET /transactions/event/3/statistics: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Your raw query had an incorrect number of parameters. Expected: `1`, actual: `0`. {"code":"P1016","meta":{"expected":1,"actual":0},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 23:01:53 [INFO]: Token:
+2025-07-08 23:01:55 [ERROR]: GET /transactions/event/2/statistics: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Your raw query had an incorrect number of parameters. Expected: `1`, actual: `0`. {"code":"P1016","meta":{"expected":1,"actual":0},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 23:06:37 [INFO]: Token:
+2025-07-08 23:06:41 [ERROR]: GET /transactions/event/2/statistics: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Your raw query had an incorrect number of parameters. Expected: `1`, actual: `0`. {"code":"P1016","meta":{"expected":1,"actual":0},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 23:06:46 [INFO]: Token:
+2025-07-08 23:06:48 [ERROR]: GET /transactions/event/2/statistics: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Your raw query had an incorrect number of parameters. Expected: `1`, actual: `0`. {"code":"P1016","meta":{"expected":1,"actual":0},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 23:06:50 [INFO]: Token:
+2025-07-08 23:06:52 [ERROR]: GET /transactions/event/2/statistics: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Your raw query had an incorrect number of parameters. Expected: `1`, actual: `0`. {"code":"P1016","meta":{"expected":1,"actual":0},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 23:12:42 [INFO]: Token:
+2025-07-08 23:12:46 [ERROR]: GET /transactions/event/2/statistics: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42703`. Message: `column "month" does not exist` {"code":"P2010","meta":{"code":"42703","message":"column \"month\" does not exist"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 23:16:57 [INFO]: Token:
+2025-07-08 23:17:02 [ERROR]: GET /transactions/event/2/statistics: Do not know how to serialize a BigInt {}
+2025-07-08 23:17:41 [INFO]: Token:
+2025-07-08 23:17:44 [ERROR]: GET /transactions/event/2/statistics: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42703`. Message: `column "month" does not exist` {"code":"P2010","meta":{"code":"42703","message":"column \"month\" does not exist"},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-08 23:21:59 [INFO]: Token:
+2025-07-08 23:22:03 [ERROR]: GET /transactions/event/2/statistics: Do not know how to serialize a BigInt {}
+2025-07-08 23:26:59 [INFO]: Token:
+2025-07-08 23:27:04 [ERROR]: GET /transactions/event/2/statistics: Do not know how to serialize a BigInt {}
+2025-07-08 23:32:52 [INFO]: Token:
+>>>>>>> statistic_update
+2025-07-09 09:33:03 [INFO]: Token:
+2025-07-09 10:03:10 [ERROR]: GET /transactions/3: Authorization header missing or invalid {"statusCode":401,"success":false,"message":"Authorization header missing or invalid"}
+2025-07-09 10:03:28 [INFO]: Token:
+2025-07-09 10:03:29 [ERROR]: GET /transactions/3: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/transaction.repositori.ts:77:31
+
+  74 }
+  75 
+  76 export const findTransactionById = async (id: number) => {
+→ 77     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-09 10:03:30 [INFO]: Token:
+2025-07-09 10:03:30 [ERROR]: GET /transactions/3: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/transaction.repositori.ts:77:31
+
+  74 }
+  75 
+  76 export const findTransactionById = async (id: number) => {
+→ 77     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-09 10:05:56 [INFO]: Token:
+2025-07-09 10:05:56 [ERROR]: GET /transactions/3: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/transaction.repositori.ts:77:31
+
+  74 }
+  75 
+  76 export const findTransactionById = async (id: number) => {
+→ 77     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-09 10:06:37 [INFO]: Token:
+2025-07-09 10:08:44 [INFO]: Token:
+2025-07-09 10:09:03 [INFO]: Token:
+2025-07-09 10:09:14 [INFO]: Token:
+2025-07-09 10:10:18 [INFO]: Token:
+2025-07-09 10:14:46 [INFO]: Token:
+2025-07-09 10:15:36 [INFO]: Token:
+2025-07-09 10:15:43 [INFO]: Token:
+2025-07-09 10:18:43 [INFO]: Token:
+2025-07-09 10:32:44 [INFO]: Token:
+2025-07-09 10:34:43 [INFO]: Token:
+2025-07-09 10:36:11 [INFO]: Token:
+2025-07-09 10:37:16 [INFO]: Token:
+2025-07-09 10:37:41 [INFO]: Token:
+2025-07-09 10:54:17 [INFO]: Token:
+2025-07-09 10:56:57 [INFO]: Token:
+2025-07-09 10:57:14 [INFO]: Token:

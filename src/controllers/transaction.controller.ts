@@ -6,10 +6,14 @@ import {
 
     uploadPaymentProofService,
     confirmTransactionService,
-    getEventStatisticService
+    getEventStatisticService,
+    expireTransactionIfNeeded,
+
+    getRemainingTime
 
 } from "../services/transaction.service";
 import AppError from "../errors/AppError";
+import { findTransactionById } from "../repositories/transaction.repositori";
 
 
 class TransactionController {
@@ -49,10 +53,18 @@ class TransactionController {
                 userPoints,
             });
 
+            const remainingTime =
+                transaction.status === "WAITING_PAYMENT" && transaction.createdAt
+                ? getRemainingTime(transaction.createdAt)
+                :0;
+
             res.status(201).send({
                 success: true,
                 message: "Transaction created successfully",
-                data: transaction,
+                data: {
+                    ...transaction,
+                    remainingTime,
+                }
             });
         } catch (error) {
             next(error);
@@ -69,6 +81,7 @@ class TransactionController {
 
             const transactions = await getUserTransactionsService(userId);
 
+
             res.status(200).send({
                 success: true,
                 message: "Obtained user transaction data",
@@ -78,6 +91,47 @@ class TransactionController {
             next(error);
         }
     }
+
+    public async getTransactionDetail(
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try{
+            const {id: userId} = res.locals.descript;
+            const transactionId = Number(req.params.transactionId);
+
+            const trx = await findTransactionById(transactionId);
+
+            if(!trx) {
+                throw new AppError("Transaction not found", 404);
+            }
+
+            if (trx.user.id !== userId) {
+                throw new AppError("Unathorized to view this transaction", 403);
+            }
+
+            const {expired, remainingTime } = await expireTransactionIfNeeded(
+                trx.id,
+                trx.createdAt!,
+                trx.status
+            );
+
+            const currentStatus = expired ? "EXPIRED" : trx.status;
+
+            res.status(200).send({
+                success: true,
+                message: "Transaction detail retrieved",
+                data: {
+                    ... trx,
+                    status: currentStatus,
+                    remainingTime,
+                },
+            });
+        } catch (error) {
+            next(error);
+        };
+    };
 
 
     public async uploadPaymentProof(
@@ -132,16 +186,19 @@ class TransactionController {
         next: NextFunction,
     ): Promise<void> {
         try {
-            const eventId = Number(req.params.eventId);
-            const type = req.query.type as "day" | "month" | "year" | undefined;
+            const { id: userId } = res.locals.descript;
 
-            const data = await getEventStatisticService(eventId, type);
+            if (!userId) {
+                throw new AppError("Unauthorized: No user ID found", 401);
+            }
+
+            const transactions = await getUserTransactionsService(userId);
 
             res.status(200).send({
                 success: true,
                 message: "Event statistics retrieved",
-                data,
-            });
+                data: transactions,
+            })
         } catch (error) {
             next(error);
         }

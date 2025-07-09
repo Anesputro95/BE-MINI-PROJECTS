@@ -1,7 +1,15 @@
 import { prisma } from "../config/prisma";
 import AppError from "../errors/AppError";
 import { findEventById } from "../repositories/event.repository";
-import { createTransaction, getUserTransactions, TransactionsStatus, getTransactionEventById, findTransactionById, updateTransactionById, getTransactionStatsByDay, getTransactionStatsByMonth, getTransactionStatsByYear } from "../repositories/transaction.repositori";
+import { 
+    createTransaction, 
+    getUserTransactions, 
+    TransactionsStatus, 
+    getTransactionEventById, 
+    findTransactionById, 
+    updateTransactionById, 
+    getTransactionStatsByInterval
+} from "../repositories/transaction.repositori";
 
 
 
@@ -67,7 +75,31 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
 };
 
 export const getUserTransactionsService = async (userId: number) => {
-    return getUserTransactions(userId);
+    const transactions = await getUserTransactions(userId);
+
+    const updated = await Promise.all(
+        transactions.map(async (trx) => {
+            if (trx.createdAt && trx.status === "WAITING_PAYMENT") {
+                const { expired, remainingTime} = await expireTransactionIfNeeded(
+                    trx.id,
+                    trx.createdAt,
+                    trx.status
+                );
+                return {
+                    ...trx,
+                    status: expired ? "EXPIRED" : trx. status,
+                    remainingTime,
+                };
+            }
+
+            return {
+                ...trx,
+                remainingTime: 0,
+            };
+        })
+    );
+
+    return updated;
 };
 
 export const transactionService = async (eventId: number) => {
@@ -118,6 +150,17 @@ export const uploadPaymentProofService = async (
     });
 };
 
+export const expireTransactionIfNeeded = async (transactionId: number, createdAt: Date, status: string) => {
+    const remainingTime = getRemainingTime(createdAt);
+
+    if (status === "WAITING_PAYMENT" && remainingTime <= 0) {
+        await updateTransactionById(transactionId, "EXPIRED");
+        return {expired: true};
+    }
+
+    return {expired: false, remainingTime};
+};
+
 export const confirmTransactionService = async (
     transactionId: number,
     action: "ACCEPT" | "REJECT",
@@ -153,7 +196,7 @@ export const confirmTransactionService = async (
         await prisma.coupon.update({
             where: { id: trx.usedCouponsId },
             data: { isUsed: false }
-        })
+        });
     }
 
     return prisma.transaction.update({
@@ -166,22 +209,19 @@ export const confirmTransactionService = async (
 
 export const getEventStatisticService = async (
     eventId: number,
-    type?: "day" | "month" | "year"
+    interval: "day" | "month" | "year"
 ) => {
-    if (type === "day") {
-        return { byDay: await getTransactionStatsByDay(eventId) }
+    const allowedIntervals = ["day", "month", "year"];
+    if (!allowedIntervals.includes(interval)) {
+        throw new Error("Invalid interval");
     }
-    if (type === "month") {
-        return { byMonth: await getTransactionStatsByMonth(eventId) }
-    }
-    if (type === "year") {
-        return { byYear: await getTransactionStatsByYear(eventId) }
-    }
+    
+    return getTransactionStatsByInterval(eventId, interval);
+ };
 
-    return {
-        byDay: await getTransactionStatsByDay(eventId),
-        byMonth: await getTransactionStatsByMonth(eventId),
-        byYear: await getTransactionStatsByYear(eventId),
-    };
-}
+ export const getRemainingTime = (createdAt: Date) => {
+    const deadline = new Date(createdAt.getTime() + 15 * 60 * 1000); // 15 menit biar ga kelamaan buat jastip
+    const remainingMs = deadline.getTime() - Date.now();
 
+    return remainingMs > 0 ? remainingMs : 0;
+};

@@ -44,6 +44,12 @@ class TransactionRouter {
             this.transactionController.uploadPaymentProof
         );
 
+        this.router.get(
+            "/:transactionId",
+            verifyToken,
+            this.transactionController.getTransactionDetail
+        )
+
         this.router.patch(
             "/transactions/:transactionId/confirm",
             verifyToken,
@@ -55,7 +61,7 @@ class TransactionRouter {
             verifyToken,
             isOrganizer,
             this.transactionController.getEventStatistic
-        )
+        );
 
     }
 
