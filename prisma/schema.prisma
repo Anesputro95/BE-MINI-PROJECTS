@@ -92,7 +92,9 @@ model Voucher {
   id                Int           @id @default(autoincrement())
   eventId           Int
   code              String        @unique
-  discountAmount    Int
+  discountAmount    Int?
+  discountPercent   Float?
+  maxDiscount       Int?
   startDate         DateTime
   endDate           DateTime
   maxUsage          Int
@@ -100,6 +102,10 @@ model Voucher {
   createdAt         DateTime      @default(now())
 
   event             Event         @relation(fields: [eventId], references: [id])
+
+  transaction       Transaction[]
+
+  @@map("voucher")
 }
 
 model Event {
@@ -149,11 +155,13 @@ model Transaction {
   restored               Boolean           @default(false)
   userPoints             Int?
   usedCouponsId          Int?
+  voucherId              Int?
   createdAt              DateTime          @default(now())
 
-  event  Event   @relation(fields: [eventId], references: [id])
-  coupon Coupon? @relation(fields: [usedCouponsId], references: [id])
-  user   Account @relation(fields: [userId], references: [id])
+  event   Event    @relation(fields: [eventId], references: [id])
+  coupon  Coupon?  @relation(fields: [usedCouponsId], references: [id])
+  voucher Voucher? @relation(fields: [voucherId], references: [id]) 
+  user    Account  @relation(fields: [userId], references: [id])
 
   @@map("transaction")
 }

@@ -3,7 +3,9 @@ import { prisma } from "../config/prisma";
 export const createVoucher = async (data: {
     eventId: number;
     code: string;
-    discountAmount: number;
+    discountAmount?: number;
+    discountPercent?: number;
+    maxDiscount?: number;
     startDate: Date;
     endDate: Date;
     maxUsage: number;

@@ -1901,3 +1901,50 @@ Invalid value for argument `mode`. Expected QueryMode. {"name":"PrismaClientVali
 2025-07-09 20:38:11 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
 2025-07-09 20:45:58 [ERROR]: POST /auth/login: Email not verify, please verify first {"statusCode":401,"success":false,"message":"Email not verify, please verify first"}
 2025-07-09 20:46:35 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
+2025-07-09 18:41:32 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
+2025-07-09 18:49:04 [INFO]: Token:
+2025-07-09 18:49:04 [ERROR]: POST /vouchers: Cannot destructure property 'eventId' of 'req.body' as it is undefined. {}
+2025-07-09 18:55:24 [INFO]: Token:
+2025-07-10 05:11:20 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 93 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{ \n  \"username\": \"wevocaf137\",\n  \"email\": \"wevocaf137@fuasha.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
+2025-07-10 05:11:55 [INFO]: Token:
+2025-07-10 05:12:58 [INFO]: Token:
+2025-07-10 05:14:54 [INFO]: Token:
+2025-07-10 05:15:00 [ERROR]: POST /vouchers: 
+Invalid `prisma.voucher.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/voucher.repository.ts:13:27
+
+  10     endDate: Date;
+  11     maxUsage: number;
+  12 }) => {
+→ 13     return prisma.voucher.create(
+Unique constraint failed on the fields: (`code`) {"code":"P2002","meta":{"modelName":"Voucher","target":["code"]},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-10 05:15:16 [INFO]: Token:
+2025-07-10 05:15:28 [INFO]: Token:
+2025-07-10 05:15:31 [ERROR]: POST /vouchers: 
+Invalid `prisma.voucher.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/voucher.repository.ts:13:27
+
+  10     endDate: Date;
+  11     maxUsage: number;
+  12 }) => {
+→ 13     return prisma.voucher.create(
+Unique constraint failed on the fields: (`code`) {"code":"P2002","meta":{"modelName":"Voucher","target":["code"]},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-10 05:16:16 [INFO]: Token:
+2025-07-10 05:32:17 [INFO]: Token:
+2025-07-10 05:32:22 [ERROR]: POST /transactions/create-transaction: Invalid user or points data {"statusCode":500,"success":false,"message":"Invalid user or points data"}
+2025-07-10 05:33:03 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 93 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{ \n  \"username\": \"terid63869\",\n  \"email\": \"terid63869@fuasha.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
+2025-07-10 05:33:22 [INFO]: Token:
+2025-07-10 05:33:26 [ERROR]: POST /transactions/create-transaction: Invalid user or points data {"statusCode":500,"success":false,"message":"Invalid user or points data"}
+2025-07-10 05:35:16 [INFO]: Token:
+2025-07-10 05:42:42 [INFO]: Token:
+2025-07-10 05:43:43 [INFO]: Token:
+2025-07-10 05:45:12 [INFO]: Token:
+2025-07-10 05:50:52 [INFO]: Token:
+2025-07-10 05:51:05 [INFO]: Token:
+2025-07-10 05:53:01 [INFO]: Token:
+2025-07-10 05:53:17 [INFO]: Token:
+2025-07-10 05:54:12 [INFO]: Token:
+2025-07-10 05:54:29 [INFO]: Token:
+2025-07-10 05:54:36 [ERROR]: POST /transactions/create-transaction: Invalid user or points data {"statusCode":500,"success":false,"message":"Invalid user or points data"}
+2025-07-10 06:36:52 [INFO]: Token:
+2025-07-10 06:37:10 [INFO]: Token:

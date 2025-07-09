@@ -40,8 +40,13 @@ class TransactionController {
         next: NextFunction,
     ): Promise<void> {
         try {
+
+            console.log("=== Raw Request Body ===", req.body);
+
             const { id: userId } = res.locals.descript;
-            const { eventId, ticketId, ticketQuantity, usedCouponsId, userPoints } = req.body;
+            const { eventId, ticketId, ticketQuantity, usedCouponsId, userPoints, voucherCode } = req.body;
+
+            console.log("Parsed voucherCode:", voucherCode);
 
             const transaction = await createTransactionService({
                 userId,
@@ -50,6 +55,7 @@ class TransactionController {
                 ticketQuantity,
                 usedCouponsId,
                 userPoints,
+                voucherCode,
             });
 
             const remainingTime =

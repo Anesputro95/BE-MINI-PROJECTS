@@ -10,7 +10,9 @@ import {
 export const createVoucherService = async (input: {
     eventId: number;
     code: string;
-    discountAmount: number;
+    discountAmount?: number;
+    discountPercent?: number;
+    maxDiscount?: number;
     startDate: Date;
     endDate: Date;
     maxUsage: number;
@@ -26,10 +28,17 @@ export const createVoucherService = async (input: {
         throw new AppError("Unauthorized: not your event", 403);
     }
 
+    if (
+        input.discountAmount !== null &&
+        input.discountPercent !== null
+    )
+
     return createVoucher({
         eventId: input.eventId,
         code: input.code,
         discountAmount: input.discountAmount,
+        discountPercent: input.discountPercent,
+        maxDiscount: input.maxDiscount,
         startDate: input.startDate,
         endDate: input.endDate,
         maxUsage: input.maxUsage,
@@ -54,4 +63,13 @@ export const validateVoucherService = async (code: string) => {
     }
 
     return voucher;
+};
+
+export const incrementVoucherUsage = async (voucherId: number) => {
+    await prisma.voucher.update({
+        where: {id: voucherId},
+        data: {
+            usageCount: {increment: 1},
+        },
+    });
 };

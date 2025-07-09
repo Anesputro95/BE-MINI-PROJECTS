@@ -30,6 +30,7 @@ interface CreateTransactionDTO {
     paymentProofUrl?: string;
     usedCouponsId?: number;
     userPoints?: number;
+    voucherId?: number;
 }
 
 export const createTransaction = async (data: CreateTransactionDTO) => {
@@ -48,6 +49,12 @@ export const getUserTransactions = async (userId: number) => {
                     title: true,
                     thumbnail: true,
                 },
+            },
+            voucher: {
+                select: {
+                    code: true,
+                    discountAmount: true
+                }
             },
         },
     });

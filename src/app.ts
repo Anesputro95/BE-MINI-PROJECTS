@@ -9,6 +9,7 @@ import logger from './utils/logger';
 import TransactionRouter from './routers/transaction.router';
 import EventRouter from './routers/event.router';
 import VoucherRouter from './routers/voucher.router';
+// import UserPointsRouter from './routers/userPoints.router';
 
 const PORT = process.env.PORT || "8080";
 
@@ -35,12 +36,14 @@ class App {
         const eventRouter = new EventRouter();
         const transactionRouter = new TransactionRouter();
         const voucherRouter = new VoucherRouter();
+        // const userPointsRouter = UserPointsRouter;
 
         this.app?.use("/auth", authRouter.getRouter());
         this.app?.use('/api', searchRouter);
         this.app?.use('/event', eventRouter.getRouter());
         this.app?.use('/transactions', transactionRouter.getRouter());
         this.app?.use("/vouchers", voucherRouter.getRouter());
+        // this.app?.use("/user-points", userPointsRouter);
 
         this.app?.get('/', (req: Request, res: Response) => {
             res.status(200).json("<h1>Welcome to Mini Project</h1>")
