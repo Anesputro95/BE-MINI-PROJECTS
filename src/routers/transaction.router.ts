@@ -51,6 +51,12 @@ class TransactionRouter {
         )
 
         this.router.patch(
+            "/transactions/:transactionId/confirm",
+            verifyToken,
+            this.transactionController.getTransactionDetail
+        )
+
+        this.router.patch(
             "/:transactionId/confirm",
             verifyToken,
             isOrganizer,
@@ -62,7 +68,7 @@ class TransactionRouter {
             verifyToken,
             isOrganizer,
             this.transactionController.getEventStatistic
-        )
+        );
 
     }
 

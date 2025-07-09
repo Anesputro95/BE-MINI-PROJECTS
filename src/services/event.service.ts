@@ -11,6 +11,7 @@ interface CreateEventInput {
     description: string;
     thumbnail: string;
     category: EventCategory;
+    location: string;
     salesStart?: Date;
     salesEnd?: Date;
     tickets: {
@@ -22,6 +23,62 @@ interface CreateEventInput {
 
 export interface UpdateEventDTO extends Partial<CreateEventInput> {
     id: number;
+}
+
+export const getPublicEventsService = async (filters: {
+    category?: string;
+    location?: string;
+}) => {
+    const whereClause: any = {};
+
+    if (filters.category) {
+        whereClause.category = filters.category;
+    }
+
+    if (filters.location) {
+        whereClause.location = {contains: filters.location, mode: "insensitive"};
+    }
+
+    return prisma.event.findMany({
+        where: whereClause,
+        orderBy: {createdAt: "desc"},
+        select: {
+            id: true,
+            title: true,
+            description: true,
+            thumbnail: true,
+            category: true,
+            location: true,
+            createdAt: true,
+        },
+    });
+};
+
+export const getEventDetailService = async (eventId: number) => {
+    const event = await prisma.event.findUnique({
+        where: {id: eventId},
+        include: {
+            tickets: true,
+            voucher: {
+                where: {
+                    endDate: {gte: new Date()},
+                },
+            },
+            organizer: {
+                select: {
+                    id: true,
+                    username: true,
+                    email: true,
+                }
+            }
+        },
+    });
+
+    if(!event) {
+        throw new AppError("Event not found", 404);
+    }
+
+    return event;
 }
 
 export const getEventsService = async (organizerId: number) => {

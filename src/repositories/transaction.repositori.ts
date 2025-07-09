@@ -140,4 +140,3 @@ export const getTransactionStatsByInterval = async (eventId: number, interval: s
         ORDER BY period ASC
         `;
 };
-

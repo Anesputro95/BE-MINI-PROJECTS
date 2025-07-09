@@ -252,11 +252,11 @@ export const getEventStatisticService = async (
     if (!allowedIntervals.includes(interval)) {
         throw new Error("Invalid interval");
     }
-
+    
     return getTransactionStatsByInterval(eventId, interval);
-};
+ };
 
-export const getRemainingTime = (createdAt: Date) => {
+ export const getRemainingTime = (createdAt: Date) => {
     const deadline = new Date(createdAt.getTime() + 15 * 60 * 1000); // 15 menit biar ga kelamaan buat jastip
     const remainingMs = deadline.getTime() - Date.now();
 
