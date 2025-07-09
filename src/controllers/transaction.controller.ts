@@ -5,7 +5,6 @@ import {
     getUserTransactionsService,
 
     uploadPaymentProofService,
-    confirmTransactionService,
     getEventStatisticService,
     expireTransactionIfNeeded,
 
@@ -168,7 +167,7 @@ class TransactionController {
             const transactionId = Number(req.params.transactionId);
             const { action } = req.body;
 
-            const trx = await confirmTransactionService(transactionId, action, organizerId);
+            const trx = await transactionService(transactionId);
 
             res.status(200).send({
                 success: true,

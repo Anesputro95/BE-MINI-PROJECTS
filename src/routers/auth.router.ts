@@ -19,7 +19,7 @@ class AuthAccountRouter {
         this.router.post("/regis", regisValidation, this.accountController.register);
         this.router.post("/login", loginValidation, this.accountController.login);
 
-        this.router.get("/verify/:token", this.accountController.verifyAccount);
+        this.router.get("/verify", this.accountController.verifyAccount);
         
         this.router.patch(
             "/profile-img/",

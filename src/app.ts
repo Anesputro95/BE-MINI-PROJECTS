@@ -6,7 +6,6 @@ import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import AuthAccountRouter from './routers/auth.router';
 import logger from './utils/logger';
-import EventDashboradRouter from './routers/event.router';
 import TransactionRouter from './routers/transaction.router';
 import EventRouter from './routers/event.router';
 import VoucherRouter from './routers/voucher.router';
@@ -24,7 +23,10 @@ class App {
     }
 
     private configure(): void {
-        this.app?.use(cors());
+        this.app?.use(cors({
+            origin: "http://localhost:3000",
+            credentials: true
+        }));
         this.app?.use(express.json());
     }
 
@@ -41,7 +43,7 @@ class App {
         this.app?.use("/vouchers", voucherRouter.getRouter());
 
         this.app?.get('/', (req: Request, res: Response) => {
-            res.status(200).send("<h1>Welcome to Mini Project</h1>")
+            res.status(200).json("<h1>Welcome to Mini Project</h1>")
         });
     }
 
@@ -50,7 +52,10 @@ class App {
             logger.error(
                 `${req.method} ${req.path}: ${error.message} ${JSON.stringify(error)}`
             );
-            res.status(error.rc || 500).send(error)
+            res.status(error.statusCode || 500).json({
+                success: false,
+                error: error.message || "Internal Server Error"
+            });
         });
     }
 

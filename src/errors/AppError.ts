@@ -7,6 +7,8 @@ class AppError {
         this.statusCode = statusCode;
         this.success = false;
         this.message = message;
+
+        Object.setPrototypeOf(this, AppError.prototype);
     }
 }
 

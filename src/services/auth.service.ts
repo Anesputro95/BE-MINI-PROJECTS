@@ -87,7 +87,7 @@ export const regisService = async (data: any) => {
 
   await createVerificationToken(newAccount.id, token, expiresAt);
 
-  const verifyLink = `${process.env.BASE_URL}/auth/verify/${token}`;
+  const verifyLink = `http://localhost:3000/verify-account/${token}`;
 
   console.log("📧 Verification link sent:", verifyLink);
 
@@ -249,12 +249,12 @@ export const resetPasswordRequestService = async (email: string) => {
   const token = crypto.randomBytes(24).toString("hex");
   const expiresAt = new Date(Date.now() + 1000 * 60 * 30); // 30 menit
 
-  const tokenData = await findResetToken(token); 
+  const tokenData = await findResetToken(token);
 
   await deleteAllResetTokensByEmail(email);
   await createPasswordResetToken(email, token, expiresAt);
 
-  const resetLink = `${process.env.BASE_URL}/reset-password/${token}`;
+  const resetLink = `http://localhost:3000/reset-password/${token}`;
 
   await transport.sendMail({
     to: email,
@@ -295,10 +295,8 @@ export const resetPasswordRequestService = async (email: string) => {
               <p>Click the button below to create a new password:</p>
 
               <a href="${resetLink}" class="btn">Reset My Password</a>
-
-              <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
               <br>
-              <a href="${resetLink}">Click Here</a>
+              <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
 
               <div class="footer">
                 <p>This email was sent by Event App. If you did not request a password reset, please ignore this message or contact support.</p>

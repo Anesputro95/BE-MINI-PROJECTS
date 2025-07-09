@@ -15,7 +15,7 @@ class AuthAccountController {
     ): Promise<void> {
         try {
             await regisService(req.body)
-            res.status(201).send({
+            res.status(201).json({
                 success: true,
                 message: "Account created successfully. Please verify your email.",
             })
@@ -53,14 +53,19 @@ class AuthAccountController {
         next: NextFunction
     ): Promise<void> {
         try {
-            console.log("✅ verifyAccount CALLED", req.params);
-            const { token } = req.params;
+            const authHeader = req.headers.authorization;
 
-            if (!token) {
-                throw new AppError("Token is missing", 404);
+            if (!authHeader || !authHeader.startsWith("Bearer ")) {
+                throw new AppError("Authorization token is missing or invalid", 401)
             }
 
-            await verifyEmailService(token);
+            const token = authHeader.split(" ")[1];
+
+            if (!token) {
+                throw new AppError("Token is Missing", 404)
+            }
+
+            await verifyEmailService(token)
 
             res.status(200).json({
                 success: true,
@@ -117,12 +122,15 @@ class AuthAccountController {
     ): Promise<void> {
         try {
             const { email } = req.body;
-            const token = await resetPasswordRequestService(email);
+            if (!email) {
+                throw new AppError("Email is required", 400)
+            }
 
-            res.status(200).send({
+            await resetPasswordRequestService(email);
+
+            res.status(200).json({
                 success: true,
-                message: "If your email is registered, a reset link has been sent.",
-                token: token || null,
+                message: "Reset password link sent to email.",
             })
         } catch (error) {
             next(error)

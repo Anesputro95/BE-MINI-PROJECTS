@@ -581,3 +581,13 @@ Invalid `prisma.event.findMany()` invocation in
      })
 
 Invalid value for argument `mode`. Expected QueryMode. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-09 19:55:04 [ERROR]: GET /auth/verify/143b136dc179e837395ffb1b729a9dc089b8565aaa6e8b1e: Invalid or expired token {"statusCode":404,"success":false,"message":"Invalid or expired token"}
+2025-07-09 20:20:19 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
+2025-07-09 20:31:23 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
+2025-07-09 20:32:09 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
+2025-07-09 20:32:16 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
+2025-07-09 20:33:10 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
+2025-07-09 20:34:40 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
+2025-07-09 20:38:11 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
+2025-07-09 20:45:58 [ERROR]: POST /auth/login: Email not verify, please verify first {"statusCode":401,"success":false,"message":"Email not verify, please verify first"}
+2025-07-09 20:46:35 [ERROR]: POST /auth/regis: User already exist {"statusCode":400,"success":false,"message":"User already exist"}
