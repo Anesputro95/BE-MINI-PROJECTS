@@ -1,15 +1,8 @@
+import { transport } from "../config/nodemailer"
 import { prisma } from "../config/prisma";
 import AppError from "../errors/AppError";
 import { findEventById } from "../repositories/event.repository";
-import { 
-    createTransaction, 
-    getUserTransactions, 
-    TransactionsStatus, 
-    getTransactionEventById, 
-    findTransactionById, 
-    updateTransactionById, 
-    getTransactionStatsByInterval
-} from "../repositories/transaction.repositori";
+import { createTransaction, getUserTransactions, TransactionsStatus, getTransactionEventById, findTransactionById, updateTransactionById, getTransactionStatsByDay, getTransactionStatsByMonth, getTransactionStatsByYear } from "../repositories/transaction.repositori";
 
 
 
@@ -166,10 +159,7 @@ export const confirmTransactionService = async (
     action: "ACCEPT" | "REJECT",
     organizerId: number
 ) => {
-    const trx = await prisma.transaction.findUnique({
-        where: { id: transactionId },
-        include: { event: true },
-    });
+    const trx = await findTransactionWithUserAndEvent(transactionId)
 
     if (!trx) {
         throw new AppError("Transaction not found", 404);
@@ -184,19 +174,23 @@ export const confirmTransactionService = async (
     }
 
     if (action === "REJECT") {
-        await prisma.ticket.update({
-            where: { id: trx.ticketId },
-            data: {
-                sold: { increment: trx.ticketQuantity }
-            }
-        })
+        await restoreAllResources(trx);
+
+        await transport.sendMail({
+            to: trx.user.email,
+            subject: "Your transaction was rejected",
+            html: `
+                    <p>Hi ${trx.user.username},</p>
+                    <p>Unfortunately, your transaction for <b>${trx.event.title}</b> was <span style="color:red">rejected</span>.</p>
+                `,
+        });
     }
 
     if (trx.usedCouponsId) {
         await prisma.coupon.update({
             where: { id: trx.usedCouponsId },
             data: { isUsed: false }
-        });
+        })
     }
 
     return prisma.transaction.update({

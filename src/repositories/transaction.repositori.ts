@@ -98,7 +98,6 @@ export const findTransactionById = async (id: number) => {
     });
 };
 
-
 export const updateTransactionById = async (
     id: number,
     status: "WAITING_PAYMENT" | "WAITING_CONFIRMATION" | "DONE" | "REJECTED" | "EXPIRED" | "CANCELED") => {
@@ -107,6 +106,16 @@ export const updateTransactionById = async (
         data: { status },
     })
 };
+
+export const findTransactionWithUserAndEvent = async (id: number) => {
+    return prisma.transaction.findUnique({
+        where: { id },
+        include: {
+            user: true,
+            event: true
+        }
+    })
+}
 
 export const getTransactionStatsByInterval = async (eventId: number, interval: string) => {
     const allowed = ["day", "month", "year"];
