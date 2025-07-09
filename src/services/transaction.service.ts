@@ -2,8 +2,17 @@ import { transport } from "../config/nodemailer"
 import { prisma } from "../config/prisma";
 import AppError from "../errors/AppError";
 import { findEventById } from "../repositories/event.repository";
-import { createTransaction, getUserTransactions, TransactionsStatus, getTransactionEventById, findTransactionById, updateTransactionById, getTransactionStatsByInterval, findTransactionWithUserAndEvent } from "../repositories/transaction.repositori";
-import { restoreAllResources } from "../utils/restoreAllResources";
+
+import { 
+    createTransaction, 
+    getUserTransactions, 
+    TransactionsStatus, 
+    getTransactionEventById, 
+    findTransactionById, 
+    updateTransactionById, 
+    getTransactionStatsByInterval
+} from "../repositories/transaction.repositori";
+
 
 
 
@@ -103,14 +112,18 @@ export const getUserTransactionsService = async (userId: number) => {
     const updated = await Promise.all(
         transactions.map(async (trx) => {
             if (trx.createdAt && trx.status === "WAITING_PAYMENT") {
-                const { expired, remainingTime } = await expireTransactionIfNeeded(
+
+                const { expired, remainingTime} = await expireTransactionIfNeeded(
+
                     trx.id,
                     trx.createdAt,
                     trx.status
                 );
                 return {
                     ...trx,
-                    status: expired ? "EXPIRED" : trx.status,
+
+                    status: expired ? "EXPIRED" : trx. status,
+
                     remainingTime,
                 };
             }
@@ -178,10 +191,11 @@ export const expireTransactionIfNeeded = async (transactionId: number, createdAt
 
     if (status === "WAITING_PAYMENT" && remainingTime <= 0) {
         await updateTransactionById(transactionId, "EXPIRED");
-        return { expired: true };
+
+        return {expired: true};
     }
 
-    return { expired: false, remainingTime };
+    return {expired: false, remainingTime};
 };
 
 export const confirmTransactionService = async (
@@ -216,22 +230,12 @@ export const confirmTransactionService = async (
         });
     }
 
-    if (action === "ACCEPT") {
-        // ✅ Jika transaksi diterima, tandai kupon sebagai digunakan
-        if (trx.usedCouponsId) {
-            await prisma.coupon.update({
-                where: { id: trx.usedCouponsId },
-                data: { isUsed: true },
-            });
-        }
 
-        await transport.sendMail({
-            to: trx.user.email,
-            subject: "Your transaction was accepted",
-            html: `
-                <p>Hi ${trx.user.username},</p>
-                <p>Congratulations! Your transaction for <b>${trx.event.title}</b> was <span style="color:green">accepted</span>.</p>
-            `,
+    if (trx.usedCouponsId) {
+        await prisma.coupon.update({
+            where: { id: trx.usedCouponsId },
+            data: { isUsed: false }
+
         });
     }
 

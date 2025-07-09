@@ -107,21 +107,13 @@ export const updateTransactionById = async (
     })
 };
 
-export const findTransactionWithUserAndEvent = async (id: number) => {
-    return prisma.transaction.findUnique({
-        where: { id },
-        include: {
-            user: true,
-            event: true
-        }
-    })
-}
 
 export const getTransactionStatsByInterval = async (eventId: number, interval: string) => {
     const allowed = ["day", "month", "year"];
     if (!allowed.includes(interval)) {
         throw new Error("Invalid interval")
     }
+
 
     type StatisticResult = {
         period: Date;
