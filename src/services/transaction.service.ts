@@ -75,7 +75,31 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
 };
 
 export const getUserTransactionsService = async (userId: number) => {
-    return getUserTransactions(userId);
+    const transactions = await getUserTransactions(userId);
+
+    const updated = await Promise.all(
+        transactions.map(async (trx) => {
+            if (trx.createdAt && trx.status === "WAITING_PAYMENT") {
+                const { expired, remainingTime} = await expireTransactionIfNeeded(
+                    trx.id,
+                    trx.createdAt,
+                    trx.status
+                );
+                return {
+                    ...trx,
+                    status: expired ? "EXPIRED" : trx. status,
+                    remainingTime,
+                };
+            }
+
+            return {
+                ...trx,
+                remainingTime: 0,
+            };
+        })
+    );
+
+    return updated;
 };
 
 export const transactionService = async (eventId: number) => {
@@ -124,6 +148,17 @@ export const uploadPaymentProofService = async (
             status: "WAITING_CONFIRMATION",
         },
     });
+};
+
+export const expireTransactionIfNeeded = async (transactionId: number, createdAt: Date, status: string) => {
+    const remainingTime = getRemainingTime(createdAt);
+
+    if (status === "WAITING_PAYMENT" && remainingTime <= 0) {
+        await updateTransactionById(transactionId, "EXPIRED");
+        return {expired: true};
+    }
+
+    return {expired: false, remainingTime};
 };
 
 export const confirmTransactionService = async (
@@ -183,3 +218,10 @@ export const getEventStatisticService = async (
     
     return getTransactionStatsByInterval(eventId, interval);
  };
+
+ export const getRemainingTime = (createdAt: Date) => {
+    const deadline = new Date(createdAt.getTime() + 15 * 60 * 1000); // 15 menit biar ga kelamaan buat jastip
+    const remainingMs = deadline.getTime() - Date.now();
+
+    return remainingMs > 0 ? remainingMs : 0;
+};

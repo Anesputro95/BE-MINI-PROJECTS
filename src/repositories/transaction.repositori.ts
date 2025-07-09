@@ -81,6 +81,7 @@ export const findTransactionById = async (id: number) => {
             ticketId: true,
             ticketQuantity: true,
             status: true,
+            createdAt: true,
             event: {
                 select: {
                     id: true,

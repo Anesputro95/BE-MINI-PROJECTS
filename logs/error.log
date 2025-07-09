@@ -326,3 +326,100 @@ Raw query failed. Code: `42703`. Message: `column "month" does not exist` {"code
 2025-07-08 23:22:03 [ERROR]: GET /transactions/event/2/statistics: Do not know how to serialize a BigInt {}
 2025-07-08 23:27:04 [ERROR]: GET /transactions/event/2/statistics: Do not know how to serialize a BigInt {}
 >>>>>>> statistic_update
+2025-07-09 10:03:10 [ERROR]: GET /transactions/3: Authorization header missing or invalid {"statusCode":401,"success":false,"message":"Authorization header missing or invalid"}
+2025-07-09 10:03:29 [ERROR]: GET /transactions/3: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/transaction.repositori.ts:77:31
+
+  74 }
+  75 
+  76 export const findTransactionById = async (id: number) => {
+→ 77     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-09 10:03:30 [ERROR]: GET /transactions/3: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/transaction.repositori.ts:77:31
+
+  74 }
+  75 
+  76 export const findTransactionById = async (id: number) => {
+→ 77     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-09 10:05:56 [ERROR]: GET /transactions/3: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/transaction.repositori.ts:77:31
+
+  74 }
+  75 
+  76 export const findTransactionById = async (id: number) => {
+→ 77     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
