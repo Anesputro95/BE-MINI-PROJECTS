@@ -88,6 +88,20 @@ model Coupon {
   @@map("coupon")
 }
 
+model Voucher {
+  id                Int           @id @default(autoincrement())
+  eventId           Int
+  code              String        @unique
+  discountAmount    Int
+  startDate         DateTime
+  endDate           DateTime
+  maxUsage          Int
+  usageCount        Int           @default(0)
+  createdAt         DateTime      @default(now())
+
+  event             Event         @relation(fields: [eventId], references: [id])
+}
+
 model Event {
   id          Int           @id @default(autoincrement())
   organizerId Int
@@ -98,10 +112,12 @@ model Event {
   category    EventCategory @default(DEFAULT)
   salesEnd    DateTime?
   salesStart  DateTime?
+  location    String
 
   organizer   Account       @relation("ORGANIZER", fields: [organizerId], references: [id])
   tickets     Ticket[]
   transaction Transaction[]
+  voucher     Voucher[]
 
   @@map("event")
 }

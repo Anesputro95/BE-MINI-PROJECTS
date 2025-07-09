@@ -24,6 +24,7 @@ interface CreateEventInput {
     description: string;
     thumbnail: string;
     category: EventCategory;
+    location: string;
     salesStart?: Date;
     salesEnd?: Date;
     tickets: {
@@ -38,7 +39,7 @@ export interface UpdateEventDTO extends Partial<CreateEventInput> {
 }
 
 export const createEvent = async (input: CreateEventInput) => {
-    const { organizerId, title, description, thumbnail, category, salesStart, salesEnd, tickets } = input;
+    const { organizerId, title, description, thumbnail, category, location, salesStart, salesEnd, tickets } = input;
 
     return prisma.event.create({
         data: {
@@ -47,6 +48,7 @@ export const createEvent = async (input: CreateEventInput) => {
             description,
             thumbnail,
             category,
+            location,
             salesStart,
             salesEnd,
             tickets: {

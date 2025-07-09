@@ -1,5 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import { createEventService, deleteEventService, getEventsService, getMyEventsService, updateEventService } from "../services/event.service";
+import { 
+    createEventService, 
+    deleteEventService, 
+    getEventsService, 
+    getMyEventsService, 
+    updateEventService,
+    getPublicEventsService,
+    getEventDetailService,
+} from "../services/event.service";
 
 class EventController {
     public async getEvents(
@@ -21,6 +29,7 @@ class EventController {
             next(error)
         }
     }
+    
 
     public async createEvents(
         req: Request,
@@ -29,7 +38,7 @@ class EventController {
     ): Promise<void> {
         try {
             const { id: organizerId } = res.locals.descript;
-            const { title, description, thumbnail, category, salesStart, salesEnd, tickets } = req.body;
+            const { title, description, thumbnail, category, salesStart, salesEnd, tickets, location } = req.body;
 
             const event = await createEventService({
                 organizerId,
@@ -39,6 +48,7 @@ class EventController {
                 category,
                 salesStart,
                 salesEnd,
+                location,
                 tickets,
             });
 
@@ -133,6 +143,50 @@ class EventController {
         } catch (error) {
             next(error)
         }
+    }
+
+    public async getPublicEvents (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> {
+        try{
+            const { category, location} = req.query;
+
+            const events = await getPublicEventsService({
+                category: category as string,
+                location: location as string,
+            });
+
+            res.status(200).send({
+                success: true,
+                message: "Public events retrieved",
+                data: events,
+            });
+        } catch (error) {
+            next (error);
+        }
+    }
+
+    public async getEventDetail (
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const id = parseInt(req.params.id);
+
+            const event = await getEventDetailService(id);
+
+            res.status(200).send({
+                success: true,
+                message: "Event detail fetched successfully",
+                data: event,
+            });
+        } catch (error) {
+            next (error);
+         }
+    
     }
 }
 

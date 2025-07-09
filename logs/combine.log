@@ -1719,3 +1719,175 @@ Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":
 2025-07-09 10:54:17 [INFO]: Token:
 2025-07-09 10:56:57 [INFO]: Token:
 2025-07-09 10:57:14 [INFO]: Token:
+2025-07-09 13:46:49 [INFO]: Token:
+2025-07-09 13:46:49 [ERROR]: POST /vouchers: Cannot destructure property 'eventId' of 'req.body' as it is undefined. {}
+2025-07-09 13:49:32 [INFO]: Token:
+2025-07-09 13:51:55 [INFO]: Token:
+2025-07-09 13:51:55 [ERROR]: POST /vouchers/1: Cannot destructure property 'eventId' of 'req.body' as it is undefined. {}
+2025-07-09 13:51:56 [INFO]: Token:
+2025-07-09 13:51:56 [ERROR]: POST /vouchers/1: Cannot destructure property 'eventId' of 'req.body' as it is undefined. {}
+2025-07-09 13:52:49 [INFO]: Token:
+2025-07-09 13:52:49 [ERROR]: POST /vouchers: Cannot destructure property 'eventId' of 'req.body' as it is undefined. {}
+2025-07-09 13:52:50 [INFO]: Token:
+2025-07-09 13:52:50 [ERROR]: POST /vouchers: Cannot destructure property 'eventId' of 'req.body' as it is undefined. {}
+2025-07-09 13:52:51 [INFO]: Token:
+2025-07-09 13:52:51 [ERROR]: POST /vouchers: Cannot destructure property 'eventId' of 'req.body' as it is undefined. {}
+2025-07-09 17:24:53 [ERROR]: POST /auth/login: Email not registered {"statusCode":404,"success":false,"message":"Email not registered"}
+2025-07-09 17:26:19 [INFO]: Token:
+2025-07-09 17:26:46 [INFO]: Token:
+2025-07-09 17:27:47 [INFO]: Token:
+2025-07-09 17:28:03 [INFO]: Token:
+2025-07-09 17:28:22 [ERROR]: POST /event/create-event: Unexpected non-whitespace character after JSON at position 521 (line 27 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{\n  \"title\": \"Maroon 5\",\n  \"description\": \"Live in Asia 2025\",\n  \"thumbnail\": \"https://example.com/maroon5-thumbnail.jpg\",\n  \"category\": \"CONCERT\",\n  \"location\": \"Bali\",\n  \"salesStart\": \"2025-07-15T10:00:00.000Z\",\n  \"salesEnd\": \"2025-07-30T22:00:00.000Z\",\n  \"tickets\": [\n    {\n      \"name\": \"Meet & Greet\",\n      \"price\": 5000000,\n      \"quota\": 50\n    },\n    {\n      \"name\": \"VIP\",\n      \"price\": 2500000,\n      \"quota\": 200\n    },\n    {\n      \"name\": \"Festival\",\n      \"price\": 1000000,\n      \"quota\": 1000\n    }\n  ]\n}\n🎸 Dummy 4\njson\nCopy code\n{\n  \"title\": \"Ed Sheeran\",\n  \"description\": \"Mathematics Tour\",\n  \"thumbnail\": \"https://example.com/edsheeran-thumbnail.jpg\",\n  \"category\": \"CONCERT\",\n  \"location\": \"Surabaya\",\n  \"salesStart\": \"2025-10-01T09:00:00.000Z\",\n  \"salesEnd\": \"2025-10-15T21:00:00.000Z\",\n  \"tickets\": [\n    {\n      \"name\": \"VIP Lounge\",\n      \"price\": 3000000,\n      \"quota\": 120\n    },\n    {\n      \"name\": \"Premium Seat\",\n      \"price\": 1800000,\n      \"quota\": 400\n    },\n    {\n      \"name\": \"Regular Seat\",\n      \"price\": 900000,\n      \"quota\": 700\n    }\n  ]\n}","type":"entity.parse.failed"}
+2025-07-09 17:28:39 [INFO]: Token:
+2025-07-09 17:29:17 [INFO]: Token:
+2025-07-09 17:29:35 [INFO]: Token:
+2025-07-09 17:39:19 [ERROR]: GET /event/public: 
+Invalid `prisma.event.findMany()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/services/event.service.ts:42:25
+
+  39     whereClause.location = {contains: filters.location, mode: "insensitive "};
+  40 }
+  41 
+→ 42 return prisma.event.findMany({
+       where: {
+         location: {
+           contains: "Kuala Lumpur",
+           mode: "insensitive "
+                 ~~~~~~~~~~~~~~
+         }
+       },
+       orderBy: {
+         createdAt: "desc"
+       },
+       select: {
+         id: true,
+         title: true,
+         description: true,
+         thumbnail: true,
+         category: true,
+         location: true,
+         createdAt: true
+       }
+     })
+
+Invalid value for argument `mode`. Expected QueryMode. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-09 17:39:40 [ERROR]: GET /event/public: 
+Invalid `prisma.event.findMany()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/services/event.service.ts:42:25
+
+  39     whereClause.location = {contains: filters.location, mode: "insensitive "};
+  40 }
+  41 
+→ 42 return prisma.event.findMany({
+       where: {
+         location: {
+           contains: "Jakarta",
+           mode: "insensitive "
+                 ~~~~~~~~~~~~~~
+         }
+       },
+       orderBy: {
+         createdAt: "desc"
+       },
+       select: {
+         id: true,
+         title: true,
+         description: true,
+         thumbnail: true,
+         category: true,
+         location: true,
+         createdAt: true
+       }
+     })
+
+Invalid value for argument `mode`. Expected QueryMode. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-09 17:39:41 [ERROR]: GET /event/public: 
+Invalid `prisma.event.findMany()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/services/event.service.ts:42:25
+
+  39     whereClause.location = {contains: filters.location, mode: "insensitive "};
+  40 }
+  41 
+→ 42 return prisma.event.findMany({
+       where: {
+         location: {
+           contains: "Jakarta",
+           mode: "insensitive "
+                 ~~~~~~~~~~~~~~
+         }
+       },
+       orderBy: {
+         createdAt: "desc"
+       },
+       select: {
+         id: true,
+         title: true,
+         description: true,
+         thumbnail: true,
+         category: true,
+         location: true,
+         createdAt: true
+       }
+     })
+
+Invalid value for argument `mode`. Expected QueryMode. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-09 17:39:42 [ERROR]: GET /event/public: 
+Invalid `prisma.event.findMany()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/services/event.service.ts:42:25
+
+  39     whereClause.location = {contains: filters.location, mode: "insensitive "};
+  40 }
+  41 
+→ 42 return prisma.event.findMany({
+       where: {
+         location: {
+           contains: "Jakarta",
+           mode: "insensitive "
+                 ~~~~~~~~~~~~~~
+         }
+       },
+       orderBy: {
+         createdAt: "desc"
+       },
+       select: {
+         id: true,
+         title: true,
+         description: true,
+         thumbnail: true,
+         category: true,
+         location: true,
+         createdAt: true
+       }
+     })
+
+Invalid value for argument `mode`. Expected QueryMode. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-09 17:39:42 [ERROR]: GET /event/public: 
+Invalid `prisma.event.findMany()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/services/event.service.ts:42:25
+
+  39     whereClause.location = {contains: filters.location, mode: "insensitive "};
+  40 }
+  41 
+→ 42 return prisma.event.findMany({
+       where: {
+         location: {
+           contains: "Jakarta",
+           mode: "insensitive "
+                 ~~~~~~~~~~~~~~
+         }
+       },
+       orderBy: {
+         createdAt: "desc"
+       },
+       select: {
+         id: true,
+         title: true,
+         description: true,
+         thumbnail: true,
+         category: true,
+         location: true,
+         createdAt: true
+       }
+     })
+
+Invalid value for argument `mode`. Expected QueryMode. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
