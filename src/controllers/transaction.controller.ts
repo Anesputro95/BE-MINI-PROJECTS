@@ -166,7 +166,7 @@ class TransactionController {
         try {
             const { id: organizerId } = res.locals.descript;
             const transactionId = Number(req.params.transactionId);
-            const { action } = req.body; // "ACCEPT" or "REJECT"
+            const { action } = req.body;
 
             const trx = await confirmTransactionService(transactionId, action, organizerId);
 

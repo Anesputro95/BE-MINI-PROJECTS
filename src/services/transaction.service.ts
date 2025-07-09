@@ -1,6 +1,8 @@
+import { transport } from "../config/nodemailer"
 import { prisma } from "../config/prisma";
 import AppError from "../errors/AppError";
 import { findEventById } from "../repositories/event.repository";
+
 import { 
     createTransaction, 
     getUserTransactions, 
@@ -10,6 +12,7 @@ import {
     updateTransactionById, 
     getTransactionStatsByInterval
 } from "../repositories/transaction.repositori";
+
 
 
 
@@ -27,12 +30,7 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
     const { userId, eventId, ticketId, ticketQuantity, usedCouponsId, userPoints } = input;
 
     const ticket = await prisma.ticket.findFirst({
-
-        where: {
-            id: ticketId,
-            eventId: eventId,
-
-        },
+        where: { id: ticketId, eventId },
     });
 
     if (!ticket) {
@@ -45,7 +43,39 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
 
     let totalPrice = ticket.price * ticketQuantity;
 
+    // Validasi kupon
+    if (usedCouponsId) {
+        const coupon = await prisma.coupon.findUnique({ where: { id: usedCouponsId } });
+
+        if (!coupon) {
+            throw new AppError("Coupon not found", 404);
+        }
+        if (coupon.isUsed) {
+            throw new AppError("Coupon has already been used", 400);
+        }
+        if (coupon.expiresAt < new Date()) {
+            throw new AppError("Coupon has expired", 400);
+        }
+
+        totalPrice -= coupon.discount;
+        if (totalPrice < 0) totalPrice = 0;
+    }
+
+    // Validasi dan kurangi poin
+    const user = await prisma.account.findUnique({
+        where: { id: userId },
+        select: { points: true },
+    });
+
+    if (!user) {
+        throw new AppError("User not found", 404);
+    }
+
     if (userPoints && userPoints > 0) {
+        if (!user || typeof user.points !== "number") {
+            throw new AppError("Invalid user or points data", 500);
+        }
+
         if (userPoints > totalPrice) {
             throw new AppError("User points exceed total price", 400);
         }
@@ -64,6 +94,7 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
         userPoints,
     });
 
+    // Update tiket terjual
     await prisma.ticket.update({
         where: { id: ticket.id },
         data: {
@@ -74,20 +105,25 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
     return transaction;
 };
 
+
 export const getUserTransactionsService = async (userId: number) => {
     const transactions = await getUserTransactions(userId);
 
     const updated = await Promise.all(
         transactions.map(async (trx) => {
             if (trx.createdAt && trx.status === "WAITING_PAYMENT") {
+
                 const { expired, remainingTime} = await expireTransactionIfNeeded(
+
                     trx.id,
                     trx.createdAt,
                     trx.status
                 );
                 return {
                     ...trx,
+
                     status: expired ? "EXPIRED" : trx. status,
+
                     remainingTime,
                 };
             }
@@ -155,6 +191,7 @@ export const expireTransactionIfNeeded = async (transactionId: number, createdAt
 
     if (status === "WAITING_PAYMENT" && remainingTime <= 0) {
         await updateTransactionById(transactionId, "EXPIRED");
+
         return {expired: true};
     }
 
@@ -166,10 +203,7 @@ export const confirmTransactionService = async (
     action: "ACCEPT" | "REJECT",
     organizerId: number
 ) => {
-    const trx = await prisma.transaction.findUnique({
-        where: { id: transactionId },
-        include: { event: true },
-    });
+    const trx = await findTransactionWithUserAndEvent(transactionId)
 
     if (!trx) {
         throw new AppError("Transaction not found", 404);
@@ -184,18 +218,24 @@ export const confirmTransactionService = async (
     }
 
     if (action === "REJECT") {
-        await prisma.ticket.update({
-            where: { id: trx.ticketId },
-            data: {
-                sold: { increment: trx.ticketQuantity }
-            }
-        })
+        await restoreAllResources(trx);
+
+        await transport.sendMail({
+            to: trx.user.email,
+            subject: "Your transaction was rejected",
+            html: `
+                <p>Hi ${trx.user.username},</p>
+                <p>Unfortunately, your transaction for <b>${trx.event.title}</b> was <span style="color:red">rejected</span>.</p>
+            `,
+        });
     }
+
 
     if (trx.usedCouponsId) {
         await prisma.coupon.update({
             where: { id: trx.usedCouponsId },
             data: { isUsed: false }
+
         });
     }
 
@@ -206,6 +246,7 @@ export const confirmTransactionService = async (
         },
     });
 };
+
 
 export const getEventStatisticService = async (
     eventId: number,

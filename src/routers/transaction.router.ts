@@ -39,7 +39,7 @@ class TransactionRouter {
 
 
         this.router.patch(
-            "/transactions/:transactionId/upload-payment-proof",
+            "/:transactionId/upload-payment-proof",
             verifyToken,
             this.transactionController.uploadPaymentProof
         );
@@ -53,6 +53,13 @@ class TransactionRouter {
         this.router.patch(
             "/transactions/:transactionId/confirm",
             verifyToken,
+            this.transactionController.getTransactionDetail
+        )
+
+        this.router.patch(
+            "/:transactionId/confirm",
+            verifyToken,
+            isOrganizer,
             this.transactionController.confirmTransaction
         );
 
