@@ -10,25 +10,25 @@ export const createVoucher = async (data: {
     endDate: Date;
     maxUsage: number;
 }) => {
-    return prisma.voucher.create({data});
+    return prisma.voucher.create({ data });
 };
 
 export const getVouchersByEvent = async (eventId: number) => {
     return prisma.voucher.findMany({
-        where: {eventId},
-        orderBy: {createdAt: "desc"}
+        where: { eventId },
+        orderBy: { createdAt: "desc" }
     });
 };
 
 export const findVoucherByCode = async (code: string) => {
     return prisma.voucher.findUnique({
-        where: {code},
+        where: { code },
     });
 };
 
 export const incrementVoucherUsage = async (id: number) => {
     return prisma.voucher.update({
-        where: {id},
-        data: {usageCount: {increment: 1}},
+        where: { id },
+        data: { usageCount: { increment: 1 } },
     });
 };

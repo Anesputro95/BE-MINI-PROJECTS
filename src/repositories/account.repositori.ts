@@ -110,3 +110,13 @@ export const deleteAllResetTokensByEmail = async (email: string) => {
     });
 };
 
+export const accountSwitch = {
+    findById: (id: number) => prisma.account.findUnique({ where: { id } }),
+
+    updateRole: (id: number, role: "CUSTOMER" | "ORGANIZER") =>
+        prisma.account.update({
+            where: { id },
+            data: { role }
+        })
+};
+

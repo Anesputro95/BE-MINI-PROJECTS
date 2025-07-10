@@ -5,7 +5,10 @@ import { hashPassword } from "../utils/hash";
 import { transport } from "../config/nodemailer";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
-import { editProfileService, loginService, regisService, resetPasswordRequestService, resetPasswordService, uploadProfileService, verifyEmailService } from "../services/auth.service";
+import { editProfileService, loginService, regisService, resetPasswordRequestService, resetPasswordService, switchRoleService, uploadProfileService, verifyEmailService } from "../services/auth.service";
+import { TOKEN_KEY } from "../config/env"
+
+
 
 class AuthAccountController {
     public async register(
@@ -154,6 +157,38 @@ class AuthAccountController {
             next(error)
         }
     }
+
+    public async switchRole(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> {
+        try {
+            const updatedUser = await switchRoleService(res.locals.descript.id);
+
+            // ⬅️ Buat token baru setelah update role
+            const token = sign(
+                {
+                    id: updatedUser.id,
+                    email: updatedUser.email,
+                    role: updatedUser.role,
+                },
+                process.env.TOKEN_KEY!, // pastikan TOKEN_KEY tersedia di .env
+                { expiresIn: "1d" }
+            );
+
+            res.status(200).json({
+                success: true,
+                message: "Role switched successfully",
+                role: updatedUser.role,
+                token, // ⬅️ kirim token baru ke FE
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
+
+
 }
 
 export default AuthAccountController;

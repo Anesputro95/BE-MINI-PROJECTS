@@ -10,7 +10,8 @@ import {
     getTransactionEventById, 
     findTransactionById, 
     updateTransactionById, 
-    getTransactionStatsByInterval
+    getTransactionStatsByInterval,
+    findTransactionWithUserAndEvent
 } from "../repositories/transaction.repositori";
 import { restoreAllResources } from "../utils/restoreAllResources";
 import { 
@@ -257,54 +258,54 @@ export const expireTransactionIfNeeded = async (transactionId: number, createdAt
     return {expired: false, remainingTime};
 };
 
-// export const confirmTransactionService = async (
-//     transactionId: number,
-//     action: "ACCEPT" | "REJECT",
-//     organizerId: number
-// ) => {
-//     const trx = await findTransactionWithUserAndEvent(transactionId)
+export const confirmTransactionService = async (
+    transactionId: number,
+    action: "ACCEPT" | "REJECT",
+    organizerId: number
+) => {
+    const trx = await findTransactionWithUserAndEvent(transactionId)
 
-//     if (!trx) {
-//         throw new AppError("Transaction not found", 404);
-//     }
+    if (!trx) {
+        throw new AppError("Transaction not found", 404);
+    }
 
-//     if (trx.event.organizerId !== organizerId) {
-//         throw new AppError("Unauthorized", 403);
-//     }
+    if (trx.event.organizerId !== organizerId) {
+        throw new AppError("Unauthorized", 403);
+    }
 
-//     if (trx.status !== "WAITING_CONFIRMATION") {
-//         throw new AppError("Transaction is not pending confirmation", 400);
-//     }
+    if (trx.status !== "WAITING_CONFIRMATION") {
+        throw new AppError("Transaction is not pending confirmation", 400);
+    }
 
-//     if (action === "REJECT") {
-//         await restoreAllResources(trx);
+    if (action === "REJECT") {
+        await restoreAllResources(trx);
 
-//         await transport.sendMail({
-//             to: trx.user.email,
-//             subject: "Your transaction was rejected",
-//             html: `
-//                 <p>Hi ${trx.user.username},</p>
-//                 <p>Unfortunately, your transaction for <b>${trx.event.title}</b> was <span style="color:red">rejected</span>.</p>
-//             `,
-//         });
-//     }
+        await transport.sendMail({
+            to: trx.user.email,
+            subject: "Your transaction was rejected",
+            html: `
+                <p>Hi ${trx.user.username},</p>
+                <p>Unfortunately, your transaction for <b>${trx.event.title}</b> was <span style="color:red">rejected</span>.</p>
+            `,
+        });
+    }
 
 
-//     if (trx.usedCouponsId) {
-//         await prisma.coupon.update({
-//             where: { id: trx.usedCouponsId },
-//             data: { isUsed: false }
+    if (trx.usedCouponsId) {
+        await prisma.coupon.update({
+            where: { id: trx.usedCouponsId },
+            data: { isUsed: false }
 
-//         });
-//     }
+        });
+    }
 
-//     return prisma.transaction.update({
-//         where: { id: transactionId },
-//         data: {
-//             status: action === "ACCEPT" ? "DONE" : "REJECTED",
-//         },
-//     });
-// };
+    return prisma.transaction.update({
+        where: { id: transactionId },
+        data: {
+            status: action === "ACCEPT" ? "DONE" : "REJECTED",
+        },
+    });
+};
 
 
 export const getEventStatisticService = async (

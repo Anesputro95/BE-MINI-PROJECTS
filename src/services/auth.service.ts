@@ -1,7 +1,7 @@
 import { compare } from "bcrypt";
 import { transport } from "../config/nodemailer";
 import AppError from "../errors/AppError";
-import { createAccountByEmail, createPasswordResetToken, createVerificationToken, deleteAllResetTokensByEmail, deleteResetToken, deleteVerificationToken, findAccountByEmail, findAccountById, findAccountByReferralCode, findResetToken, findVerificationToken, loginAccountByEmail, updateUser, verifyAccountByEmail } from "../repositories/account.repositori";
+import { accountSwitch, createAccountByEmail, createPasswordResetToken, createVerificationToken, deleteAllResetTokensByEmail, deleteResetToken, deleteVerificationToken, findAccountByEmail, findAccountById, findAccountByReferralCode, findResetToken, findVerificationToken, loginAccountByEmail, updateUser, verifyAccountByEmail } from "../repositories/account.repositori";
 import { hashPassword } from "../utils/hash";
 import { sign } from "jsonwebtoken";
 import crypto from "crypto";
@@ -44,8 +44,8 @@ export const regisService = async (data: any) => {
     }
   }
 
-  const allowedRoles = ["CUSTOMER", "ORGANIZER"]
-  const safeRoles = allowedRoles.includes(role) ? role : "CUSTOMER"
+  
+  const safeRoles = "CUSTOMER";
 
   const newAccount = await createAccountByEmail({
     username,
@@ -332,3 +332,15 @@ export const resetPasswordService = async (token: string, newPassword: string) =
 
   await deleteResetToken(token);
 }
+
+export const switchRoleService = async (userId: number) => {
+  const user = await accountSwitch.findById(userId);
+  if (!user) throw new AppError("User not found", 404);
+
+  const newRole = user.role === "CUSTOMER" ? "ORGANIZER" : "CUSTOMER";
+
+  const updatedUser = await accountSwitch.updateRole(userId, newRole);
+
+  return updatedUser;
+}
+

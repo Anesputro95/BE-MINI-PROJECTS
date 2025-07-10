@@ -616,3 +616,14 @@ Unique constraint failed on the fields: (`code`) {"code":"P2002","meta":{"modelN
 2025-07-10 05:33:03 [ERROR]: POST /auth/login: Expected double-quoted property name in JSON at position 93 (line 5 column 1) {"expose":true,"statusCode":400,"status":400,"body":"{ \n  \"username\": \"terid63869\",\n  \"email\": \"terid63869@fuasha.com\",\n  \"password\": \"Kevin123\",\n}","type":"entity.parse.failed"}
 2025-07-10 05:33:26 [ERROR]: POST /transactions/create-transaction: Invalid user or points data {"statusCode":500,"success":false,"message":"Invalid user or points data"}
 2025-07-10 05:54:36 [ERROR]: POST /transactions/create-transaction: Invalid user or points data {"statusCode":500,"success":false,"message":"Invalid user or points data"}
+2025-07-10 09:28:09 [ERROR]: GET /auth/verify: Invalid or expired token {"statusCode":404,"success":false,"message":"Invalid or expired token"}
+2025-07-10 11:03:35 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
+2025-07-10 13:56:26 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
+2025-07-10 14:19:16 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
+2025-07-10 14:19:22 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
+2025-07-10 14:19:29 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
+2025-07-10 14:19:33 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
+2025-07-10 14:19:36 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
+2025-07-10 14:19:54 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
+2025-07-10 14:20:03 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
+2025-07-10 16:05:39 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}

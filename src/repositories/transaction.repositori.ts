@@ -126,7 +126,7 @@ export const getTransactionStatsByInterval = async (eventId: number, interval: s
         totalTransactions: bigint;
         totalRevenue: bigint;
     }
-    
+
     return prisma.$queryRaw`
         SELECT
             date_trunc(${interval}::text, "createdAt") AS period,
@@ -137,4 +137,29 @@ export const getTransactionStatsByInterval = async (eventId: number, interval: s
         GROUP BY period
         ORDER BY period ASC
         `;
+};
+
+export const findTransactionWithUserAndEvent = async (transactionId: number) => {
+    return prisma.transaction.findUnique({
+        where: { id: transactionId },
+        select: {
+            id: true,
+            status: true,
+            usedCouponsId: true,
+            event: {
+                select: {
+                    id: true,
+                    title: true,
+                    organizerId: true,
+                },
+            },
+            user: {
+                select: {
+                    id: true,
+                    username: true,
+                    email: true,
+                },
+            },
+        },
+    });
 };
