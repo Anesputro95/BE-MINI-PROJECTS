@@ -1961,3 +1961,15 @@ Unique constraint failed on the fields: (`code`) {"code":"P2002","meta":{"modelN
 2025-07-10 16:05:39 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
 2025-07-10 18:04:23 [INFO]: Token:
 2025-07-10 18:04:49 [INFO]: Token:
+2025-07-10 18:16:38 [INFO]: Token:
+2025-07-10 18:16:45 [INFO]: Token:
+2025-07-10 18:17:27 [INFO]: Token:
+2025-07-10 18:22:34 [INFO]: Token:
+2025-07-10 18:22:43 [INFO]: Token:
+2025-07-10 18:23:43 [INFO]: Token:
+2025-07-10 18:33:51 [INFO]: Token:
+2025-07-10 19:10:44 [INFO]: Token:
+2025-07-10 19:10:58 [INFO]: Token:
+2025-07-10 19:11:54 [INFO]: Token:
+2025-07-10 19:18:06 [INFO]: Token:
+2025-07-10 20:06:04 [INFO]: Token:
