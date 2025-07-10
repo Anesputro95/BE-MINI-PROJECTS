@@ -14,7 +14,7 @@ import VoucherRouter from './routers/voucher.router';
 const PORT = process.env.PORT || "8080";
 
 class App {
-    public app: Application | undefined;
+    public app: Application ;
 
     constructor() {
         this.app = express();
@@ -24,11 +24,8 @@ class App {
     }
 
     private configure(): void {
-        this.app?.use(cors({
-            origin: "http://localhost:3000",
-            credentials: true
-        }));
-        this.app?.use(express.json());
+        this.app.use(cors());
+        this.app.use(express.json());
     }
 
     private routes(): void {
@@ -38,20 +35,21 @@ class App {
         const voucherRouter = new VoucherRouter();
         // const userPointsRouter = UserPointsRouter;
 
-        this.app?.use("/auth", authRouter.getRouter());
-        this.app?.use('/api', searchRouter);
-        this.app?.use('/event', eventRouter.getRouter());
-        this.app?.use('/transactions', transactionRouter.getRouter());
-        this.app?.use("/vouchers", voucherRouter.getRouter());
-        // this.app?.use("/user-points", userPointsRouter);
-
-        this.app?.get('/', (req: Request, res: Response) => {
+        this.app.get('/', (req: Request, res: Response) => {
             res.status(200).json("<h1>Welcome to Mini Project</h1>")
         });
+
+        this.app.use("/auth", authRouter.getRouter());
+        this.app.use('/api', searchRouter);
+        this.app.use('/event', eventRouter.getRouter());
+        this.app.use('/transactions', transactionRouter.getRouter());
+        this.app.use("/vouchers", voucherRouter.getRouter());
+        // this.app?.use("/user-points", userPointsRouter);
+
     }
 
     private errorHandler(): void {
-        this.app?.use((error: any, req: Request, res: Response, next: NextFunction) => {
+        this.app.use((error: any, req: Request, res: Response, next: NextFunction) => {
             logger.error(
                 `${req.method} ${req.path}: ${error.message} ${JSON.stringify(error)}`
             );
@@ -63,7 +61,7 @@ class App {
     }
 
     public start(): void {
-        this.app?.listen(PORT, () => {
+        this.app.listen(PORT, () => {
             console.log(`Server is Running on http://localhost:${PORT}`);
         });
     }
