@@ -145,7 +145,8 @@ class AuthAccountController {
                     id: updatedUser.id,
                     email: updatedUser.email,
                     role: updatedUser.role,
-                }, process.env.TOKEN_KEY, { expiresIn: "1d" });
+                }, process.env.TOKEN_KEY, // pastikan TOKEN_KEY tersedia di .env
+                { expiresIn: "1d" });
                 res.status(200).json({
                     success: true,
                     message: "Role switched successfully",
