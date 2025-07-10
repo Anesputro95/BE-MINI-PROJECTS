@@ -13,6 +13,10 @@ import {
     getTransactionStatsByInterval
 } from "../repositories/transaction.repositori";
 import { restoreAllResources } from "../utils/restoreAllResources";
+import { 
+    validateVoucherService,
+    incrementVoucherUsage,
+ } from "./voucher.service";
 
 
 
@@ -25,10 +29,11 @@ interface CreateTransactionInput {
     paymentProofUrl?: string;
     usedCouponsId?: number;
     userPoints?: number;
+    voucherCode?: string;
 }
 
 export const createTransactionService = async (input: CreateTransactionInput) => {
-    const { userId, eventId, ticketId, ticketQuantity, usedCouponsId, userPoints } = input;
+    const { userId, eventId, ticketId, ticketQuantity, usedCouponsId, userPoints, voucherCode } = input;
 
     const ticket = await prisma.ticket.findFirst({
         where: { id: ticketId, eventId },
@@ -62,6 +67,45 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
         if (totalPrice < 0) totalPrice = 0;
     }
 
+    let voucherId: number | undefined;
+    if (voucherCode) {
+        const voucher = await validateVoucherService(voucherCode);
+
+        if (voucher.eventId !== eventId) {
+            throw new AppError("Voucher does not belong to this event", 400);
+        }
+        voucherId = voucher.id;
+
+        let discount = 0;
+
+        if (voucher.discountAmount) {
+            discount += voucher.discountAmount;
+        }
+
+        if (voucher.discountPercent) {
+            const percentageDiscount = totalPrice * (voucher.discountPercent / 100);
+
+            if (voucher.maxDiscount) {
+                discount += Math.min(percentageDiscount, voucher.maxDiscount);
+            } else {
+                discount += percentageDiscount;
+            }
+        }
+
+        if (discount > totalPrice) discount = totalPrice;
+
+        totalPrice -= discount;
+
+        await incrementVoucherUsage(voucher.id);
+
+        console.log("=== Voucher Validation ===");
+        console.log("voucherCode:", voucherCode);
+        console.log("voucher object:", voucher);
+        console.log("voucherId:", voucherId);
+        console.log("discount applied:", discount);
+    
+    }
+
     // Validasi dan kurangi poin
     const user = await prisma.account.findUnique({
         where: { id: userId },
@@ -83,6 +127,19 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
         totalPrice -= userPoints;
     }
 
+    console.log("=== Final Transaction Payload ===", {
+        userId,
+        eventId,
+        ticketId,
+        ticketQuantity,
+        totalPrice,
+        status: "WAITING_PAYMENT",
+        restored: false,
+        usedCouponsId,
+        voucherId,
+        userPoints,
+    });
+    
     const transaction = await createTransaction({
         userId,
         eventId,
@@ -92,6 +149,7 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
         status: "WAITING_PAYMENT",
         restored: false,
         usedCouponsId,
+        voucherId,
         userPoints,
     });
 
