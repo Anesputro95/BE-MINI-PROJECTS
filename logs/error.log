@@ -627,3 +627,4 @@ Unique constraint failed on the fields: (`code`) {"code":"P2002","meta":{"modelN
 2025-07-10 14:19:54 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
 2025-07-10 14:20:03 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
 2025-07-10 16:05:39 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
+2025-07-12 06:35:23 [ERROR]: POST /event/create-event: Description must be between 10 and 300 characters {"statusCode":400,"success":false,"message":"Description must be between 10 and 300 characters"}

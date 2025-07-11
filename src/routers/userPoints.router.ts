@@ -1,10 +1,10 @@
-import { Router } from "express";
-import { UserPointsController } from "../controllers/userPoints.controller";
-import { verifyToken } from "../middleware/verifyToken";
+// import { Router } from "express";
+// import { UserPointsController } from "../controllers/userPoints.controller";
+// import { verifyToken } from "../middleware/verifyToken";
 
-const router = Router();
-const controller = new UserPointsController();
+// const router = Router();
+// const controller = new UserPointsController();
 
-router.post("/redeem", verifyToken, controller.redeemPoints);
+// router.post("/redeem", verifyToken, controller.redeemPoints);
 
-export default router;
+// export default router;

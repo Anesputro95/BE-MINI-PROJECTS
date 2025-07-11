@@ -8,6 +8,7 @@ import {
     getPublicEventsService,
     getEventDetailService,
 } from "../services/event.service";
+import AppError from "../errors/AppError";
 
 class EventController {
     public async getEvents(
@@ -39,6 +40,10 @@ class EventController {
         try {
             const { id: organizerId } = res.locals.descript;
             const { title, description, thumbnail, category, salesStart, salesEnd, tickets, location } = req.body;
+
+            if (!description || description.length < 10 || description.length > 300) {
+                throw new AppError("Description must be between 10 and 300 characters", 400);
+            }
 
             const event = await createEventService({
                 organizerId,
