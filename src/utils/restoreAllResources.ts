@@ -15,7 +15,7 @@ export const restoreAllResources = async (trx: any) => {
         })
     );
 
-    //  Kembalikan kupon jika ada
+    // Restore poin user jika ada
     if (trx.usedCouponsId) {
         operations.push(
             prisma.coupon.update({
@@ -37,4 +37,6 @@ export const restoreAllResources = async (trx: any) => {
             })
         );
     }
+
+    await prisma.$transaction(operations);
 }

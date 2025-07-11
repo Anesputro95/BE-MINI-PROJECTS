@@ -627,3 +627,139 @@ Unique constraint failed on the fields: (`code`) {"code":"P2002","meta":{"modelN
 2025-07-10 14:19:54 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
 2025-07-10 14:20:03 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
 2025-07-10 16:05:39 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
+2025-07-11 20:47:54 [ERROR]: PATCH /transactions/1/confirm: Unauthorized {"statusCode":403,"success":false,"message":"Unauthorized"}
+2025-07-11 20:48:16 [ERROR]: PATCH /transactions/1/confirm: Unauthorized {"statusCode":403,"success":false,"message":"Unauthorized"}
+2025-07-11 20:49:52 [ERROR]: POST /event/create-event: 
+Invalid `prisma.event.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/event.repository.ts:44:25
+
+  41 export const createEvent = async (input: CreateEventInput) => {
+  42     const { organizerId, title, description, thumbnail, category, location, salesStart, salesEnd, tickets } = input;
+  43 
+→ 44     return prisma.event.create({
+           data: {
+             organizerId: 4,
+             title: "Seminar Kaya cepat dengan Judol",
+             description: "Acara untuk pengusaha muda.",
+             thumbnail: "https://example.com/image.jpg",
+             category: "EDUCATION",
+             salesStart: undefined,
+             salesEnd: undefined,
+             tickets: {
+               create: [
+                 {
+                   name: "Umum",
+                   price: 100000,
+                   quota: 100
+                 }
+               ]
+             },
+         +   location: String
+           },
+           include: {
+             tickets: true
+           }
+         })
+
+Argument `location` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-11 20:50:00 [ERROR]: POST /event/create-event: 
+Invalid `prisma.event.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/event.repository.ts:44:25
+
+  41 export const createEvent = async (input: CreateEventInput) => {
+  42     const { organizerId, title, description, thumbnail, category, location, salesStart, salesEnd, tickets } = input;
+  43 
+→ 44     return prisma.event.create({
+           data: {
+             organizerId: 4,
+             title: "Seminar Kaya cepat dengan Judol",
+             description: "Acara untuk pengusaha muda.",
+             thumbnail: "https://example.com/image.jpg",
+             category: "EDUCATION",
+             salesStart: undefined,
+             salesEnd: undefined,
+             tickets: {
+               create: [
+                 {
+                   name: "Umum",
+                   price: 100000,
+                   quota: 100
+                 }
+               ]
+             },
+         +   location: String
+           },
+           include: {
+             tickets: true
+           }
+         })
+
+Argument `location` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-11 20:50:21 [ERROR]: POST /event/create-event: 
+Invalid `prisma.event.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/event.repository.ts:44:25
+
+  41 export const createEvent = async (input: CreateEventInput) => {
+  42     const { organizerId, title, description, thumbnail, category, location, salesStart, salesEnd, tickets } = input;
+  43 
+→ 44     return prisma.event.create({
+           data: {
+             organizerId: 4,
+             title: "Seminar Kaya cepat dengan Judol",
+             description: "Acara untuk pengusaha muda.",
+             thumbnail: "https://example.com/image.jpg",
+             category: "EDUCATION",
+             salesStart: undefined,
+             salesEnd: undefined,
+             tickets: {
+               create: [
+                 {
+                   name: "Umum",
+                   price: 100000,
+                   quota: 100
+                 }
+               ]
+             },
+         +   location: String
+           },
+           include: {
+             tickets: true
+           }
+         })
+
+Argument `location` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-11 20:50:33 [ERROR]: POST /event/create-event: 
+Invalid `prisma.event.create()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/event.repository.ts:44:25
+
+  41 export const createEvent = async (input: CreateEventInput) => {
+  42     const { organizerId, title, description, thumbnail, category, location, salesStart, salesEnd, tickets } = input;
+  43 
+→ 44     return prisma.event.create({
+           data: {
+             organizerId: 4,
+             title: "Seminar Kaya cepat dengan Bitcoin",
+             description: "Acara untuk pengusaha muda.",
+             thumbnail: "https://example.com/image.jpg",
+             category: "EDUCATION",
+             salesStart: undefined,
+             salesEnd: undefined,
+             tickets: {
+               create: [
+                 {
+                   name: "Umum",
+                   price: 100000,
+                   quota: 100
+                 }
+               ]
+             },
+         +   location: String
+           },
+           include: {
+             tickets: true
+           }
+         })
+
+Argument `location` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-11 20:51:41 [ERROR]: PATCH /transactions/1/confirm: Unauthorized {"statusCode":403,"success":false,"message":"Unauthorized"}
+2025-07-11 20:52:11 [ERROR]: PATCH /transactions/1/confirm: Unauthorized {"statusCode":403,"success":false,"message":"Unauthorized"}

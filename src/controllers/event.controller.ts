@@ -1,12 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import { 
-    createEventService, 
-    deleteEventService, 
-    getEventsService, 
-    getMyEventsService, 
+import {
+    createEventService,
+    deleteEventService,
+    getEventsService,
+    getMyEventsService,
     updateEventService,
     getPublicEventsService,
     getEventDetailService,
+    getOrganizerDashboardService,
 } from "../services/event.service";
 
 class EventController {
@@ -29,7 +30,7 @@ class EventController {
             next(error)
         }
     }
-    
+
 
     public async createEvents(
         req: Request,
@@ -145,13 +146,13 @@ class EventController {
         }
     }
 
-    public async getPublicEvents (
+    public async getPublicEvents(
         req: Request,
         res: Response,
         next: NextFunction
     ): Promise<void> {
-        try{
-            const { category, location} = req.query;
+        try {
+            const { category, location } = req.query;
 
             const events = await getPublicEventsService({
                 category: category as string,
@@ -164,11 +165,11 @@ class EventController {
                 data: events,
             });
         } catch (error) {
-            next (error);
+            next(error);
         }
     }
 
-    public async getEventDetail (
+    public async getEventDetail(
         req: Request,
         res: Response,
         next: NextFunction,
@@ -184,9 +185,28 @@ class EventController {
                 data: event,
             });
         } catch (error) {
-            next (error);
-         }
-    
+            next(error);
+        }
+    }
+
+    public async getDasboardSummary(
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const { id: organizerId } = res.locals.descript;
+
+            const summary = await getOrganizerDashboardService(organizerId)
+
+            res.status(200).json({
+                success: true,
+                message: "Dashboard summary retrieved",
+                data: summary
+            })
+        } catch (error) {
+            next(error)
+        }
     }
 }
 

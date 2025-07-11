@@ -15,14 +15,12 @@ class TransactionRouter {
     }
 
     private initialRoute(): void {
-        // 👥 Untuk admin/organizer melihat daftar attendee
         this.router.get(
             "/attendees/:eventId",
             verifyToken,
             this.transactionController.getAttendList
         );
 
-        // 🧾 Untuk user membuat transaksi pembelian tiket
         this.router.post(
             "/create-transaction",
             verifyToken,
@@ -30,13 +28,11 @@ class TransactionRouter {
             this.transactionController.createTransaction
         );
 
-        // 📜 Untuk user melihat daftar transaksi mereka
         this.router.get(
             "/transactions",
             verifyToken,
             this.transactionController.getUserTransactions
         );
-
 
         this.router.patch(
             "/:transactionId/upload-payment-proof",
@@ -53,6 +49,7 @@ class TransactionRouter {
         this.router.patch(
             "/transactions/:transactionId/confirm",
             verifyToken,
+            isOrganizer,
             this.transactionController.getTransactionDetail
         )
 
@@ -69,7 +66,6 @@ class TransactionRouter {
             isOrganizer,
             this.transactionController.getEventStatistic
         );
-
     }
 
     public getRouter(): Router {
