@@ -1,7 +1,7 @@
 import { compare } from "bcrypt";
 import { transport } from "../config/nodemailer";
 import AppError from "../errors/AppError";
-import { accountSwitch, createAccountByEmail, createPasswordResetToken, createVerificationToken, deleteAllResetTokensByEmail, deleteResetToken, deleteVerificationToken, findAccountByEmail, findAccountById, findAccountByReferralCode, findResetToken, findVerificationToken, loginAccountByEmail, updateUser, verifyAccountByEmail } from "../repositories/account.repositori";
+import { accountSwitch, createAccountByEmail, createPasswordResetToken, createVerificationToken, deleteAllResetTokensByEmail, deleteResetToken, deleteVerificationToken, findAccountByEmail, findAccountById, findAccountByReferralCode, findResetToken, findVerificationToken, getCouponsByUserId, getPointsByUserId, loginAccountByEmail, updateUser, verifyAccountByEmail } from "../repositories/account.repositori";
 import { hashPassword } from "../utils/hash";
 import { sign } from "jsonwebtoken";
 import crypto from "crypto";
@@ -41,7 +41,7 @@ export const regisService = async (data: any) => {
       isUnique = true;
     }
   }
-  
+
   const safeRoles = "CUSTOMER"
 
   const newAccount = await createAccountByEmail({
@@ -162,8 +162,19 @@ export const loginService = async (data: any) => {
     throw new AppError("Password is wrong", 401);
   }
 
+  const coupons = await getCouponsByUserId(findUser.id);
+  const points = await getPointsByUserId(findUser.id);
+
   const token = sign(
-    { id: findUser.id, role: findUser.role },
+    {
+      id: findUser.id,
+      email: findUser.email,
+      username: findUser.username,
+      role: findUser.role,
+      referralCode: findUser.referall_code,
+      coupons,
+      userPoints: points
+    },
     process.env.TOKEN_KEY || "fallback_secret",
     { expiresIn: "1d" }
   );
