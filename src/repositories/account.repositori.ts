@@ -120,3 +120,28 @@ export const accountSwitch = {
         })
 };
 
+export const getCouponsByUserId = async (userId: number) => {
+    return prisma.coupon.findMany({
+        where: {
+            userId,
+        },
+        select: {
+            id: true,
+            code: true,
+            discount: true,
+            expiresAt: true,
+        },
+    });
+};
+
+export const getPointsByUserId = async (userId: number) => {
+    return prisma.userPoint.findMany({
+        where: { userId },
+        select: {
+            id: true,
+            amount: true,
+            expiredAt: true,
+        },
+    });
+};
+

@@ -7,6 +7,7 @@ import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { editProfileService, loginService, regisService, resetPasswordRequestService, resetPasswordService, switchRoleService, uploadProfileService, verifyEmailService } from "../services/auth.service";
 import { TOKEN_KEY } from "../config/env"
+import { getCouponsByUserId, getPointsByUserId } from "../repositories/account.repositori";
 
 
 
@@ -35,8 +36,21 @@ class AuthAccountController {
     ): Promise<void> {
         try {
             const loginAccount = await loginService(req.body)
+           
+            const token = sign(
+                {
+                    id: loginAccount.account.id,
+                    email: loginAccount.account.email,
+                    username: loginAccount.account.username,
+                    role: loginAccount.account.role,
+                    referralCode: loginAccount.account.referall_code, 
+                    profileImg: loginAccount.account.ImgProfile,
+                },
+                process.env.TOKEN_KEY!,
+                { expiresIn: "1d" }
+            );
 
-            res.status(200).send({
+            res.status(200).json({
                 message: "Login Success",
                 email: loginAccount.account.email,
                 imgProfile: loginAccount.account.ImgProfile,
@@ -165,15 +179,22 @@ class AuthAccountController {
     ): Promise<void> {
         try {
             const updatedUser = await switchRoleService(res.locals.descript.id);
+            const coupons = await getCouponsByUserId(updatedUser.id);
+            const points = await getPointsByUserId(updatedUser.id);
 
             // ⬅️ Buat token baru setelah update role
             const token = sign(
                 {
                     id: updatedUser.id,
                     email: updatedUser.email,
+                    username: updatedUser.username,
                     role: updatedUser.role,
+                    referralCode: updatedUser.referall_code,
+                    profileImg: updatedUser.ImgProfile,
+                    coupons,
+                    userPoints: points,
                 },
-                process.env.TOKEN_KEY!, 
+                process.env.TOKEN_KEY!,
                 { expiresIn: "1d" }
             );
 

@@ -627,3 +627,50 @@ Unique constraint failed on the fields: (`code`) {"code":"P2002","meta":{"modelN
 2025-07-10 14:19:54 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
 2025-07-10 14:20:03 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
 2025-07-10 16:05:39 [ERROR]: POST /auth/login: Password is wrong {"statusCode":401,"success":false,"message":"Password is wrong"}
+2025-07-12 20:32:25 [ERROR]: POST /auth/switch-role: 
+Invalid `prisma.account.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/account.repositori.ts:114:46
+
+  111 };
+  112 
+  113 export const accountSwitch = {
+→ 114     findById: (id: number) => prisma.account.findUnique(
+Can't reach database server at `aws-0-us-east-2.pooler.supabase.com:5432`
+
+Please make sure your database server is running at `aws-0-us-east-2.pooler.supabase.com:5432`. {"clientVersion":"6.10.1","name":"PrismaClientInitializationError"}
+2025-07-12 20:32:46 [ERROR]: POST /auth/switch-role: 
+Invalid `prisma.account.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/account.repositori.ts:114:46
+
+  111 };
+  112 
+  113 export const accountSwitch = {
+→ 114     findById: (id: number) => prisma.account.findUnique(
+Can't reach database server at `aws-0-us-east-2.pooler.supabase.com:5432`
+
+Please make sure your database server is running at `aws-0-us-east-2.pooler.supabase.com:5432`. {"clientVersion":"6.10.1","name":"PrismaClientInitializationError"}
+2025-07-12 20:40:00 [ERROR]: PATCH /auth/update: 
+Invalid `prisma.account.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/account.repositori.ts:71:27
+
+  68 };
+  69 
+  70 export const findAccountById = async (id: number) => {
+→ 71     return prisma.account.findUnique(
+Can't reach database server at `aws-0-us-east-2.pooler.supabase.com:5432`
+
+Please make sure your database server is running at `aws-0-us-east-2.pooler.supabase.com:5432`. {"clientVersion":"6.10.1","name":"PrismaClientInitializationError"}
+2025-07-12 20:40:24 [ERROR]: PATCH /auth/update: 
+Invalid `prisma.account.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/account.repositori.ts:71:27
+
+  68 };
+  69 
+  70 export const findAccountById = async (id: number) => {
+→ 71     return prisma.account.findUnique(
+Can't reach database server at `aws-0-us-east-2.pooler.supabase.com:5432`
+
+Please make sure your database server is running at `aws-0-us-east-2.pooler.supabase.com:5432`. {"clientVersion":"6.10.1","name":"PrismaClientInitializationError"}
+2025-07-12 20:40:37 [ERROR]: PATCH /auth/update: Old and new passwords must be filled in. {"statusCode":400,"success":false,"message":"Old and new passwords must be filled in."}
+2025-07-12 20:40:53 [ERROR]: PATCH /auth/update: Old and new passwords must be filled in. {"statusCode":400,"success":false,"message":"Old and new passwords must be filled in."}
+2025-07-12 20:41:05 [ERROR]: PATCH /auth/update: Old and new passwords must be filled in. {"statusCode":400,"success":false,"message":"Old and new passwords must be filled in."}
