@@ -32,12 +32,22 @@ export const getPublicEventsService = async (filters: {
 }) => {
     const whereClause: any = {};
 
-    if (filters.category) {
-        whereClause.category = filters.category;
+    if (filters.category && filters.category.trim()) {
+        whereClause.category = filters.category.trim();
     }
 
-    if (filters.location) {
-        whereClause.location = { contains: filters.location, mode: "insensitive" };
+    if (filters.location && filters.location.trim()) {
+        whereClause.location = { 
+            contains: filters.location.trim(), 
+            mode: "insensitive", 
+        };
+    }
+
+    if (filters.keyword && filters.keyword.trim()) {
+        whereClause.OR = [
+            {title: { contains: filters.keyword.trim(), mode: "insensitive"}},
+            {description: {contains: filters.keyword.trim(), mode: "insensitive"}}
+        ];
     }
 
     return prisma.event.findMany({

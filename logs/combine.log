@@ -2137,3 +2137,14 @@ Argument `location` is missing. {"name":"PrismaClientValidationError","clientVer
 2025-07-11 20:54:57 [INFO]: Token:
 2025-07-11 21:25:15 [INFO]: Token:
 >>>>>>> origin/main
+2025-07-12 21:03:58 [ERROR]: GET /event/public: 
+Invalid `prisma.event.findMany()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/services/event.service.ts:43:25
+
+  40     whereClause.location = { contains: filters.location, mode: "insensitive" };
+  41 }
+  42 
+→ 43 return prisma.event.findMany(
+Can't reach database server at `aws-0-us-east-2.pooler.supabase.com:5432`
+
+Please make sure your database server is running at `aws-0-us-east-2.pooler.supabase.com:5432`. {"clientVersion":"6.10.1","name":"PrismaClientInitializationError"}
