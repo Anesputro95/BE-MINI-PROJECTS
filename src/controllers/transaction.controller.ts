@@ -3,16 +3,16 @@ import {
     transactionService,
     createTransactionService,
     getUserTransactionsService,
-
     uploadPaymentProofService,
     getEventStatisticService,
     expireTransactionIfNeeded,
-
-    getRemainingTime
-
+    getRemainingTime,
+    confirmTransactionService,
+    cancelTransitionService
 } from "../services/transaction.service";
 import AppError from "../errors/AppError";
 import { findTransactionById } from "../repositories/transaction.repositori";
+import { prisma } from "../config/prisma";
 
 
 class TransactionController {
@@ -60,8 +60,8 @@ class TransactionController {
 
             const remainingTime =
                 transaction.status === "WAITING_PAYMENT" && transaction.createdAt
-                ? getRemainingTime(transaction.createdAt)
-                :0;
+                    ? getRemainingTime(transaction.createdAt)
+                    : 0;
 
             res.status(201).send({
                 success: true,
@@ -102,13 +102,13 @@ class TransactionController {
         res: Response,
         next: NextFunction,
     ): Promise<void> {
-        try{
-            const {id: userId} = res.locals.descript;
+        try {
+            const { id: userId } = res.locals.descript;
             const transactionId = Number(req.params.transactionId);
 
             const trx = await findTransactionById(transactionId);
 
-            if(!trx) {
+            if (!trx) {
                 throw new AppError("Transaction not found", 404);
             }
 
@@ -116,7 +116,7 @@ class TransactionController {
                 throw new AppError("Unathorized to view this transaction", 403);
             }
 
-            const {expired, remainingTime } = await expireTransactionIfNeeded(
+            const { expired, remainingTime } = await expireTransactionIfNeeded(
                 trx.id,
                 trx.createdAt!,
                 trx.status
@@ -128,7 +128,7 @@ class TransactionController {
                 success: true,
                 message: "Transaction detail retrieved",
                 data: {
-                    ... trx,
+                    ...trx,
                     status: currentStatus,
                     remainingTime,
                 },
@@ -173,7 +173,7 @@ class TransactionController {
             const transactionId = Number(req.params.transactionId);
             const { action } = req.body;
 
-            const trx = await transactionService(transactionId);
+            const trx = await confirmTransactionService(transactionId, action, organizerId);
 
             res.status(200).send({
                 success: true,
@@ -191,25 +191,57 @@ class TransactionController {
         next: NextFunction,
     ): Promise<void> {
         try {
-            const { id: userId } = res.locals.descript;
+            const { id: organizerId } = res.locals.descript;
+            const eventId = Number(req.params.eventId);
+            const interval = req.query.interval as "day" | "month" | "year";
 
-            if (!userId) {
-                throw new AppError("Unauthorized: No user ID found", 401);
+            if (!interval || !["day", "month", "year"].includes(interval)) {
+                throw new AppError("Interval is required and must be 'day', 'month', or 'year'", 400);
             }
 
-            const transactions = await getUserTransactionsService(userId);
+            const event = await prisma.event.findUnique({
+                where: { id: eventId },
+                select: { organizer: true }
+            });
+
+            if (!event) {
+                throw new AppError("Unauthorized access to this event statistics", 403);
+            };
+
+            const stats = await getEventStatisticService(eventId, interval);
 
             res.status(200).send({
                 success: true,
-                message: "Event statistics retrieved",
-                data: transactions,
-            })
+                message: "Statistics retrieved successfully",
+                data: stats,
+            });
         } catch (error) {
             next(error);
         }
     }
 
+    public async cancelTransition(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> {
+        try {
+            const transactionId = Number(req.params.id);
+            const userId = res.locals.descript.id;
 
+            const trx = { id: transactionId, user: { id: userId } };
+
+            const result = await cancelTransitionService(trx)
+
+            res.status(200).json({
+                success: true,
+                message: "Transaction cancelled successfully",
+                data: result,
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default TransactionController;

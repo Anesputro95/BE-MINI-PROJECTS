@@ -28,6 +28,12 @@ class EventRouter {
             isOrganizer,
             this.EventController.getMyEvent
         );
+        this.router.get(
+            "/dashboard/summary",
+            verifyToken,
+            isOrganizer,
+            this.EventController.getDasboardSummary
+        )
     }
 
     public getRouter(): Router {

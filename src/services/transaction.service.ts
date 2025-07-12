@@ -3,24 +3,21 @@ import { prisma } from "../config/prisma";
 import AppError from "../errors/AppError";
 import { findEventById } from "../repositories/event.repository";
 
-import { 
-    createTransaction, 
-    getUserTransactions, 
-    TransactionsStatus, 
-    getTransactionEventById, 
-    findTransactionById, 
-    updateTransactionById, 
+import {
+    createTransaction,
+    getUserTransactions,
+    TransactionsStatus,
+    getTransactionEventById,
+    findTransactionById,
+    updateTransactionById,
     getTransactionStatsByInterval,
     findTransactionWithUserAndEvent
 } from "../repositories/transaction.repositori";
 import { restoreAllResources } from "../utils/restoreAllResources";
-import { 
+import {
     validateVoucherService,
     incrementVoucherUsage,
- } from "./voucher.service";
-
-
-
+} from "./voucher.service";
 
 interface CreateTransactionInput {
     userId: number;
@@ -104,7 +101,7 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
         console.log("voucher object:", voucher);
         console.log("voucherId:", voucherId);
         console.log("discount applied:", discount);
-    
+
     }
 
     // Validasi dan kurangi poin
@@ -140,7 +137,7 @@ export const createTransactionService = async (input: CreateTransactionInput) =>
         voucherId,
         userPoints,
     });
-    
+
     const transaction = await createTransaction({
         userId,
         eventId,
@@ -173,7 +170,7 @@ export const getUserTransactionsService = async (userId: number) => {
         transactions.map(async (trx) => {
             if (trx.createdAt && trx.status === "WAITING_PAYMENT") {
 
-                const { expired, remainingTime} = await expireTransactionIfNeeded(
+                const { expired, remainingTime } = await expireTransactionIfNeeded(
 
                     trx.id,
                     trx.createdAt,
@@ -182,7 +179,7 @@ export const getUserTransactionsService = async (userId: number) => {
                 return {
                     ...trx,
 
-                    status: expired ? "EXPIRED" : trx. status,
+                    status: expired ? "EXPIRED" : trx.status,
 
                     remainingTime,
                 };
@@ -213,7 +210,6 @@ export const transactionService = async (eventId: number) => {
             totalPrice: trx.totalPrice,
         }));
 };
-
 
 export const uploadPaymentProofService = async (
     transactionId: number,
@@ -252,10 +248,10 @@ export const expireTransactionIfNeeded = async (transactionId: number, createdAt
     if (status === "WAITING_PAYMENT" && remainingTime <= 0) {
         await updateTransactionById(transactionId, "EXPIRED");
 
-        return {expired: true};
+        return { expired: true };
     }
 
-    return {expired: false, remainingTime};
+    return { expired: false, remainingTime };
 };
 
 export const confirmTransactionService = async (
@@ -282,14 +278,26 @@ export const confirmTransactionService = async (
 
         await transport.sendMail({
             to: trx.user.email,
-            subject: "Your transaction was rejected",
+            subject: "Your transaction was Rejected",
             html: `
                 <p>Hi ${trx.user.username},</p>
                 <p>Unfortunately, your transaction for <b>${trx.event.title}</b> was <span style="color:red">rejected</span>.</p>
+                <p>Any points, voucher, or coupon used have been restored.</p>
             `,
         });
     }
 
+    if (action === "ACCEPT") {
+        await transport.sendMail({
+            to: trx.user.email,
+            subject: "Your transaction was Accept",
+            html: `
+                <p>Hi ${trx.user.username},</p>
+                <p>Your transaction for <b>${trx.event.title}</b> has been <span style="color:green">accepted</span>.</p>
+                <p>Thank you for purchasing. Please check your event ticket on the platform.</p>
+            `,
+        })
+    }
 
     if (trx.usedCouponsId) {
         await prisma.coupon.update({
@@ -307,7 +315,6 @@ export const confirmTransactionService = async (
     });
 };
 
-
 export const getEventStatisticService = async (
     eventId: number,
     interval: "day" | "month" | "year"
@@ -316,13 +323,41 @@ export const getEventStatisticService = async (
     if (!allowedIntervals.includes(interval)) {
         throw new Error("Invalid interval");
     }
-    
-    return getTransactionStatsByInterval(eventId, interval);
- };
 
- export const getRemainingTime = (createdAt: Date) => {
+    return getTransactionStatsByInterval(eventId, interval);
+};
+
+export const getRemainingTime = (createdAt: Date) => {
     const deadline = new Date(createdAt.getTime() + 15 * 60 * 1000); // 15 menit biar ga kelamaan buat jastip
     const remainingMs = deadline.getTime() - Date.now();
 
     return remainingMs > 0 ? remainingMs : 0;
 };
+
+export const cancelTransitionService = async (trx: any) => {
+    const trxData = await prisma.transaction.findUnique({
+        where: { id: trx.id },
+        include: {
+            user: true,
+        }
+    });
+
+    if (!trxData) {
+        throw new AppError("Transaction not found", 404);
+    }
+
+    if (trxData.status !== "WAITING_CONFIRMATION") {
+        throw new AppError("Only pending transactions can be canceled", 400);
+    }
+
+    await restoreAllResources(trxData);
+
+    const updateStatus = await prisma.transaction.update({
+        where: { id: trx.id },
+        data: {
+            status: "CANCELED"
+        }
+    });
+
+    return updateStatus;
+}

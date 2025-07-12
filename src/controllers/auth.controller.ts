@@ -173,7 +173,7 @@ class AuthAccountController {
                     email: updatedUser.email,
                     role: updatedUser.role,
                 },
-                process.env.TOKEN_KEY!, // pastikan TOKEN_KEY tersedia di .env
+                process.env.TOKEN_KEY!, 
                 { expiresIn: "1d" }
             );
 

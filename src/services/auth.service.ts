@@ -10,8 +10,6 @@ import { createReferral } from "../repositories/referral.repositori";
 import { createUserPoints } from "../repositories/userPoints.repositori";
 import { createCoupon } from "../repositories/coupon.repositori";
 import { cloudinaryUpload } from "../config/cloudinary";
-import { prisma } from "../config/prisma";
-import { Multer } from "multer";
 
 export const regisService = async (data: any) => {
   const { username, email, password, role } = data;
@@ -43,9 +41,8 @@ export const regisService = async (data: any) => {
       isUnique = true;
     }
   }
-
   
-  const safeRoles = "CUSTOMER";
+  const safeRoles = "CUSTOMER"
 
   const newAccount = await createAccountByEmail({
     username,
@@ -88,11 +85,6 @@ export const regisService = async (data: any) => {
   await createVerificationToken(newAccount.id, token, expiresAt);
 
   const verifyLink = `http://localhost:3000/verify-account/${token}`;
-
-  console.log("📧 Verification link sent:", verifyLink);
-
-  console.log("📧 Verification link sent:", verifyLink); // ⬅️ Tambahkan ini
-
 
   await transport.sendMail({
     from: process.env.MAILSENDER,
@@ -343,4 +335,3 @@ export const switchRoleService = async (userId: number) => {
 
   return updatedUser;
 }
-

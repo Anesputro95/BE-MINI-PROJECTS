@@ -36,12 +36,12 @@ export const getPublicEventsService = async (filters: {
     }
 
     if (filters.location) {
-        whereClause.location = {contains: filters.location, mode: "insensitive"};
+        whereClause.location = { contains: filters.location, mode: "insensitive" };
     }
 
     return prisma.event.findMany({
         where: whereClause,
-        orderBy: {createdAt: "desc"},
+        orderBy: { createdAt: "desc" },
         select: {
             id: true,
             title: true,
@@ -56,12 +56,12 @@ export const getPublicEventsService = async (filters: {
 
 export const getEventDetailService = async (eventId: number) => {
     const event = await prisma.event.findUnique({
-        where: {id: eventId},
+        where: { id: eventId },
         include: {
             tickets: true,
             voucher: {
                 where: {
-                    endDate: {gte: new Date()},
+                    endDate: { gte: new Date() },
                 },
             },
             organizer: {
@@ -74,7 +74,7 @@ export const getEventDetailService = async (eventId: number) => {
         },
     });
 
-    if(!event) {
+    if (!event) {
         throw new AppError("Event not found", 404);
     }
 
@@ -120,3 +120,20 @@ export const getMyEventsService = async (organizerId: number) => {
     });
 }
 
+export const getOrganizerDashboardService = async (organizerId: number) => {
+    const events = await eventDashboard(organizerId);
+
+    let totalTransaction = 0;
+    let totalRevenue = 0;
+    let totalTicketSold = 0;
+
+    events.forEach(event => {
+        event.transaction.forEach(trx => {
+            if (trx.status === "DONE") {
+                totalTransaction++;
+                totalRevenue += Number(trx.totalPrice);
+                totalTicketSold += trx.ticketQuantity;
+            }
+        });
+    });
+}
