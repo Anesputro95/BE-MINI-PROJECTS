@@ -157,11 +157,12 @@ class EventController {
         next: NextFunction
     ): Promise<void> {
         try {
-            const { category, location } = req.query;
+            const { category, location, keyword } = req.query;
 
             const events = await getPublicEventsService({
                 category: category as string,
                 location: location as string,
+                keyword: keyword as string,
             });
 
             res.status(200).send({

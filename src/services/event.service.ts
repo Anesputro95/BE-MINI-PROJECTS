@@ -28,6 +28,7 @@ export interface UpdateEventDTO extends Partial<CreateEventInput> {
 export const getPublicEventsService = async (filters: {
     category?: string;
     location?: string;
+    keyword?: string;
 }) => {
     const whereClause: any = {};
 
