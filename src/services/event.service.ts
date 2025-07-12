@@ -49,7 +49,17 @@ export const getPublicEventsService = async (filters: {
             thumbnail: true,
             category: true,
             location: true,
+            salesStart: true,
             createdAt: true,
+            tickets: {
+                select:{
+                    id: true,
+                    name: true,
+                    price: true,
+                    quota: true,
+                    sold: true,
+                }
+            }
         },
     });
 };
