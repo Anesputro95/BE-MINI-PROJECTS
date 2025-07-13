@@ -33,7 +33,6 @@ class App {
         const eventRouter = new EventRouter();
         const transactionRouter = new TransactionRouter();
         const voucherRouter = new VoucherRouter();
-        // const userPointsRouter = UserPointsRouter;
 
         this.app.get('/', (req: Request, res: Response) => {
             res.status(200).json("<h1>Welcome to Mini Project</h1>")
@@ -44,7 +43,6 @@ class App {
         this.app.use('/event', eventRouter.getRouter());
         this.app.use('/transactions', transactionRouter.getRouter());
         this.app.use("/vouchers", voucherRouter.getRouter());
-        // this.app?.use("/user-points", userPointsRouter);
 
     }
 

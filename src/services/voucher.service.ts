@@ -1,10 +1,11 @@
 import { create } from "domain";
 import { prisma } from "../config/prisma";
 import AppError from "../errors/AppError";
-import { 
+import {
     createVoucher,
     getVouchersByEvent,
-    findVoucherByCode, 
+    findVoucherByCode,
+    getMyCoupons,
 } from "../repositories/voucher.repository";
 
 export const createVoucherService = async (input: {
@@ -19,7 +20,7 @@ export const createVoucherService = async (input: {
     organizerId: number;
 }) => {
     const event = await prisma.event.findUnique({
-        where: {id: input.eventId},
+        where: { id: input.eventId },
     });
 
     if (!event) throw new AppError("Event not found", 404);
@@ -33,16 +34,16 @@ export const createVoucherService = async (input: {
         input.discountPercent !== null
     )
 
-    return createVoucher({
-        eventId: input.eventId,
-        code: input.code,
-        discountAmount: input.discountAmount,
-        discountPercent: input.discountPercent,
-        maxDiscount: input.maxDiscount,
-        startDate: input.startDate,
-        endDate: input.endDate,
-        maxUsage: input.maxUsage,
-    });
+        return createVoucher({
+            eventId: input.eventId,
+            code: input.code,
+            discountAmount: input.discountAmount,
+            discountPercent: input.discountPercent,
+            maxDiscount: input.maxDiscount,
+            startDate: input.startDate,
+            endDate: input.endDate,
+            maxUsage: input.maxUsage,
+        });
 };
 
 export const getVouchersByEventService = async (eventId: number) => {
@@ -67,9 +68,13 @@ export const validateVoucherService = async (code: string) => {
 
 export const incrementVoucherUsage = async (voucherId: number) => {
     await prisma.voucher.update({
-        where: {id: voucherId},
+        where: { id: voucherId },
         data: {
-            usageCount: {increment: 1},
+            usageCount: { increment: 1 },
         },
     });
 };
+
+export const getMyCouponsService = async (userId: number) => {
+    return getMyCoupons(userId);
+}   

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import logger from "../utils/logger";
 import AppError from "../errors/AppError";
-import { verify } from "jsonwebtoken"
+import { JwtPayload, verify } from "jsonwebtoken"
 
 export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -22,10 +22,10 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
         }
 
         const checkToken = verify(token, process.env.TOKEN_KEY || "fallback_secret")
-        console.log(checkToken);
+        console.log("Decoded token:", checkToken);
 
         // jika token tidak valid, akan di lempar error
-        res.locals.descript = checkToken;
+        res.locals.descript = checkToken as JwtPayload;
         next();
 
     } catch (error: any) {

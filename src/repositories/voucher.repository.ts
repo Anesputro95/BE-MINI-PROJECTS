@@ -32,3 +32,10 @@ export const incrementVoucherUsage = async (id: number) => {
         data: { usageCount: { increment: 1 } },
     });
 };
+
+export const getMyCoupons = async (userId: number) => {
+    return prisma.coupon.findMany({
+        where: { userId },
+        orderBy: { createdAt: "desc" }
+    })
+}

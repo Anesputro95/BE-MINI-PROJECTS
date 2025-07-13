@@ -1,0 +1,1166 @@
+2025-07-13 12:19:00 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:19:00 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:19:03 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:20:18 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:20:52 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:20:52 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:20:56 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:21:06 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:21:06 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:21:10 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:24:17 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:24:17 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:24:19 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:24:19 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:24:23 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:24:23 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:56:22 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:56:22 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:57:22 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 12:57:22 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 13:13:01 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 13:13:01 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 13:13:02 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 13:13:03 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 13:13:05 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 13:13:05 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 13:45:54 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 13:45:54 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 13:51:05 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 13:51:05 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 13:51:07 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 13:51:10 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 15:40:00 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 16:02:40 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 16:02:40 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 16:22:38 [ERROR]: POST /auth/login: 
+Invalid `prisma.account.findUnique()` invocation in
+/Users/macbook/Documents/NGODING/modul-purwadhika-main/03 MODUL 3 BACK END/MINI PROJECT/BE-MINI-PROJECT/src/repositories/account.repositori.ts:33:27
+
+  30 }
+  31 
+  32 export const loginAccountByEmail = async (email: string) => {
+→ 33     return prisma.account.findUnique(
+Can't reach database server at `aws-0-us-east-2.pooler.supabase.com:5432`
+
+Please make sure your database server is running at `aws-0-us-east-2.pooler.supabase.com:5432`. {"clientVersion":"6.10.1","name":"PrismaClientInitializationError"}

@@ -20,7 +20,8 @@ class AuthAccountRouter {
         this.router.post("/login", loginValidation, this.accountController.login);
 
         this.router.get("/verify", this.accountController.verifyAccount);
-        this.router.post("/switch-role", verifyToken, this.accountController.switchRole)
+        this.router.post("/switch-role", verifyToken, this.accountController.switchRole);
+        
         
         this.router.patch(
             "/profile-img/",
