@@ -120,7 +120,6 @@ export const getTransactionStatsByInterval = async (eventId: number, interval: s
         throw new Error("Invalid interval")
     }
 
-
     type StatisticResult = {
         period: Date;
         totalTransactions: bigint;
@@ -133,7 +132,8 @@ export const getTransactionStatsByInterval = async (eventId: number, interval: s
             COUNT(*) AS "totalTransactions",
             SUM("totalPrice") AS "totalRevenue"
         FROM "transaction"
-        WHERE "eventId" = ${eventId} AND status = 'DONE'
+        WHERE "eventId" = ${eventId} 
+            AND status = 'DONE'
         GROUP BY period
         ORDER BY period ASC
         `;

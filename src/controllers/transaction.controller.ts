@@ -204,13 +204,13 @@ class TransactionController {
                 select: { organizer: true }
             });
 
-            if (!event) {
+            if (!event || event.organizer.id !== organizerId) {
                 throw new AppError("Unauthorized access to this event statistics", 403);
             };
 
             const stats = await getEventStatisticService(eventId, interval);
 
-            res.status(200).send({
+            res.status(200).json({
                 success: true,
                 message: "Statistics retrieved successfully",
                 data: stats,
