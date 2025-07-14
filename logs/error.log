@@ -1,0 +1,148 @@
+2025-07-13 19:14:43 [ERROR]: POST /auth/login: 
+Invalid `prisma.account.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/account.repositori.ts:33:27
+
+  30 }
+  31 
+  32 export const loginAccountByEmail = async (email: string) => {
+→ 33     return prisma.account.findUnique(
+Can't reach database server at `aws-0-us-east-2.pooler.supabase.com:5432`
+
+Please make sure your database server is running at `aws-0-us-east-2.pooler.supabase.com:5432`. {"clientVersion":"6.10.1","name":"PrismaClientInitializationError"}
+2025-07-13 19:15:17 [ERROR]: POST /auth/login: 
+Invalid `prisma.account.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/account.repositori.ts:33:27
+
+  30 }
+  31 
+  32 export const loginAccountByEmail = async (email: string) => {
+→ 33     return prisma.account.findUnique(
+Can't reach database server at `aws-0-us-east-2.pooler.supabase.com:5432`
+
+Please make sure your database server is running at `aws-0-us-east-2.pooler.supabase.com:5432`. {"clientVersion":"6.10.1","name":"PrismaClientInitializationError"}
+2025-07-13 19:17:09 [ERROR]: POST /auth/regis: 
+Invalid `prisma.account.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/account.repositori.ts:29:27
+
+  26 
+  27 export const createAccountByEmail = async (
+  28     data: CreateAccountInput) => {
+→ 29     return prisma.account.create(
+Unique constraint failed on the fields: (`username`) {"code":"P2002","meta":{"modelName":"Account","target":["username"]},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-13 19:17:33 [ERROR]: POST /auth/regis: 
+Invalid `prisma.account.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/account.repositori.ts:29:27
+
+  26 
+  27 export const createAccountByEmail = async (
+  28     data: CreateAccountInput) => {
+→ 29     return prisma.account.create(
+Unique constraint failed on the fields: (`username`) {"code":"P2002","meta":{"modelName":"Account","target":["username"]},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-13 23:13:50 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-13 23:13:50 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
+2025-07-14 09:09:41 [ERROR]: POST /event/create-event: 
+Invalid `prisma.event.create()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/event.repository.ts:44:25
+
+  41 export const createEvent = async (input: CreateEventInput) => {
+  42     const { organizerId, title, description, thumbnail, category, location, salesStart, salesEnd, tickets } = input;
+  43 
+→ 44     return prisma.event.create(
+Timed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 10, connection limit: 17) {"code":"P2024","meta":{"modelName":"Event","connection_limit":17,"timeout":10},"clientVersion":"6.10.1","name":"PrismaClientKnownRequestError"}
+2025-07-14 09:13:54 [ERROR]: GET /transactions/my-tickets: 
+Invalid `prisma.transaction.findUnique()` invocation in
+/Users/kjoshhh/Desktop/Desktop/Design/Purwadhika/JCWDOL/EVENT_MINIPROJECT/BE-MINI-PROJECTS/src/repositories/transaction.repositori.ts:84:31
+
+  81 }
+  82 
+  83 export const findTransactionById = async (id: number) => {
+→ 84     return prisma.transaction.findUnique({
+           where: {
+         +   id: Int
+           },
+           select: {
+             id: true,
+             ticketId: true,
+             ticketQuantity: true,
+             status: true,
+             createdAt: true,
+             event: {
+               select: {
+                 id: true,
+                 organizerId: true
+               }
+             },
+             user: {
+               select: {
+                 id: true,
+                 email: true
+               }
+             }
+           }
+         })
+
+Argument `id` is missing. {"name":"PrismaClientValidationError","clientVersion":"6.10.1"}
