@@ -2,6 +2,7 @@ import { Router } from "express";
 import { verifyToken } from "../middleware/verifyToken";
 import { isOrganizer } from "../middleware/isOrganizer";
 import EventController from "../controllers/event.controller";
+import { uploadMemory } from "../middleware/uploader";
 
 
 class EventRouter {
@@ -19,7 +20,12 @@ class EventRouter {
         this.router.get("/public", this.EventController.getPublicEvents);
         this.router.get("/public/:id", this.EventController.getEventDetail)
         this.router.get("/events/:id", verifyToken, this.EventController.getEventByList)
-        this.router.post("/create-event", verifyToken, isOrganizer, this.EventController.createEvents)
+        this.router.post(
+            "/create-event",
+            verifyToken,
+            isOrganizer,
+            uploadMemory().single("thumbnail"),
+            this.EventController.createEvents)
         this.router.patch("/event/:id", verifyToken, isOrganizer, this.EventController.updateEvent)
         this.router.delete("/event/:id", verifyToken, isOrganizer, this.EventController.deleteEvent)
         this.router.get(
@@ -34,6 +40,14 @@ class EventRouter {
             isOrganizer,
             this.EventController.getDasboardSummary
         )
+
+        this.router.get(
+            "/events/:id/attendees",
+            verifyToken,
+            isOrganizer,
+            this.EventController.getAttendees
+        );
+
     }
 
     public getRouter(): Router {
