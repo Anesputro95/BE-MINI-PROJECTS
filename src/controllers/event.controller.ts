@@ -8,8 +8,10 @@ import {
     getPublicEventsService,
     getEventDetailService,
     getOrganizerDashboardService,
+    getEventAttendeesService,
 } from "../services/event.service";
 import AppError from "../errors/AppError";
+import { cloudinaryUpload } from "../config/cloudinary";
 
 class EventController {
     public async getEvents(
@@ -32,7 +34,6 @@ class EventController {
         }
     }
 
-
     public async createEvents(
         req: Request,
         res: Response,
@@ -46,16 +47,28 @@ class EventController {
                 throw new AppError("Description must be between 10 and 300 characters", 400);
             }
 
+            let uploadThumbnailURL = "";
+            if (req.file) {
+                const result = await cloudinaryUpload(req.file)
+                uploadThumbnailURL = result.secure_url;
+            } else {
+                throw new AppError("Thumbnail image is required", 400)
+            }
+            console.log("Received file:", req.file);
+
+
+            const parsedTickets = typeof tickets === "string" ? JSON.parse(tickets) : tickets;
+
             const event = await createEventService({
                 organizerId,
                 title,
                 description,
-                thumbnail,
+                thumbnail: uploadThumbnailURL,
                 category,
-                salesStart,
-                salesEnd,
+                salesStart: salesStart ? new Date(salesStart) : undefined,
+                salesEnd: salesEnd ? new Date(salesEnd) : undefined,
                 location,
-                tickets,
+                tickets: parsedTickets,
             });
 
             res.status(201).send({
@@ -214,6 +227,28 @@ class EventController {
             next(error)
         }
     }
+
+    public async getAttendees(
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const eventId = parseInt(req.params.id);
+            const { id: organizerId } = res.locals.descript;
+
+            const attendees = await getEventAttendeesService(eventId, organizerId);
+
+            res.status(200).json({
+                success: true,
+                message: "Attendees retrieved successfully",
+                data: attendees,
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }
 
 export default EventController;

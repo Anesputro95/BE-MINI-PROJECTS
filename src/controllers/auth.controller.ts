@@ -7,7 +7,7 @@ import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { editProfileService, loginService, regisService, resetPasswordRequestService, resetPasswordService, switchRoleService, uploadProfileService, verifyEmailService } from "../services/auth.service";
 import { TOKEN_KEY } from "../config/env"
-import { getCouponsByUserId, getPointsByUserId } from "../repositories/account.repositori";
+import { findAccountById, getCouponsByUserId, getPointsByUserId } from "../repositories/account.repositori";
 
 
 
@@ -35,16 +35,24 @@ class AuthAccountController {
         next: NextFunction,
     ): Promise<void> {
         try {
-            const loginAccount = await loginService(req.body)
-           
+            const loginAccount = await loginService(req.body);
+            const user = loginAccount.account;
+
+            // ✅ Ambil kupon dan poin user
+            const coupons = await getCouponsByUserId(user.id);
+            const points = await getPointsByUserId(user.id);
+
+            // ✅ Buat token dengan field lengkap
             const token = sign(
                 {
-                    id: loginAccount.account.id,
-                    email: loginAccount.account.email,
-                    username: loginAccount.account.username,
-                    role: loginAccount.account.role,
-                    referralCode: loginAccount.account.referall_code, 
-                    profileImg: loginAccount.account.ImgProfile,
+                    id: user.id,
+                    email: user.email,
+                    username: user.username,
+                    role: user.role,
+                    referralCode: user.referall_code,
+                    profileImg: user.ImgProfile,
+                    coupons,
+                    userPoints: points,
                 },
                 process.env.TOKEN_KEY!,
                 { expiresIn: "1d" }
@@ -52,15 +60,14 @@ class AuthAccountController {
 
             res.status(200).json({
                 message: "Login Success",
-                email: loginAccount.account.email,
-                imgProfile: loginAccount.account.ImgProfile,
-                role: loginAccount.account.role,
-                referral_code: loginAccount.account.referall_code,
-                token: loginAccount.token,
+                email: user.email,
+                imgProfile: user.ImgProfile,
+                role: user.role,
+                referral_code: user.referall_code,
+                token, // ✅ kirim token lengkap
             });
-
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
 
@@ -99,16 +106,40 @@ class AuthAccountController {
         next: NextFunction,
     ): Promise<void> {
         try {
-            const uploadedUrl = await uploadProfileService(req.file, res.locals.descript.id)
-            console.log(uploadedUrl);
+            const userId = res.locals.descript.id;
+
+            const uploadedUrl = await uploadProfileService(req.file, userId);
+            const user = await findAccountById(userId);
+            if (!user) {
+                throw new AppError("User not found after upload", 404);
+            }
+
+            const coupons = await getCouponsByUserId(userId);
+            const points = await getPointsByUserId(userId);
+
+            const token = sign(
+                {
+                    id: user.id,
+                    email: user.email,
+                    username: user.username,
+                    role: user.role,
+                    referralCode: user.referall_code,
+                    profileImg: uploadedUrl,
+                    coupons,
+                    userPoints: points,
+                },
+                process.env.TOKEN_KEY!,
+                { expiresIn: "1d" }
+            );
 
             res.status(201).send({
                 success: true,
                 message: "Upload profile success",
                 data: {
-                    imageUrl: uploadedUrl
-                }
-            })
+                    imageUrl: uploadedUrl,
+                    token,
+                },
+            });
         } catch (error) {
             next(error)
         }

@@ -1,10 +1,12 @@
-import {Request, Response, NextFunction} from "express";
+import { Request, Response, NextFunction } from "express";
 import {
     createVoucherService,
+    getMyCouponsService,
     getVouchersByEventService,
 } from "../services/voucher.service";
 import { create } from "domain";
 import { getVouchersByEvent } from "../repositories/voucher.repository";
+import { prisma } from "../config/prisma";
 
 class VoucherController {
     public async createVoucher(
@@ -13,7 +15,7 @@ class VoucherController {
         next: NextFunction
     ): Promise<void> {
         try {
-            const {id: organizerId} = res.locals.descript;
+            const { id: organizerId } = res.locals.descript;
 
             const {
                 eventId,
@@ -44,7 +46,7 @@ class VoucherController {
                 data: voucher,
             });
         } catch (error) {
-            next (error);
+            next(error);
         }
     }
 
@@ -53,7 +55,7 @@ class VoucherController {
         res: Response,
         next: NextFunction
     ): Promise<void> {
-        try{
+        try {
             const eventId = Number(req.params.eventId);
 
             const vouchers = await getVouchersByEventService(eventId);
@@ -64,7 +66,38 @@ class VoucherController {
                 data: vouchers,
             });
         } catch (error) {
-        next (error);
+            next(error);
+        }
+    }
+
+    public async getMyCoupons(
+        req: Request,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const { id: userId } = res.locals.descript;
+
+            const myCoupons = await prisma.coupon.findMany({
+                where: {
+                    userId,
+                    isUsed: false,
+                    expiresAt: {
+                        gte: new Date(), 
+                    },
+                },
+                orderBy: {
+                    expiresAt: "asc", 
+                },
+            });
+
+            res.status(200).json({
+                success: true,
+                message: "Coupons retrieved successfully",
+                data: myCoupons,
+            });
+        } catch (error) {
+            next(error)
         }
     }
 }

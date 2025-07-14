@@ -148,6 +148,7 @@ export const loginService = async (data: any) => {
   const { email } = data;
 
   const findUser = await loginAccountByEmail(email)
+  
 
   if (!findUser) {
     throw new AppError("Email not registered", 404);

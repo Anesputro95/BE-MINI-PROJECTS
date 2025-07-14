@@ -37,16 +37,16 @@ export const getPublicEventsService = async (filters: {
     }
 
     if (filters.location && filters.location.trim()) {
-        whereClause.location = { 
-            contains: filters.location.trim(), 
-            mode: "insensitive", 
+        whereClause.location = {
+            contains: filters.location.trim(),
+            mode: "insensitive",
         };
     }
 
     if (filters.keyword && filters.keyword.trim()) {
         whereClause.OR = [
-            {title: { contains: filters.keyword.trim(), mode: "insensitive"}},
-            {description: {contains: filters.keyword.trim(), mode: "insensitive"}}
+            { title: { contains: filters.keyword.trim(), mode: "insensitive" } },
+            { description: { contains: filters.keyword.trim(), mode: "insensitive" } }
         ];
     }
 
@@ -63,7 +63,7 @@ export const getPublicEventsService = async (filters: {
             salesStart: true,
             createdAt: true,
             tickets: {
-                select:{
+                select: {
                     id: true,
                     name: true,
                     price: true,
@@ -158,3 +158,40 @@ export const getOrganizerDashboardService = async (organizerId: number) => {
         });
     });
 }
+
+export const getEventAttendeesService = async (eventId: number, organizerId: number) => {
+    const event = await prisma.event.findFirst({
+        where: {
+            id: eventId,
+            organizerId,
+        },
+        include: {
+            transaction: {
+                include: {
+                    user: {
+                        select: {
+                            id: true,
+                            username: true,
+                            email: true,
+                        },
+                    },
+                },
+            },
+        },
+    });
+
+    if (!event) {
+        throw new AppError("Event not found or not owned by you", 404);
+    }
+
+    return event.transaction.map((trx) => ({
+        userId: trx.user.id,
+        username: trx.user.username,
+        email: trx.user.email,
+        ticketQuantity: trx.ticketQuantity,
+        totalPrice: trx.totalPrice,
+        status: trx.status,
+    }));
+};
+
+
